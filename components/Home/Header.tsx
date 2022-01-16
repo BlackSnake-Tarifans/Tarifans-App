@@ -8,7 +8,7 @@ import { Dimensions } from 'react-native';
                 style={styles.rectangulo}
                 source={require('../../assets/images/assetsTarifans/RectangleHeader.png')}
                 />*/
-const Header = ({navigation}) => {
+const Header = ({navigation} : any) => {
     return(
         <View>
             
