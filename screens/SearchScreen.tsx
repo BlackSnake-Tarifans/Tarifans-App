@@ -16,9 +16,9 @@ const SearchScreen = ({navigation}) => {
     );
 };
 
-var RESULTS=[
-    
-]
+
+
+
 
 const Header = ({navigation}) =>(
     <View style={styles.headercontainer}>
@@ -35,6 +35,8 @@ const Header = ({navigation}) =>(
 )
 
 const Result = ({navigation}) => {
+    var [RESULTS, setResults]=useState([])
+
     return(
     <View style={styles.resultcontainer}>
         <View style={styles.top}>
@@ -50,20 +52,20 @@ const Result = ({navigation}) => {
                         return res.data
                         })
                         .then( (data) => {
-                            RESULTS=data;
+                            setResults(data);
                             //refresh();
                         }).catch((error) => console.log(error))}}
                 />
             </View>
             <Text style={{color: '#966BEE', fontSize: 15,}}>Cancelar</Text>
         </View>
-        <Presentacion navigation={navigation}/>
+        <Presentacion navigation={navigation} res={RESULTS}/>
     </View>
 )}
 
-const Presentacion=({navigation})=>(
+const Presentacion=({navigation, res}: any)=>(
         <ScrollView style={{marginHorizontal: 25,}}>
-                {RESULTS.map((result,index)=> (
+                {res.map((result,index)=> (
                 <TouchableOpacity onPress={() => {navigation.navigate('Profile', {id:result.id})}} >
                     <Perfil result={result} key={index}/> 
                 </TouchableOpacity>
