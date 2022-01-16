@@ -1,15 +1,19 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput , Alert , Pressable, Platform, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput , Alert , Pressable, Platform, Image, Dimensions } from 'react-native';
 
 
-import { TOKEN_CHANGE } from '../redux/AuthToken'
+import { TOKEN_CHANGE } from '../redux/AuthToken';
+import {useDispatch} from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {login} from '../hooks/backendAPI'
+import {login} from '../hooks/backendAPI';
+import AppLoading from 'expo-app-loading';
+
 
 import { Text, View } from '../components/Themed';
 import { LinearGradient }  from 'expo-linear-gradient';
-import { useFonts, Rosario_400Regular} from '@expo-google-fonts/rosario'
+import { useFonts } from 'expo-font';
+
 
 
 /*const LinearGradient =  Platform.select({
@@ -18,61 +22,78 @@ import { useFonts, Rosario_400Regular} from '@expo-google-fonts/rosario'
   default: () => require("react-native-web-linear-gradient")
 })().default*/
 
-console.log( LinearGradient )
+import {useRoute} from '@react-navigation/native';
+
 
 const LoginScreen = ({ navigation } : any) => {
+  const route = useRoute();
   const [user, onChangeUser] = React.useState("");
   const [pass, onChangePass] = React.useState('');
-  let [fontsLoaded] = useFonts({Rosario_400Regular});
+  let [fontsLoaded] = useFonts({
+      RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
+    });
+  const dispatch = useDispatch();
+  const changeToken = (item: any) => dispatch({ type: TOKEN_CHANGE, payload: item });
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient style={styles.background} colors={['#f28e43','#966bee']} start={{x:0, y:0}} end={{x:1, y:0.7}} locations={[0,0.95]}>
-        <Image style={styles.imageTitle } source={require('../assets/images/tarifans_palabra_color_blanco.png')}/>
-        <Text style={styles.title }>Inicio de sesión</Text>
-        <Text style={styles.title}>Usuario</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          placeholderTextColor={'white'}
-          onChangeText={text => onChangeUser(text)}
-        />
-        <Text style={styles.title}>Contrasena</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor={'white'}
-          onChangeText={text => onChangePass(text)}
-        />
-        <View style={styles.buttons}>
-          <Button
-            onPress={() => {
-              login({username: user, password: pass})
-              .then((res) => {
-                console.log(res.data)
-              }
-            )}}
-            title="Iniciar Sesión"
-            style_button={styles.button_1}
-            style_text={styles.text_1}
+  if(!fontsLoaded){
+    return <AppLoading />;
+  }else{
+    return  (
+      <SafeAreaView style={styles.container}>
+        <LinearGradient style={styles.background} colors={['#f28e43','#966bee']} start={{x:0, y:0}} end={{x:1, y:0.7}} locations={[0,0.95]}>
+          <Image style={styles.imageTitle } source={require('../assets/images/tarifans_palabra_color_blanco.png')}/>
+          <Text style={styles.title }>Inicio de sesión</Text>
+          <Text style={styles.title}>Usuario</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            placeholderTextColor={'white'}
+            onChangeText={text => onChangeUser(text)}
+          />
+          
+          <Text style={styles.title}>Contrasena</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry={true}
+            placeholderTextColor={'white'}
+            onChangeText={text => onChangePass(text)}
+          />
+          <View style={styles.buttons}>
+            <Button
+              onPress={() => {
+                login({username: user, password: pass})
+                .then((res) => {
+                  return res.data
+                })
+                .then( (data) => {
+                  changeToken(data['token'])
+                  navigation.navigate('Home')
+                })
+                .catch((error) => console.log(error))
+              }}
+              title="Iniciar Sesión"
+              style_button={styles.button_1}
+              style_text={styles.text_1}
+              />
+            <Button
+              onPress={() => navigation.navigate('Register')}
+              title="Registrarse"
+              style_button={styles.button_2}
+              style_text={styles.text_2}
             />
-          <Button
-            onPress={() => navigation.navigate('Modal')}
-            title="Registrarse"
-            style_button={styles.button_2}
-            style_text={styles.text_2}
-          />
-          <Button
-            title='Iniciar Sesión con Google'
-            onPress={() => {}}
-            style_button={styles.button_3}
-            style_text={styles.text_3}
-          />
-        </View>
-      </LinearGradient>
-    </SafeAreaView>
-  );
+            <Button
+              title='Iniciar Sesión con Google'
+              onPress={() => {}}
+              style_button={styles.button_3}
+              style_text={styles.text_3}
+            />
+          </View>
+        </LinearGradient>
+      </SafeAreaView>
+    ) ;
+  }
+  
 };
 
 function Button(props: { onPress: any; title: string | undefined; style_button : any, style_text : any }) {
@@ -98,14 +119,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'Rosario_400Regular',
+    fontFamily: 'RosarioRegular',
     color: 'white'
   },
   imageTitle: {
-    width: '60vw', 
-    height: '24vw',
+    width: Dimensions.get('window').width * 0.6, 
+    height: Dimensions.get('window').width * 0.24,
     maxWidth: 540,
-    maxHeight: '216px'
+    maxHeight: 216
   },
   /*separator: {
     marginVertical: 30,
@@ -114,7 +135,7 @@ const styles = StyleSheet.create({
   },*/
   input: {
     height: 40,
-    width: '60%',
+    width: Dimensions.get('window').width * 0.6,
     margin: 12,
     borderWidth: 3,
     padding: 10,
@@ -123,7 +144,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     backgroundColor: 'rgba(0,0,0,0)',
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     flexGrow: 0,
@@ -146,7 +166,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     backgroundColor: 'white',
-    width: '60vw',
+    width: Dimensions.get('window').width * 0.6,
     maxWidth: 540,
     marginBottom: 5
   },
@@ -154,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     letterSpacing: 0.25,
-    fontFamily: 'Rosario_400Regular',
+    fontFamily: 'RosarioRegular',
     color: '#f28e43',
   },
   button_2: {
@@ -172,7 +192,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     backgroundColor: '#966bee',
-    width: '60vw',
+    width: Dimensions.get('window').width * 0.6,
     maxWidth: 540,
     marginBottom: 5
   },
@@ -180,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     letterSpacing: 0.25,
-    fontFamily: 'Rosario_400Regular',
+    fontFamily: 'RosarioRegular',
     color: 'white',
   },
   button_3: {
@@ -198,7 +218,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     backgroundColor: '#966bee',
-    width: '60vw',
+    width: Dimensions.get('window').width * 0.6,
     maxWidth: 540,
     marginBottom: 5
   },
@@ -206,7 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 21,
     letterSpacing: 0.25,
-    fontFamily: 'Rosario_400Regular',
+    fontFamily: 'RosarioRegular',
     color: 'white',
   }
   

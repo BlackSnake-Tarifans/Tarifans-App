@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,7 +8,7 @@ import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { register } from '../hooks/backendAPI'
 
 const RegisterScreen = ({ navigation }: any) => {
   const [email, onChangeEmail] = React.useState("");
@@ -16,6 +16,14 @@ const RegisterScreen = ({ navigation }: any) => {
   const [pass, onChangePass] = React.useState('');
   const [passConf, onChangePassConf] = React.useState('');
   const [birthDate, onChangeDate] = React.useState(new Date());
+  const [show, setShow] = useState(true);
+  const onDateChange = (event: any, selectedDate: any) => {
+    const currentDate = selectedDate || birthDate;
+    setShow(Platform.OS === 'ios');
+    onChangeDate(currentDate);
+  };
+
+
 
   const [text1, onChangeNumber] = React.useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -50,23 +58,54 @@ const RegisterScreen = ({ navigation }: any) => {
           placeholder="Confirmar Contrasena"
           placeholderTextColor={'white'}
           secureTextEntry={true}
-          onChangeText={text => onChangePassConf(text)}
+          onChangeText={text => {
+
+            onChangePassConf(text)
+          }}
         />
-        <DateTimePicker
+        {show && <DateTimePicker
           value={birthDate}
+
           mode="date"
           display="default"
-          onChange={ (selectedDate : any) => onChangeDate(selectedDate)}
-        />
+          onChange={(event: any, selectedDate: any) => selectedDate ? onDateChange(event, selectedDate) : ''}
+        />}
         <TextInput
           style={styles.input}
           placeholder="Fecha de Nacimiento dd/mm/aa"
           placeholderTextColor={'white'}
+          onChangeText={text => {
+            var parts = text.split("/");
+            var dt = new Date(parseInt(parts[2], 10),
+              parseInt(parts[1], 10) - 1,
+              parseInt(parts[0], 10));
+            var dt2 = new Date(Date.parse(text))
+            if(dt instanceof Date && !isNaN(dt as any)){
+              console.log(dt);
+              onChangeDate(dt);
+            } 
+            if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
+              onChangeDate(dt2);
+              console.log(dt2);
+            }
+          }}
         />
-        <View>
+        <View style={styles.buttons}>
           <Button
             title='Registrarse'
-            onPress={() => navigation.navigate('Root')}
+            style_button={styles.button_2}
+            style_text={styles.text_2}
+            onPress={() => {
+              register({
+                user: {
+                  email: email,
+                  username: user,
+                  password: pass,
+                  confirm_password: passConf
+                },
+                birth_date: birthDate.getFullYear()+'-' + (birthDate.getMonth()+1) + '-'+birthDate.getDate()
+              }).then((data) => { console.log(data); navigation.navigate('Login') })
+            }}
           />
         </View>
       </LinearGradient>
@@ -74,11 +113,11 @@ const RegisterScreen = ({ navigation }: any) => {
   );
 };
 
-function Button(props: { onPress: any; title: string | undefined }) {
-  const { onPress, title = 'Save' } = props;
+function Button(props: { onPress: any; title: string | undefined; style_button: any, style_text: any }) {
+  const { onPress, title = 'Save', style_button, style_text } = props;
   return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+    <Pressable style={style_button} onPress={onPress}>
+      <Text style={style_text}>{title}</Text>
     </Pressable>
   );
 }
@@ -87,8 +126,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red'
+    justifyContent: 'center'
   },
   background: {
     flex: 1,
@@ -98,14 +136,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'Rosario_400Regular',
+    fontFamily: 'RosarioRegular',
     color: 'white'
   },
   imageTitle: {
-    width: '60vw',
-    height: '24vw',
+    width: Dimensions.get('window').width * 0.6,
+    height: Dimensions.get('window').width * 0.24,
     maxWidth: 540,
-    maxHeight: '216px'
+    maxHeight: 216
   },
   /*separator: {
     marginVertical: 30,
@@ -114,30 +152,100 @@ const styles = StyleSheet.create({
   },*/
   input: {
     height: 40,
-    width: '60%',
+    width: Dimensions.get('window').width * 0.6,
     margin: 12,
     borderWidth: 3,
     padding: 10,
     color: 'white',
     borderColor: 'white'
   },
-  button: {
+  buttons: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 0,
+    flexBasis: 'auto'
+  },
+
+
+  button_1: {
     marginTop: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
+    paddingVertical: 6,
+    borderRadius: 32,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 2.22,
     elevation: 3,
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
+    width: Dimensions.get('window').width * 0.6,
+    maxWidth: 540,
+    marginBottom: 5
   },
-  text: {
+  text_1: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
     letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: '#f28e43',
+  },
+  button_2: {
+    marginTop: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    borderRadius: 32,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 2.22,
+    elevation: 3,
+    backgroundColor: '#966bee',
+    width: Dimensions.get('window').width * 0.6,
+    maxWidth: 540,
+    marginBottom: 5
+  },
+  text_2: {
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
     color: 'white',
   },
+  button_3: {
+    marginTop: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    borderRadius: 32,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 2.22,
+    elevation: 3,
+    backgroundColor: '#966bee',
+    width: Dimensions.get('window').width * 0.6,
+    maxWidth: 540,
+    marginBottom: 5
+  },
+  text_3: {
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+  }
 
 });
 

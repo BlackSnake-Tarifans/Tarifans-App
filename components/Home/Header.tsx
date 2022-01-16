@@ -13,7 +13,7 @@ const Header = ({navigation} : any) => {
         <View>
             
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
                     <Image 
                     style={styles.logo}
                     source={require('../../assets/images/assetsTarifans/tarifansICONO.png')}
