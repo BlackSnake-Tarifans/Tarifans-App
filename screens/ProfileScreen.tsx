@@ -7,6 +7,9 @@ import {consultainformacioncreador} from '../hooks/backendAPI';
 import Button from "../components/Button";
 
 
+
+const ProfileScreen = ({route ,navigation}) => {
+    
 var VALORES={
     id: 1,
     user: {
@@ -23,22 +26,20 @@ var VALORES={
     num_subscribers: 0,
     num_subscribed: 0
 } ;
-
-const ProfileScreen = ({route ,navigation}) => {
     const { id } = route.params;
     //VALORES =  consultainformacioncreador(id).then((res) => {console.log(res.data); return res.data});
     return(
         <View>
             <Text>{}</Text>
             <Header navigation={navigation}/>
-            <Cuerpo/>
+            <Cuerpo vals={VALORES}/>
         </View>
     );
 };
 
-const Cuerpo = () => (
+const Cuerpo = ({vals}) => (
     <View>
-        <Text>{VALORES.user.first_name} {VALORES.user.last_name}</Text>
+        <Text>{vals.user.first_name} {vals.user.last_name}</Text>
     </View>
 )
 
