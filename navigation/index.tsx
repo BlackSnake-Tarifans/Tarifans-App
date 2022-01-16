@@ -21,6 +21,8 @@ import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -44,12 +46,14 @@ function RootNavigator() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name='Search' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         
       </Stack.Group>
