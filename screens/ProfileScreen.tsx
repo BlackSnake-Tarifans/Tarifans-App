@@ -38,7 +38,16 @@ const ProfileScreen = ({route ,navigation}) => {
 
 const Cuerpo = () => (
     <View>
-        <Text>{VALORES.user.first_name} {VALORES.user.last_name}</Text>
+        <View style={{borderColor:'black', borderRadius:3, alignContent:'center'}}>
+            <Image style={{width:'100%',height: '70%',resizeMode: 'contain',}} source={{uri: "https://25ae-190-63-212-143.ngrok.io" + VALORES.profile_pic}}/>
+        </View>
+        <View style={{flexDirection: "row", justifyContent: "space-between" , marginHorizontal:10,alignItems:'center'}}>
+            <Text>{VALORES.user.first_name} {VALORES.user.last_name}</Text>
+            <Button title="Suscribirse"/>
+        </View>
+        <View>
+
+        </View>
     </View>
 )
 
