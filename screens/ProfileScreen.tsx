@@ -6,7 +6,6 @@ import Header from "../components/Home/Header";
 import {consultainformacioncreador} from '../hooks/backendAPI';
 import Button from "../components/Button";
 
-
 var VALORES={
     id: 1,
     user: {
@@ -25,13 +24,15 @@ var VALORES={
 } ;
 
 const ProfileScreen = ({route ,navigation}) => {
+    
+
     const { id } = route.params;
     //VALORES =  consultainformacioncreador(id).then((res) => {console.log(res.data); return res.data});
     return(
         <View>
             <Text>{}</Text>
             <Header navigation={navigation}/>
-            <Cuerpo/>
+            <Cuerpo />
         </View>
     );
 };

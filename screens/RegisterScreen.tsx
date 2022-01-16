@@ -91,6 +91,7 @@ const RegisterScreen = ({ navigation }: any) => {
           }}
         />
         <View style={styles.buttons}>
+        
           <Button
             title='Registrarse'
             style_button={styles.button_2}
@@ -107,6 +108,12 @@ const RegisterScreen = ({ navigation }: any) => {
               }).then((data) => { console.log(data); navigation.navigate('Login') })
             }}
           />
+          <Button
+              onPress={() => navigation.navigate('Login')}
+              title="Volver a Iniciar Sesión"
+              style_button={styles.button_1}
+              style_text={styles.text_1}
+              />
         </View>
       </LinearGradient>
     </SafeAreaView>
