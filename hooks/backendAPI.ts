@@ -15,7 +15,7 @@ export const consultarCreadores = async (obj : string) => {
     return axios.get<any>(`${apiUrl}/content-creators?search=${obj}`, {headers: {'Authorization': 'Token d21314078a1cfe75216adcb97da4a881b55d8874'}})    
 } 
 
-export const consultainformacioncreador = (obj : string) => {
-    return axios.get<any>(`${apiUrl}/content-creators/${obj}`, {headers: {'Authorization': 'Token d21314078a1cfe75216adcb97da4a881b55d8874'}})    
+export const consultainformacioncreador = async (obj : string) => {
+    return await axios.get<any>(`${apiUrl}/content-creators/${obj}`, {headers: {'Authorization': 'Token d21314078a1cfe75216adcb97da4a881b55d8874'}})    
 } 
   
