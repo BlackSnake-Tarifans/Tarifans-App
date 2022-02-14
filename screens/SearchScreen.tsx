@@ -6,7 +6,7 @@ import { TextInput } from "react-native";
 import {consultarCreadores} from '../hooks/backendAPI';
 import Navigation from "../navigation";
 
-const SearchScreen = ({navigation}) => {
+const SearchScreen = ({navigation}: any) => {
     return(
         <View style={{flex: 1,}}>
             <Header navigation={navigation}/>
@@ -20,7 +20,7 @@ const SearchScreen = ({navigation}) => {
 
 
 
-const Header = ({navigation}) =>(
+const Header = ({navigation}: any) =>(
     <View style={styles.headercontainer}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')} >
             <Image style={styles.icons} source={require('../assets/images/iconos/atras.png')} />
@@ -34,7 +34,7 @@ const Header = ({navigation}) =>(
     </View>
 )
 
-const Result = ({navigation}) => {
+const Result = ({navigation}: any) => {
     var [RESULTS, setResults]=useState([])
 
     return(
@@ -65,14 +65,14 @@ const Result = ({navigation}) => {
 
 const Presentacion=({navigation, res}: any)=>(
         <ScrollView style={{marginHorizontal: 25,}}>
-                {res.map((result,index)=> (
+                {res.map((result: any,index: any)=> (
                 <TouchableOpacity onPress={() => {navigation.navigate('Profile', {id:result.id})}} >
                     <Perfil result={result} key={index}/> 
                 </TouchableOpacity>
                 ))}
         </ScrollView>
 )
-const Perfil=({result})=>(
+const Perfil=({result}: any)=>(
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Image style={styles.resultadoimg} source={{uri: "https://25ae-190-63-212-143.ngrok.io"+result.profile_pic}}/>
         <Text>{result.first_name} {result.last_name}</Text>

@@ -21,7 +21,7 @@ const postFooterIcons=[{
 
 
 
-const Post= ({post}) => {
+const Post= ({post}: any) => {
     return (
         <View style={{marginBottom:30, marginHorizontal: 30}}>  
             <Divider />
@@ -32,7 +32,7 @@ const Post= ({post}) => {
         </View>
     );
 }
-const PostHeader=({post})=>(
+const PostHeader=({post}: any)=>(
         <View style={{flexDirection:'row',justifyContent:'flex-end',margin:5,alignItems:'center'}}>
             <View>
                 <Text style={{color:'gray', marginLeft: 5,fontWeight: '700'}}>{post.fecha}</Text>
@@ -40,7 +40,7 @@ const PostHeader=({post})=>(
         </View>
     )
 
-const PostImage=({post})=>{
+const PostImage=({post}: any)=>{
     return(
         <View style={{width: '100%', height: 450}}>
             <Image source={post.imageUrl} style={{width: '100%', height:'100%', resizeMode: 'cover'}}/>
@@ -63,7 +63,7 @@ const PostFooter=()=>{
     );
 }
 
-const PostCaption=({post})=>{
+const PostCaption=({post}: any)=>{
     return(
         <View style={{}}>
             <Text>
@@ -76,7 +76,7 @@ const PostCaption=({post})=>{
     )
 }
 
-const Icon=({imgStyle, imgUrl})=>(
+const Icon=({imgStyle, imgUrl}: any)=>(
     <TouchableOpacity>
         <Image style={imgStyle} source={imgUrl}/>
     </TouchableOpacity>

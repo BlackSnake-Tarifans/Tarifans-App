@@ -81,12 +81,10 @@ const RegisterScreen = ({ navigation }: any) => {
               parseInt(parts[0], 10));
             var dt2 = new Date(Date.parse(text))
             if(dt instanceof Date && !isNaN(dt as any)){
-              console.log(dt);
               onChangeDate(dt);
             } 
             if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
               onChangeDate(dt2);
-              console.log(dt2);
             }
           }}
         />

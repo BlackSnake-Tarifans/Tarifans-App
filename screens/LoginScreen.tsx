@@ -43,18 +43,18 @@ const LoginScreen = ({ navigation } : any) => {
         <LinearGradient style={styles.background} colors={['#f28e43','#966bee']} start={{x:0, y:0}} end={{x:1, y:0.7}} locations={[0,0.95]}>
           <Image style={styles.imageTitle } source={require('../assets/images/tarifans_palabra_color_blanco.png')}/>
           <Text style={styles.title }>Inicio de sesión</Text>
-          <Text style={styles.title}>Usuario</Text>
+
           <TextInput
             style={styles.input}
-            placeholder="Username"
+            placeholder="Nombre de usuario"
             placeholderTextColor={'white'}
             onChangeText={text => onChangeUser(text)}
           />
           
-          <Text style={styles.title}>Contrasena</Text>
+
           <TextInput
             style={styles.input}
-            placeholder="Password"
+            placeholder="Contraseña"
             secureTextEntry={true}
             placeholderTextColor={'white'}
             onChangeText={text => onChangePass(text)}
@@ -84,7 +84,7 @@ const LoginScreen = ({ navigation } : any) => {
             />
             <Button
               title='Iniciar Sesión con Google'
-              onPress={() => {}}
+              onPress={() => {navigation.navigate('Home')}}
               style_button={styles.button_3}
               style_text={styles.text_3}
             />

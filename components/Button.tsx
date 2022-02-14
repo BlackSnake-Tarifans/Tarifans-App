@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 
-export default function Button(props: { onPress: any; title?: "Save" | undefined; }) {
-  const { onPress, title = 'Save' } = props;
+export default function Button(props: { onPress: any; title?: "Save" | undefined; style_button: any}) {
+  const { onPress, title = 'Save' , style_button} = props;
   return (
-    <Pressable style={styles.button} onPress={onPress}>
+    <Pressable style={style_button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
