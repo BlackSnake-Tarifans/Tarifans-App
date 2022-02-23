@@ -26,6 +26,7 @@ import CreateCateScreen from '../screens/CreateCateScreen';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import PaginaInicio from '../screens/PaginaInicio';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -48,6 +49,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Inicio" component={PaginaInicio} options={{ headerShown: false }} />
       <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name='Search' component={SearchScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
