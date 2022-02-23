@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -8,7 +8,9 @@ import { RootTabScreenProps } from '../types';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { register } from '../hooks/backendAPI'
+import { register } from '../hooks/backendAPI';
+import GradientButton from 'react-native-gradient-buttons';
+
 
 const RegisterScreen = ({ navigation }: any) => {
   const [email, onChangeEmail] = React.useState("");
@@ -31,69 +33,75 @@ const RegisterScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient style={styles.background} colors={['#f28e43', '#966bee']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.7 }} locations={[0, 0.95]}>
-        <Image style={styles.imageTitle} source={require('../assets/images/tarifans_palabra_color_blanco.png')} />
-        <Text style={styles.title}>Registro de Usuarios</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          placeholderTextColor={'white'}
-          onChangeText={text => onChangeUser(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Correo Electronico"
-          placeholderTextColor={'white'}
-          onChangeText={text => onChangeEmail(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contrasena"
-          placeholderTextColor={'white'}
-          secureTextEntry={true}
-          onChangeText={text => onChangePass(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirmar Contrasena"
-          placeholderTextColor={'white'}
-          secureTextEntry={true}
-          onChangeText={text => {
+      <View style={styles.background}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Image style={styles.backStyleImage} source={require('../assets/images/iconos/back.png')} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Crear{"\n"}cuenta</Text>
+        <View style={styles.SectionStyle}>
+          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+          <TextInput
+              style={{ flex: 1 }}
+              placeholder="Nombre de usuario"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => onChangeUser(text)}
+          />
+        </View>
+        <View style={styles.SectionStyle}>
+          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
+          <TextInput
+              style={{ flex: 1 }}
+              placeholder="Correo electrónico"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => onChangeEmail(text)}
+          />
+        </View>
+        <View style={styles.SectionStyle}>
+          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+          <TextInput
+              style={{ flex: 1 }}
+              placeholder="Contraseña"
+              placeholderTextColor={'#9D9D9E'}
+              secureTextEntry={true}
+              onChangeText={text => onChangePass(text)}
+          />
+        </View>
+        <View style={styles.SectionStyle}>
+          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+          <TextInput
+              style={{ flex: 1 }}
+              placeholder="Confirmar contraseña"
+              placeholderTextColor={'#9D9D9E'}
+              secureTextEntry={true}
+              onChangeText={text => {
 
-            onChangePassConf(text)
-          }}
-        />
-        {show && <DateTimePicker
-          value={birthDate}
-
-          mode="date"
-          display="default"
-          onChange={(event: any, selectedDate: any) => selectedDate ? onDateChange(event, selectedDate) : ''}
-        />}
-        <TextInput
-          style={styles.input}
-          placeholder="Fecha de Nacimiento dd/mm/aa"
-          placeholderTextColor={'white'}
-          onChangeText={text => {
-            var parts = text.split("/");
-            var dt = new Date(parseInt(parts[2], 10),
-              parseInt(parts[1], 10) - 1,
-              parseInt(parts[0], 10));
-            var dt2 = new Date(Date.parse(text))
-            if(dt instanceof Date && !isNaN(dt as any)){
-              onChangeDate(dt);
-            } 
-            if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
-              onChangeDate(dt2);
-            }
-          }}
-        />
+                onChangePassConf(text)
+              }}
+          />
+        </View>
+        <View style={styles.SectionStyle}>
+          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
+          <TextInput
+              style={{ flex: 1 }}
+              placeholder="Fecha de nacimiento dd/mm/aa"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => {
+                var parts = text.split("/");
+                var dt = new Date(parseInt(parts[2], 10),
+                  parseInt(parts[1], 10) - 1,
+                  parseInt(parts[0], 10));
+                var dt2 = new Date(Date.parse(text))
+                if(dt instanceof Date && !isNaN(dt as any)){
+                  onChangeDate(dt);
+                } 
+                if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
+                  onChangeDate(dt2);
+                }
+              }}
+          />
+        </View>
         <View style={styles.buttons}>
-        
-          <Button
-            title='Registrarse'
-            style_button={styles.button_2}
-            style_text={styles.text_2}
+          <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
             onPress={() => {
               register({
                 user: {
@@ -105,15 +113,17 @@ const RegisterScreen = ({ navigation }: any) => {
                 birth_date: birthDate.getFullYear()+'-' + (birthDate.getMonth()+1) + '-'+birthDate.getDate()
               }).then((data) => { console.log(data); navigation.navigate('Login') })
             }}
-          />
-          <Button
-              onPress={() => navigation.navigate('Login')}
-              title="Volver a Iniciar Sesión"
-              style_button={styles.button_1}
-              style_text={styles.text_1}
-              />
-        </View>
-      </LinearGradient>
+          >                      
+            <Text style={styles.text_2}> Registrarse </Text>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/right-arrow.png')} />
+          </TouchableOpacity>      
+        </View> 
+        <View style={styles.vistaFinal}>
+        <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
+        <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
+          </View>       
+        
+      </View>
     </SafeAreaView>
   );
 };
@@ -132,17 +142,33 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
+  },  
   background: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    backgroundColor: 'white'
+  },
+  backStyleImage:{
+    padding: 10,
+    marginLeft: 40,
+    marginBottom: 30,
+    height: 40,
+    width: 40,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    alignSelf: 'center',
+    opacity: 0.4
   },
   title: {
-    fontSize: 20,
+    fontSize: 60,
+    fontWeight: "bold",
     fontFamily: 'RosarioRegular',
-    color: 'white'
+    color: 'black',
+    marginTop:0,
+    marginLeft:40,
+    lineHeight: 60    
   },
   imageTitle: {
     width: Dimensions.get('window').width * 0.6,
@@ -155,26 +181,70 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },*/
-  input: {
-    height: 40,
-    width: Dimensions.get('window').width * 0.6,
-    margin: 12,
-    borderWidth: 3,
+  SectionStyle: {
+    flexDirection: 'row',
+    height: 50,
+    width: Dimensions.get('window').width * 0.8,
+    marginLeft:40,
+    marginTop: 25,
+    borderRadius: 15,
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
-    color: 'white',
+
+},
+  ImageStyle: {
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 5,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    alignSelf: 'center',
+    opacity: 0.4
+},
+  input: {
+    flex:1,
+    height: 40,
+    width: Dimensions.get('window').width * 0.7,
+    marginLeft:40,
+    marginTop: 25,
+    borderRadius: 5,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    padding: 10,
+    color: 'green',
     borderColor: 'white'
   },
   buttons: {
     backgroundColor: 'rgba(0,0,0,0)',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    alignSelf: 'flex-end',
+    marginRight:40,
     justifyContent: 'center',
     flexGrow: 0,
     flexBasis: 'auto'
+  },  
+  MainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10
   },
-
-
-  button_1: {
-    marginTop: 4,
+  FacebookStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#485a96',
+    borderWidth: .5,
+    borderColor: '#fff',
+    height: 40,
+    borderRadius: 5 ,
+    margin: 5,
+   
+  },
+  button_2: {
+    flexDirection: 'row',
+    height:60,
+    marginTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
@@ -187,71 +257,38 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.50,
     shadowRadius: 2.22,
     elevation: 3,
-    backgroundColor: 'white',
-    width: Dimensions.get('window').width * 0.6,
+    backgroundColor: '#966bee',
+    width: Dimensions.get('window').width * 0.4,
     maxWidth: 540,
-    marginBottom: 5
+    marginBottom: 20
   },
-  text_1: {
-    fontSize: 16,
+  text_2: {
+    fontSize: 20,
+    marginLeft:5,
     lineHeight: 21,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+  },
+  vistaFinal:{
+    backgroundColor: 'transparent',
+    alignSelf:'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 40
+  },
+  textoFinal1:{
+    fontSize: 15,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: '#9D9D9E',
+  },
+  textoFinal2:{
+    fontSize: 15,
     letterSpacing: 0.25,
     fontFamily: 'RosarioRegular',
     color: '#f28e43',
-  },
-  button_2: {
-    marginTop: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 6,
-    borderRadius: 32,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.50,
-    shadowRadius: 2.22,
-    elevation: 3,
-    backgroundColor: '#966bee',
-    width: Dimensions.get('window').width * 0.6,
-    maxWidth: 540,
-    marginBottom: 5
-  },
-  text_2: {
-    fontSize: 16,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    fontFamily: 'RosarioRegular',
-    color: 'white',
-  },
-  button_3: {
-    marginTop: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 6,
-    borderRadius: 32,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.50,
-    shadowRadius: 2.22,
-    elevation: 3,
-    backgroundColor: '#966bee',
-    width: Dimensions.get('window').width * 0.6,
-    maxWidth: 540,
-    marginBottom: 5
-  },
-  text_3: {
-    fontSize: 16,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    fontFamily: 'RosarioRegular',
-    color: 'white',
   }
-
 });
 
 

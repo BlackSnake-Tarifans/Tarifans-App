@@ -42,7 +42,8 @@ const LoginScreen = ({ navigation } : any) => {
       <SafeAreaView style={styles.container}>
         <LinearGradient style={styles.background} colors={['#f28e43','#966bee']} start={{x:0, y:0}} end={{x:1, y:0.7}} locations={[0,0.95]}>
           <Image style={styles.imageTitle } source={require('../assets/images/tarifans_palabra_color_blanco.png')}/>
-          <Text style={styles.title }>Inicio de sesión</Text>
+          <Text style={styles.titleInicio }>Inicio de sesión</Text>
+          <Text style={styles.titleInicioMensaje }>Por favor, inicia sesión para continuar.</Text>
 
           <TextInput
             style={styles.input}
@@ -117,8 +118,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%'
   },
-  title: {
+  titleInicio: {
     fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+  },
+  titleInicioMensaje: {
+    fontSize: 14,
     fontFamily: 'RosarioRegular',
     color: 'white'
   },
@@ -135,12 +141,14 @@ const styles = StyleSheet.create({
   },*/
   input: {
     height: 40,
-    width: Dimensions.get('window').width * 0.6,
+    width: Dimensions.get('window').width * 0.7,
     margin: 12,
-    borderWidth: 3,
+    borderWidth: 0,
+    borderRadius: 25,
+    backgroundColor: 'rgba(52, 52, 52, 0.2)',
+    borderColor: 'transparent',
     padding: 10,
-    color: 'white',
-    borderColor: 'white'
+    color: 'white'    
   },
   buttons: {
     backgroundColor: 'rgba(0,0,0,0)',
