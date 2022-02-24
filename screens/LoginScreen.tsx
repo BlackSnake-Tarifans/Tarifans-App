@@ -91,6 +91,10 @@ const LoginScreen = ({ navigation } : any) => {
             <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
             <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Register')}>¡Regístrate aquí!</Text>
           </View>  
+          <View style={styles.vistaFinal}>
+            <Text style={styles.textoFinal1}>¿Olvidaste tu contraseña? </Text>
+            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('ChangePass')}>¡Te ayudamos a cambiarla!</Text>
+          </View>  
           <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
           <Text style={styles.textoFinal1 }>Continúa con tus redes sociales.</Text>
           <View style={styles.vistaRedes}>

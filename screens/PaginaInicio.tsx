@@ -47,17 +47,7 @@ const LoginScreen = ({ navigation } : any) => {
           
           <View style={styles.buttons}>
             <Button
-              onPress={() => {
-                login({username: user, password: pass})
-                .then((res) => {
-                  return res.data
-                })
-                .then( (data) => {
-                  changeToken(data['token'])
-                  navigation.navigate('Home')
-                })
-                .catch((error) => console.log(error))
-              }}
+              onPress={() => navigation.navigate('Login')}
               title="Iniciar Sesión"
               style_button={styles.button_1}
               style_text={styles.text_1}

@@ -23,6 +23,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import CreateCateScreen from '../screens/CreateCateScreen';
+import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -48,7 +49,7 @@ function RootNavigator() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={PaginaInicio} options={{ headerShown: false }} />
       <Stack.Screen name="Inicio" component={PaginaInicio} options={{ headerShown: false }} />
       <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name='Search' component={SearchScreen} options={{ headerShown: false }} />
@@ -57,7 +58,7 @@ function RootNavigator() {
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
       <Stack.Screen name="Category" component={CreateCateScreen} options={{ headerShown: false }}/>
-
+      <Stack.Screen name='ChangePass' component={ChangePasswordScreen} options={{ headerShown: false }}/>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         
       </Stack.Group>
