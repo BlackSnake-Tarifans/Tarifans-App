@@ -9,7 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { register } from '../hooks/backendAPI';
-import GradientButton from 'react-native-gradient-buttons';
+
 
 
 const RegisterScreen = ({ navigation }: any) => {
@@ -28,19 +28,15 @@ const RegisterScreen = ({ navigation }: any) => {
   const imageHeight = Math.round(dimensions.width * 13 / 16);
   const imageWidth = dimensions.width;
 
-
   const [text1, onChangeNumber] = React.useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   let [fontsLoaded] = useFonts({ Rosario_400Regular });
 
   return (
-    <SafeAreaView style={styles.container}>
-      
-        <View style={styles.background}>
-        
-        <View style={styles.ViewTop}>
+    <SafeAreaView style={styles.container}>        
+      <View style={styles.ViewTop}>
         <ImageBackground
-        style={{ top:-10, height: imageHeight, width: imageWidth, borderStartColor:'transparent',alignItems:'flex-start'}}
+        style={{height: imageHeight, width: imageWidth, borderStartColor:'transparent',alignItems:'flex-start'}}
         resizeMode='cover'        
         source={require('../assets/images/iconos/header_purple.png')}>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -48,8 +44,9 @@ const RegisterScreen = ({ navigation }: any) => {
         </TouchableOpacity>
         <Text style={styles.title}>Crear{"\n"}Cuenta</Text>
         </ImageBackground>
+      </View>
         
-
+      <View style={styles.ViewMiddle}>
           <View style={styles.SectionStyle}>
             <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
             <TextInput
@@ -112,32 +109,32 @@ const RegisterScreen = ({ navigation }: any) => {
                 }}
             />
           </View>
+        </View>
         
-        
-        <View style={styles.buttons}>
-          <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
-            onPress={() => {
-              register({
-                user: {
-                  email: email,
-                  username: user,
-                  password: pass,
-                  confirm_password: passConf
-                },
-                birth_date: birthDate.getFullYear()+'-' + (birthDate.getMonth()+1) + '-'+birthDate.getDate()
-              }).then((data) => { console.log(data); navigation.navigate('Login') })
-            }}
-          >                      
-            <Text style={styles.text_2}> Registrarse </Text>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/right-arrow.png')} />
-          </TouchableOpacity>      
-        </View> 
-        <View style={styles.vistaFinal}>
-        <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
-        <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
-          </View>     
-          </View>
-      </View>      
+        <View style={styles.ViewEnd}>
+          <View style={styles.buttons}>
+            <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
+              onPress={() => {
+                register({
+                  user: {
+                    email: email,
+                    username: user,
+                    password: pass,
+                    confirm_password: passConf
+                  },
+                  birth_date: birthDate.getFullYear()+'-' + (birthDate.getMonth()+1) + '-'+birthDate.getDate()
+                }).then((data) => { console.log(data); navigation.navigate('Login') })
+              }}
+            >                      
+              <Text style={styles.text_2}> Registrarse </Text>
+              <Image style={styles.ImageStyle} source={require('../assets/images/iconos/right-arrow.png')} />
+            </TouchableOpacity>      
+          </View> 
+          <View style={styles.vistaFinal}>
+          <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
+          <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
+        </View>
+      </View>     
     </SafeAreaView>
   );
 };
@@ -157,17 +154,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor:'white'
-  },  
-  background: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    width: '100%',
-    backgroundColor: 'transparent'
   },
   backStyleImage:{
     padding: 0,
-    marginTop:30,
+    marginTop:50,
     marginLeft: 40,
     marginBottom: 20,
     height: 40,
@@ -176,23 +166,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center'
   },
-  imagePurple:{   
-   
-  },
   title: {
-    fontSize: 60,
+    fontSize: 50,
     fontWeight: "bold",
     fontFamily: 'RosarioRegular',
     color: 'white',
     marginLeft:40,
-    lineHeight: 60    
-  },
-  imageTitle: {
-    width: Dimensions.get('window').width * 0.6,
-    height: Dimensions.get('window').width * 0.24,
-    maxWidth: 540,
-    maxHeight: 216
-  },
+    lineHeight: 50    
+  },  
   /*separator: {
     marginVertical: 30,
     height: 1,
@@ -202,17 +183,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     width: Dimensions.get('window').width * 0.8,
-    marginLeft:40,
-    marginTop: 25,
+    margin:10,
     borderRadius: 15,
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
-    top:'-15%'
   },
   ViewTop:{
-    top:0,
-    backgroundColor:'white'
+    backgroundColor:'white',
+    width: Dimensions.get('window').width,
+    position: 'absolute',
+    top:0
   },  
+  ViewMiddle:{
+    alignItems: 'center',
+    backgroundColor:'transparent',
+    width: Dimensions.get('window').width,
+    position: 'relative',
+    top:40
+  },
+  ViewEnd:{
+    alignItems: 'center',
+    backgroundColor:'transparent',
+    width: Dimensions.get('window').width,
+    position: 'absolute',
+    bottom:0
+  },
   ImageStyle: {
     padding: 10,
     marginRight: 10,
@@ -238,19 +233,15 @@ const styles = StyleSheet.create({
   },
   buttons: {
     backgroundColor: 'rgba(0,0,0,0)',
-    alignItems: 'stretch',
     alignSelf: 'flex-end',
-    marginRight:40,
     justifyContent: 'center',
-    flexGrow: 0,
-    flexBasis: 'auto'
+    marginBottom:140,
+    marginRight:40
   },    
   button_2: {
     flexDirection: 'row',
     position:'relative',
-    marginBottom:20,
     height:60,
-    bottom:30,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
@@ -280,7 +271,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 0
+    bottom: 50
   },
   textoFinal1:{
     fontSize: 15,

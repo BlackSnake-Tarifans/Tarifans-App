@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput , Alert , Pressable, Platform, Image, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput , Alert , Pressable, Platform, Image, Dimensions, TouchableHighlight } from 'react-native';
 
 
 import { TOKEN_CHANGE } from '../redux/AuthToken';
@@ -94,7 +94,9 @@ const LoginScreen = ({ navigation } : any) => {
           <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
           <Text style={styles.textoFinal1 }>Continúa con tus redes sociales.</Text>
           <View style={styles.vistaRedes}>
-          <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
+          <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+            <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
+          </TouchableHighlight>          
           <Image style={styles.imagenRedes} source={require('../assets/images/iconos/google.png')} />
           </View>
         </LinearGradient>
