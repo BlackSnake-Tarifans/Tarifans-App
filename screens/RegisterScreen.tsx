@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform, TouchableOpacity, ImageBackground } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -24,7 +24,9 @@ const RegisterScreen = ({ navigation }: any) => {
     setShow(Platform.OS === 'ios');
     onChangeDate(currentDate);
   };
-
+  const dimensions = Dimensions.get('window');
+  const imageHeight = Math.round(dimensions.width * 13 / 16);
+  const imageWidth = dimensions.width;
 
 
   const [text1, onChangeNumber] = React.useState(null);
@@ -33,73 +35,85 @@ const RegisterScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.background}>
+      
+        <View style={styles.background}>
+        
+        <View style={styles.ViewTop}>
+        <ImageBackground
+        style={{ top:-10, height: imageHeight, width: imageWidth, borderStartColor:'transparent',alignItems:'flex-start'}}
+        resizeMode='cover'        
+        source={require('../assets/images/iconos/header_purple.png')}>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Image style={styles.backStyleImage} source={require('../assets/images/iconos/back.png')} />
         </TouchableOpacity>
-        <Text style={styles.title}>Crear{"\n"}cuenta</Text>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
-          <TextInput
-              style={{ flex: 1 }}
-              placeholder="Nombre de usuario"
-              placeholderTextColor={'#9D9D9E'}
-              onChangeText={text => onChangeUser(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
-          <TextInput
-              style={{ flex: 1 }}
-              placeholder="Correo electrónico"
-              placeholderTextColor={'#9D9D9E'}
-              onChangeText={text => onChangeEmail(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-          <TextInput
-              style={{ flex: 1 }}
-              placeholder="Contraseña"
-              placeholderTextColor={'#9D9D9E'}
-              secureTextEntry={true}
-              onChangeText={text => onChangePass(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-          <TextInput
-              style={{ flex: 1 }}
-              placeholder="Confirmar contraseña"
-              placeholderTextColor={'#9D9D9E'}
-              secureTextEntry={true}
-              onChangeText={text => {
+        <Text style={styles.title}>Crear{"\n"}Cuenta</Text>
+        </ImageBackground>
+        
 
-                onChangePassConf(text)
-              }}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
-          <TextInput
-              style={{ flex: 1 }}
-              placeholder="Fecha de nacimiento dd/mm/aa"
-              placeholderTextColor={'#9D9D9E'}
-              onChangeText={text => {
-                var parts = text.split("/");
-                var dt = new Date(parseInt(parts[2], 10),
-                  parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));
-                var dt2 = new Date(Date.parse(text))
-                if(dt instanceof Date && !isNaN(dt as any)){
-                  onChangeDate(dt);
-                } 
-                if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
-                  onChangeDate(dt2);
-                }
-              }}
-          />
-        </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+            <TextInput
+                style={{ flex: 1 }}
+                placeholder="Nombre de usuario"
+                placeholderTextColor={'#9D9D9E'}
+                onChangeText={text => onChangeUser(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
+            <TextInput
+                style={{ flex: 1 }}
+                placeholder="Correo electrónico"
+                placeholderTextColor={'#9D9D9E'}
+                onChangeText={text => onChangeEmail(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <TextInput
+                style={{ flex: 1 }}
+                placeholder="Contraseña"
+                placeholderTextColor={'#9D9D9E'}
+                secureTextEntry={true}
+                onChangeText={text => onChangePass(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <TextInput
+                style={{ flex: 1 }}
+                placeholder="Confirmar contraseña"
+                placeholderTextColor={'#9D9D9E'}
+                secureTextEntry={true}
+                onChangeText={text => {
+
+                  onChangePassConf(text)
+                }}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
+            <TextInput
+                style={{ flex: 1 }}
+                placeholder="Fecha de nacimiento dd/mm/aa"
+                placeholderTextColor={'#9D9D9E'}
+                onChangeText={text => {
+                  var parts = text.split("/");
+                  var dt = new Date(parseInt(parts[2], 10),
+                    parseInt(parts[1], 10) - 1,
+                    parseInt(parts[0], 10));
+                  var dt2 = new Date(Date.parse(text))
+                  if(dt instanceof Date && !isNaN(dt as any)){
+                    onChangeDate(dt);
+                  } 
+                  if(dt2 instanceof Date && !isNaN(dt2 as any)){ 
+                    onChangeDate(dt2);
+                  }
+                }}
+            />
+          </View>
+        
+        
         <View style={styles.buttons}>
           <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
             onPress={() => {
@@ -121,9 +135,9 @@ const RegisterScreen = ({ navigation }: any) => {
         <View style={styles.vistaFinal}>
         <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
         <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
-          </View>       
-        
-      </View>
+          </View>     
+          </View>
+      </View>      
     </SafeAreaView>
   );
 };
@@ -141,32 +155,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor:'white'
   },  
   background: {
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   backStyleImage:{
-    padding: 10,
+    padding: 0,
+    marginTop:30,
     marginLeft: 40,
-    marginBottom: 30,
+    marginBottom: 20,
     height: 40,
     width: 40,
     resizeMode: 'stretch',
     alignItems: 'center',
-    alignSelf: 'center',
-    opacity: 0.4
+    alignSelf: 'center'
+  },
+  imagePurple:{   
+   
   },
   title: {
     fontSize: 60,
     fontWeight: "bold",
     fontFamily: 'RosarioRegular',
-    color: 'black',
-    marginTop:0,
+    color: 'white',
     marginLeft:40,
     lineHeight: 60    
   },
@@ -190,8 +207,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
-
-},
+    top:'-15%'
+  },
+  ViewTop:{
+    top:0,
+    backgroundColor:'white'
+  },  
   ImageStyle: {
     padding: 10,
     marginRight: 10,
@@ -223,28 +244,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexGrow: 0,
     flexBasis: 'auto'
-  },  
-  MainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10
-  },
-  FacebookStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#485a96',
-    borderWidth: .5,
-    borderColor: '#fff',
-    height: 40,
-    borderRadius: 5 ,
-    margin: 5,
-   
-  },
+  },    
   button_2: {
     flexDirection: 'row',
+    position:'relative',
+    marginBottom:20,
     height:60,
-    marginTop: 40,
+    bottom:30,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
@@ -260,7 +266,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#966bee',
     width: Dimensions.get('window').width * 0.4,
     maxWidth: 540,
-    marginBottom: 20
   },
   text_2: {
     fontSize: 20,
@@ -275,7 +280,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 40
+    bottom: 0
   },
   textoFinal1:{
     fontSize: 15,

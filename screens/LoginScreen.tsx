@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation } : any) => {
           </View>
           <View style={styles.vistaFinal}>
             <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
-            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>¡Regístrate aquí!</Text>
+            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Register')}>¡Regístrate aquí!</Text>
           </View>  
           <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
           <Text style={styles.textoFinal1 }>Continúa con tus redes sociales.</Text>
@@ -270,7 +270,6 @@ ImageStyleDivider:{
   vistaRedes:{
     flexDirection: 'row',
     backgroundColor:'transparent',
-
   }
 });
 
