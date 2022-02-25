@@ -15,7 +15,6 @@ const POSTS = [{
         {
             user: 'oalsla',
             comment: 'oaoa',
-
         },
     ]    
 },
