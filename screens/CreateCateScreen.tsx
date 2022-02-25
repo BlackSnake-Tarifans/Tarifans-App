@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, ScrollView, TouchableOpacity } from "react-native";
 import HeaderSinLogo from "../components/Home/HeaderSinLogo";
 import HeaderDiferente from "../components/Home/HeaderDiferente";
 import { Dimensions } from 'react-native';
@@ -9,7 +9,7 @@ const deviceWidth = Dimensions.get('window').width;
 const CreateCateScreen = ({ route, navigation }: any) => {
   //const { id } = route.params;
 
-  
+
   const [name, onChangeName] = useState("New Category");
   const [desc, onChangeDesc] = useState("Todo lo que deseas y más");
   const [price, onChangePrice] = useState(0);
@@ -20,12 +20,12 @@ const CreateCateScreen = ({ route, navigation }: any) => {
     <SafeAreaView style={styles.container}>
 
       <View style={styles.ViewTop}>
-        <HeaderDiferente props= "Registrar Categoría Suscripción"/>
+        <HeaderDiferente props={titulo} />
       </View>
 
       <View style={styles.ViewMiddle}>
 
-        <View style={styles.SectionStyle}>          
+        <View style={styles.SectionStyle}>
           <Text style={styles.TextfileTitle}>Nombre</Text>
           <TextInput
             placeholder="Ingrese el nombre de la categoría"
@@ -64,10 +64,8 @@ const CreateCateScreen = ({ route, navigation }: any) => {
       </View>
 
       <View style={styles.ViewEnd}>
-          <CateButton
-            title='Crear Categoría'
-            style_button={styles.button_2}
-            style_text={styles.text}
+        <View style={styles.buttons}>
+          <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
             onPress={() => {
               /* Aqui iria algun metodo para crear la suscripcion en el back: ejemplo con "crearCat"
               crearCat({
@@ -81,22 +79,18 @@ const CreateCateScreen = ({ route, navigation }: any) => {
               }).then((data) => { console.log(data); navigation.navigate('Profile') })*/
               console.log("Nueva categoría");
               navigation.navigate('Profile');
-            }}
-          />
+            }}>
+            <Text style={styles.text_2}> Crear Categoría </Text>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/right-arrow.png')} />
+
+          </TouchableOpacity>
         </View>
+      </View>
     </SafeAreaView>
 
   );
 }
 
-function CateButton(props: { onPress: any; title: string | undefined; style_button: any, style_text: any }) {
-  const { onPress, title, style_button, style_text } = props;
-  return (
-    <Pressable style={style_button} onPress={onPress}>
-      <Text style={style_text}>{title}</Text>
-    </Pressable>
-  );
-}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -113,10 +107,12 @@ const styles = StyleSheet.create({
     top: -30,
     width: deviceWidth,
     alignItems: 'center',
+
   },
   ViewEnd: {
-    position: 'absolute',
-    bottom:0,
+    position: 'relative',
+    bottom: 0,
+    top: -30,
     width: deviceWidth,
   },
   SectionStyle: {
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
   },
-  SectionStyleDescripcion:{
+  SectionStyleDescripcion: {
     flexDirection: 'column',
     height: 140,
     width: Dimensions.get('window').width * 0.8,
@@ -151,21 +147,59 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   text: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    letterSpacing: 0,
+    fontSize: 10,
+    marginLeft: 5,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
     color: 'white',
-  },  
+  },
+  buttons: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 140,
+    marginRight: 40
+  },
   button_2: {
-    height:70,
+    flexDirection: 'row',
+    position: 'relative',
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#966bee',
+    paddingVertical: 6,
+    borderRadius: 32,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
-    }
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 2.22,
+    elevation: 3,
+    backgroundColor: '#966bee',
+    width: Dimensions.get('window').width * 0.4,
+    maxWidth: 540,
+  },
+  text_2: {
+    fontSize: 15,
+    marginLeft: 5,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+  },
+  ImageStyle: {
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 5,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    alignSelf: 'center',
+    opacity: 0.4
   },
 });
 
