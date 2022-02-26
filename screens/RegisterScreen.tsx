@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Image, Dimensions, Platform, TouchableOpacity, ImageBackground } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Pressable, Image, Dimensions, Platform} from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import Colors from "../constants/Colors";
-import { RootTabScreenProps } from '../types';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { register } from '../hooks/backendAPI';
+import HeaderDiferente from "../components/Elementos/HeaderDiferente";
+import Boton from "../components/Elementos/Boton";
 
 
 
@@ -27,23 +24,15 @@ const RegisterScreen = ({ navigation }: any) => {
   const dimensions = Dimensions.get('window');
   const imageHeight = Math.round(dimensions.width * 13 / 16);
   const imageWidth = dimensions.width;
-
   const [text1, onChangeNumber] = React.useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   let [fontsLoaded] = useFonts({ Rosario_400Regular });
+  const tituloHeader = "Crear Cuenta";
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.ViewTop}>
-        <ImageBackground
-          style={{ height: imageHeight, width: imageWidth, borderStartColor: 'transparent', alignItems: 'flex-start' }}
-          resizeMode='cover'
-          source={require('../assets/images/iconos/header_purple.png')}>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Image style={styles.backStyleImage} source={require('../assets/images/iconos/back.png')} />
-          </TouchableOpacity>
-          <Text style={styles.title}>Crear{"\n"}Cuenta</Text>
-        </ImageBackground>
+        <HeaderDiferente props={tituloHeader} />
       </View>
 
       <View style={styles.ViewMiddle}>
@@ -51,7 +40,7 @@ const RegisterScreen = ({ navigation }: any) => {
           <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
           <TextInput
             style={{ flex: 1 }}
-            placeholder="Nombre de usuario"
+            placeholder="Nombre de usuario."
             placeholderTextColor={'#9D9D9E'}
             onChangeText={text => onChangeUser(text)}
           />
@@ -112,23 +101,18 @@ const RegisterScreen = ({ navigation }: any) => {
       </View>
 
       <View style={styles.ViewEnd}>
-        <View style={styles.buttons}>
-          <TouchableOpacity style={styles.button_2} activeOpacity={0.5}
-            onPress={() => {
-              register({
-                user: {
-                  email: email,
-                  username: user,
-                  password: pass,
-                  confirm_password: passConf
-                },
-                birth_date: birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate()
-              }).then((data) => { console.log(data); navigation.navigate('Login') })
-            }}
-          >
-            <Text style={styles.text_2}> Registrarse </Text>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/right-arrow.png')} />
-          </TouchableOpacity>
+        <View style={styles.ViewButtonRegister}>
+          <Boton onPress={() => {
+            register({
+              user: {
+                email: email,
+                username: user,
+                password: pass,
+                confirm_password: passConf
+              },
+              birth_date: birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate()
+            }).then((data) => { console.log(data); navigation.navigate('Login') })
+          }} title="Registrarse" anchura={150} altura={45} />
         </View>
         <View style={styles.vistaFinal}>
           <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
@@ -152,19 +136,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white'
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
   },
-  backStyleImage: {
-    padding: 0,
-    marginTop: 50,
-    marginLeft: 40,
-    marginBottom: 20,
-    height: 40,
-    width: 40,
-    resizeMode: 'stretch',
-    alignItems: 'center',
-    alignSelf: 'center'
+  ViewBackButton: {
+    left: 40,
+    backgroundColor: 'transparent',
+    marginTop: 60,
+    marginBottom: 10
   },
   title: {
     fontSize: 50,
@@ -189,24 +168,27 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   ViewTop: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     width: Dimensions.get('window').width,
     position: 'relative',
-    top: 0
+    top: 0,
+    marginBottom:-40
   },
   ViewMiddle: {
     alignItems: 'center',
     backgroundColor: 'transparent',
     width: Dimensions.get('window').width,
     position: 'relative',
-    top: 0
+    marginBottom:25
+
   },
   ViewEnd: {
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: 'transparent',
     width: Dimensions.get('window').width,
     position: 'relative',
-    bottom: 0,
+    alignItems:'center',
+    height:140
   },
   ImageStyle: {
     padding: 10,
@@ -228,55 +210,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'rgba(52, 52, 52, 0.05)',
     padding: 10,
-    color: 'green',
+    color: 'transparent',
     borderColor: 'white'
-  },
-  buttons: {
-    backgroundColor: 'rgba(0,0,0,0)',
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 140,
-    marginRight: 40
-  },
-  button_2: {
-    flexDirection: 'row',
-    position: 'relative',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 6,
-    borderRadius: 32,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.50,
-    shadowRadius: 2.22,
-    elevation: 3,
-    backgroundColor: '#966bee',
-    width: Dimensions.get('window').width * 0.4,
-    maxWidth: 540,
-  },
-  text_2: {
-    fontSize: 20,
-    marginLeft: 5,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    fontFamily: 'RosarioRegular',
-    color: 'white',
+  }, 
+  ViewButtonRegister:{
+    backgroundColor:'transparent',
+    width:150
   },
   vistaFinal: {
     backgroundColor: 'transparent',
     alignSelf: 'center',
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: 50
+    position:'absolute',
+    bottom:0
   },
   textoFinal1: {
     fontSize: 15,
-    letterSpacing: 0.25,
     fontFamily: 'RosarioRegular',
     color: '#9D9D9E',
   },

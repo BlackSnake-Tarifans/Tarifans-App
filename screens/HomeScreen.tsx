@@ -1,7 +1,7 @@
 import React, { useState }  from "react";
 import { Text, View } from '../components/Themed';
 import { SafeAreaView , ScrollView, StyleSheet} from 'react-native';
-import Header from "../components/Home/Header";
+import Header from "../components/Elementos/Header";
 import Post from "../components/Home/Post";
 
 const POSTS = [{

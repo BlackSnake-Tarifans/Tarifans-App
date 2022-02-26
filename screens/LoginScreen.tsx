@@ -1,30 +1,13 @@
 import React from "react";
 import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Platform, Image, Dimensions, TouchableHighlight } from 'react-native';
-
-
 import { TOKEN_CHANGE } from '../redux/AuthToken';
 import { useDispatch } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { login } from '../hooks/backendAPI';
 import AppLoading from 'expo-app-loading';
-
-
 import { Text, View } from '../components/Themed';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
-
-
-
-/*const LinearGradient =  Platform.select({
-  ios: () => require("react-native-linear-gradient"),
-  android: () => require("react-native-linear-gradient"),
-  default: () => require("react-native-web-linear-gradient")
-})().default*/
-
 import { useRoute } from '@react-navigation/native';
-import { Divider } from "react-native-paper";
-
 
 const LoginScreen = ({ navigation }: any) => {
   const route = useRoute();
@@ -43,50 +26,56 @@ const LoginScreen = ({ navigation }: any) => {
     return (
       <SafeAreaView style={styles.container}>
         <LinearGradient style={styles.background} colors={['#f28e43', '#966bee']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.7 }} locations={[0, 0.95]}>
-          <Text style={styles.titleInicio}>Bienvenidos a:</Text>
-          <Image style={styles.imageTitle1} source={require('../assets/images/tarifans_palabra_color_blanco.png')} />
-          <Image style={styles.imageTitle2} source={require('../assets/images/tarifans_logo_blanca.png')} />
-
-          <Text style={styles.titleInicioMensaje}>Ingresa y obtén al momento noticias y {"\n"}actualizaciones de tus creadores favoritos.</Text>
-
-          <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
-            <TextInput
-              style={{ flex: 1 }}
-              placeholder="Nombre de usuario"
-              placeholderTextColor={'#9D9D9E'}
-              onChangeText={text => onChangeUser(text)}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-            <TextInput
-              style={{ flex: 1 }}
-              placeholder="Contraseña"
-              placeholderTextColor={'#9D9D9E'}
-              secureTextEntry={true}
-              onChangeText={text => onChangePass(text)}
-            />
+          <View style={styles.ViewStart}>
+            <Text style={styles.titleInicio}>Bienvenidos a:</Text>
+            <Image style={styles.imageTitle1} source={require('../assets/images/tarifans_palabra_color_blanco.png')} />
+            <Image style={styles.imageTitle2} source={require('../assets/images/tarifans_logo_blanca.png')} />
           </View>
 
-          <View style={styles.buttons}>
-            <Button
-              onPress={() => {
-                login({ username: user, password: pass })
-                  .then((res) => {
-                    return res.data
-                  })
-                  .then((data) => {
-                    changeToken(data['token'])
-                    navigation.navigate('Home')
-                  })
-                  .catch((error) => console.log(error))
-              }}
-              title="INICIAR SESIÓN"
-              style_button={styles.button_1}
-              style_text={styles.text_1}
-            />
+          <View style={styles.ViewMiddle}>
+            <Text style={styles.titleInicioMensaje}>Ingresa y obtén al momento noticias y {"\n"}actualizaciones de tus creadores favoritos.</Text>
+
+            <View style={styles.SectionStyle}>
+              <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+              <TextInput
+                style={{ flex: 1 }}
+                placeholder="Nombre de usuario"
+                placeholderTextColor={'#9D9D9E'}
+                onChangeText={text => onChangeUser(text)}
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+              <TextInput
+                style={{ flex: 1 }}
+                placeholder="Contraseña"
+                placeholderTextColor={'#9D9D9E'}
+                secureTextEntry={true}
+                onChangeText={text => onChangePass(text)}
+              />
+            </View>
+
+            <View style={styles.buttons}>
+              <Button
+                onPress={() => {
+                  login({ username: user, password: pass })
+                    .then((res) => {
+                      return res.data
+                    })
+                    .then((data) => {
+                      changeToken(data['token'])
+                      navigation.navigate('Home')
+                    })
+                    .catch((error) => console.log(error))
+                }}
+                title="INICIAR SESIÓN"
+                style_button={styles.button_1}
+                style_text={styles.text_1}
+              />
+            </View>
           </View>
+
+          <View style={styles.ViewEnd}>
           <View style={styles.vistaFinal}>
             <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
             <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Register')}>¡Regístrate aquí!</Text>
@@ -98,6 +87,11 @@ const LoginScreen = ({ navigation }: any) => {
           <View style={styles.vistaRedes}>
             <Image style={styles.imagenRedes} source={require('../assets/images/iconos/google.png')} />
             <Text style={styles.textoFinal3} onPress={() => navigation.navigate('Category')}>¡Inicia sesión con Google!</Text>
+          </View>
+          <View style={styles.vistaRedes}>
+            <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
+            <Text style={styles.textoFinal3} onPress={() => navigation.navigate('Category')}>¡Inicia sesión con Facebook!</Text>
+          </View>
           </View>
         </LinearGradient>
       </SafeAreaView>
@@ -119,13 +113,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor:'transparent'
   },
   background: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+  },
+  ViewStart:{
+    alignItems:'center',
+    backgroundColor:'transparent'
+  },
+  ViewMiddle:{
+    alignItems:'center',
+    backgroundColor:'transparent'
+  },
+  ViewEnd:{
+    alignItems:'flex-start',
+    backgroundColor:'transparent'
   },
   imageTitle1: {
     width: 250,
@@ -254,11 +261,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   imagenRedes: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 150 / 2,
     overflow: "hidden",
-    borderWidth: 5,
+    borderWidth: 2,
     borderColor: 'rgba(255, 255, 255, 1)',
     backgroundColor: 'white',
     margin: 10,

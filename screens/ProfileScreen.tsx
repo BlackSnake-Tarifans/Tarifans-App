@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Text, View } from './../components/Themed';
-import { SafeAreaView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text, View } from '../components/Themed';
+import { SafeAreaView, StyleSheet, Image} from 'react-native';
 import { Dimensions } from 'react-native';
-import HeaderDiferente from "../components/Home/HeaderDiferente";
-import Boton from "../components/Boton";
+import HeaderDiferente from "../components/Elementos/HeaderDiferente";
+import Boton from "../components/Elementos/Boton";
 
 const VALORES = {
     id: 1,
@@ -36,9 +36,7 @@ const ProfileScreen = ({ route, navigation }: any) => {
                     <View style={styles.ProfileView}>
                         <Image style={styles.profileImage} source={require('../assets/images/fotos/profile_picture.png')} />
                     </View>
-
                 </View>
-
                 <View style={styles.ViewMiddle}>
                     <View style={styles.Botones}>
                         <Boton onPress={() => navigation.navigate('Register')} title="Seguir" anchura={100} altura={45} />
