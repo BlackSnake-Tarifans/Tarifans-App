@@ -68,15 +68,53 @@ const Suscripciones = ({ navigation, res }: any) =>{
     return(
         <ScrollView contentContainerStyle={styles.suscContainter}>
             {res.map((suscripcion: any, index: any) => (
-                <SuscData suscripcion={suscripcion} key={index} />
+                <SuscData suscripcion={suscripcion} key={index} navigation={navigation} />
             ))}
         </ScrollView>
     )
 }
 
-const SuscData = ({suscripcion}: any) => {
+const SuscData = ({suscripcion, navigation}: any) => {
+    const [modalVisible, setModalVisible] = useState(false);
+
     return(
     <View style={styles.suscData}>
+         
+        <Modal
+            hasBackdrop={true}
+            isVisible={modalVisible}
+            onBackdropPress={() => {
+            setModalVisible(!modalVisible);
+            }}
+        >
+            <View style={styles.container2}>
+                <View style={styles.modalV}>
+                    <View style={{flexDirection: "row-reverse", justifyContent:"space-around"}}>
+                        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} >
+                                    <Image style={styles.iconM} source={require('../assets/images/iconos/cerrar_x.png')} />
+                        </TouchableOpacity>
+                        <Text style={styles.modalTitle}>Confirmación de Compra</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.modalText}>Suscripción: {suscripcion.nombre}</Text>
+                        <Text style={styles.modalText}>Beneficios: {suscripcion.desc}</Text>
+                        <Text style={styles.modalText}>Nivel de Suscripción: {suscripcion.nivel}</Text>
+                        <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
+                        <Text style={styles.modalText2}>¿Desea confirmar su compra a la siguiente suscripción?</Text>
+                    </View>
+                   
+                        <Pressable
+                            style={styles.button}
+                            onPress={() => {
+                                setModalVisible(!modalVisible);
+                                navigation.navigate('Profile')
+                            }}
+                        >
+                            <Text style={styles.text_2}>Confirmar compra</Text>
+                        </Pressable>
+                </View>
+            </View>
+        </Modal>
         <View>
             <Text style={styles.susTitle}>{suscripcion.user} {suscripcion.nombre}</Text>
         </View>
@@ -90,8 +128,9 @@ const SuscData = ({suscripcion}: any) => {
             <Text style={styles.susText}>Precio: {suscripcion.precio}</Text>
         </View>
         <View>
+            
             <Button
-            onPress={()=>console.log("V")}
+            onPress={()=>setModalVisible(!modalVisible)}
             title="Comprar Suscripción"
             style_button={styles.button}
             style_text={styles.btext}
@@ -103,8 +142,9 @@ const SuscData = ({suscripcion}: any) => {
 
 function Button(props: { onPress: any; title: string | undefined; style_button: any, style_text: any }) {
     const { onPress, title, style_button, style_text } = props;
+    
     return (
-      <Pressable style={style_button} onPress={onPress}>
+      <Pressable style={style_button} onPress={onPress} >
         <Text style={style_text}>{title}</Text>
       </Pressable>
     );
@@ -127,6 +167,13 @@ const styles = StyleSheet.create({
     icons:{
         resizeMode: 'contain',
         marginTop: 2,
+    },
+    iconM:{
+        resizeMode: 'cover',
+        height: 13,
+        width: 13,
+        marginTop: 12,
+      
     },
     textBar:{
         color: 'white',
@@ -169,7 +216,7 @@ const styles = StyleSheet.create({
         color: "purple",
     },
     button: {
-        marginTop: 4,
+        marginTop: 7,
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 6,
@@ -188,6 +235,45 @@ const styles = StyleSheet.create({
         fontFamily: 'Rosario_400Regular',
         color: 'white',
       },
+      modalV:{
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      container2: {
+        borderRadius: 25,
+        borderStyle: "solid",
+      },
+      text_2: {
+        fontSize: 16,
+        lineHeight: 21,
+        letterSpacing: 0.25,
+        fontFamily: 'Rosario_400Regular',
+        color: 'white',
+      },
+      modalTitle:{
+        fontSize: 22,
+        fontFamily: 'Rosario_400Regular',
+        color: 'purple',
+        marginRight: 35,
+      },
+      modalText:{
+        padding: 5 ,
+        fontSize: 17,
+        fontFamily: 'Rosario_400Regular',
+        marginTop:5,
+        textAlign:"justify"
+    },
+    modalText2:{
+        padding: 5 ,
+        fontSize: 18,
+        fontFamily: 'Rosario_400Regular',
+        marginTop:5,
+        textAlign:"justify",
+        color: "purple",
+    }
    
 });
 
