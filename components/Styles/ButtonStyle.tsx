@@ -12,5 +12,6 @@ export default StyleSheet.create({
         fontFamily: 'RosarioRegular',
         color: 'white',
         fontWeight: 'bold',
+        textAlign: "center"
     }
 });

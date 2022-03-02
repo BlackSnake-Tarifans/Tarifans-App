@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Text, View } from '../components/Themed';
-import { SafeAreaView, StyleSheet, Image} from 'react-native';
+import { SafeAreaView, StyleSheet, Image, ScrollView} from 'react-native';
 import { Dimensions } from 'react-native';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from "../components/Elementos/Boton";
+import CarouselCards from "../components/test/CarouselCards";
 
 const VALORES = {
     id: 1,
@@ -25,12 +26,33 @@ const dimensions = Dimensions.get('window');
 const deviceWidth = dimensions.width;
 const deviceHeight = dimensions.height;
 
+const data = [
+    {
+      title: "Coral Reef",
+      description: "Location: Red Sea",
+      source:
+        "https://images.unsplash.com/photo-1633205719979-e47958ff6d93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
+    },
+    {
+      title: "Phone",
+      description: "iPhone 6 on the table",
+      source:
+        "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
+    },
+  
+    {
+      title: "Old building",
+      description: "Location: Germany",
+      source:
+        "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/06/Anime-Demon-Slayer.jpeg?fit=1200%2C1048&ssl=1",
+    },
+  ];
 
 const ProfileScreen = ({ route, navigation }: any) => {
     return (
-        <>
+        
             <SafeAreaView style={styles.container}>
-
+                <ScrollView>
                 <View style={styles.ViewTop}>
                     <HeaderDiferente props={VALORES.user.first_name + " " + VALORES.user.last_name} />
                     <View style={styles.ProfileView}>
@@ -58,10 +80,19 @@ const ProfileScreen = ({ route, navigation }: any) => {
                     <Text style={styles.textoBio}>{VALORES.bio}</Text>
                 </View>
 
-                <View style={styles.ViewEnd}>
+                <View style={styles.View}>
+                  <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
+                    <CarouselCards data={data}></CarouselCards>
                 </View>
+
+                
+                <View style={styles.ViewEnd}>
+                
+                <Boton onPress={() => navigation.navigate('Register')} title="Ver más publicaciones" anchura={200} altura={60}/>
+  
+                </View>
+                </ScrollView>
             </SafeAreaView>
-        </>
     )
 };
 
@@ -90,13 +121,15 @@ const styles = StyleSheet.create({
         bottom: 0,
         top: 0,
         width: deviceWidth,
+        padding: 10,
+        alignItems: "center"
     },
     ProfileView: {
         backgroundColor: 'transparent',
         position: 'absolute',
         width: deviceWidth,
         bottom: 0,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     profileImage: {
         height: 120,
@@ -146,7 +179,15 @@ const styles = StyleSheet.create({
         color: '#9D9D9E',
         fontSize:15,
         textAlign:'justify'
-    }
+    },
+    View: {
+        flex:1,
+        width: deviceWidth,
+        alignItems: 'center',
+       marginBottom:10,
+
+
+    },
 })
 
 export default ProfileScreen;
