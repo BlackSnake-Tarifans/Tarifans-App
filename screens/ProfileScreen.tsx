@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Text, View } from '../components/Themed';
-import { SafeAreaView, StyleSheet, Image, ScrollView} from 'react-native';
+import { SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
 import { Dimensions } from 'react-native';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from "../components/Elementos/Boton";
-import CarouselCards from "../components/test/CarouselCards";
+import CarouselCards from "../components/Elementos/CarouselCards";
 
 const VALORES = {
     id: 1,
@@ -28,31 +28,31 @@ const deviceHeight = dimensions.height;
 
 const data = [
     {
-      title: "Coral Reef",
-      description: "Location: Red Sea",
-      source:
-        "https://images.unsplash.com/photo-1633205719979-e47958ff6d93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
+        title: "Coral Reef",
+        description: "Location: Red Sea",
+        source:
+            "https://images.unsplash.com/photo-1633205719979-e47958ff6d93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
     },
     {
-      title: "Phone",
-      description: "iPhone 6 on the table",
-      source:
-        "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
+        title: "Phone",
+        description: "iPhone 6 on the table",
+        source:
+            "https://images.unsplash.com/photo-1535303311164-664fc9ec6532?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
     },
-  
+
     {
-      title: "Old building",
-      description: "Location: Germany",
-      source:
-        "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/06/Anime-Demon-Slayer.jpeg?fit=1200%2C1048&ssl=1",
+        title: "Old building",
+        description: "Location: Germany",
+        source:
+            "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/06/Anime-Demon-Slayer.jpeg?fit=1200%2C1048&ssl=1",
     },
-  ];
+];
 
 const ProfileScreen = ({ route, navigation }: any) => {
     return (
-        
-            <SafeAreaView style={styles.container}>
-                <ScrollView>
+
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
                 <View style={styles.ViewTop}>
                     <HeaderDiferente props={VALORES.user.first_name + " " + VALORES.user.last_name} />
                     <View style={styles.ProfileView}>
@@ -80,19 +80,19 @@ const ProfileScreen = ({ route, navigation }: any) => {
                     <Text style={styles.textoBio}>{VALORES.bio}</Text>
                 </View>
 
-                <View style={styles.View}>
-                  <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
+                <View style={styles.ViewPublicaciones}>
+                    <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
                     <CarouselCards data={data}></CarouselCards>
                 </View>
 
-                
+
                 <View style={styles.ViewEnd}>
-                
-                <Boton onPress={() => navigation.navigate('Register')} title="Ver más publicaciones" anchura={200} altura={60}/>
-  
+
+                    <Boton onPress={() => navigation.navigate('Register')} title="Ver más publicaciones" anchura={190} altura={60} />
+
                 </View>
-                </ScrollView>
-            </SafeAreaView>
+            </ScrollView>
+        </SafeAreaView>
     )
 };
 
@@ -121,8 +121,10 @@ const styles = StyleSheet.create({
         bottom: 0,
         top: 0,
         width: deviceWidth,
+        height:100,
         padding: 10,
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor:'transparent'
     },
     ProfileView: {
         backgroundColor: 'transparent',
@@ -166,25 +168,26 @@ const styles = StyleSheet.create({
     },
     cabecerasInfo: {
         color: '#9D9D9E',
-        fontSize:15
+        fontSize: 15
     },
     datosCabeceraInfo: {
         color: '#f28e43',
-        fontWeight:'bold',
-        fontSize:20
+        fontWeight: 'bold',
+        fontSize: 20
     },
-    textoBio:{
+    textoBio: {
         marginTop: 20,
-        width:deviceWidth -80,
+        width: deviceWidth - 80,
         color: '#9D9D9E',
-        fontSize:15,
-        textAlign:'justify'
+        fontSize: 15,
+        textAlign: 'justify'
     },
-    View: {
-        flex:1,
+    ViewPublicaciones: {
+        flex: 1,
         width: deviceWidth,
         alignItems: 'center',
-       marginBottom:10,
+        marginBottom: 10,
+        backgroundColor:'transparent'
 
 
     },

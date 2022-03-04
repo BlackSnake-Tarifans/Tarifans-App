@@ -38,6 +38,7 @@
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-native": "0.64.3",
+    "react-native-snap-carousel": "3.9.0",
     "react-native-gradient-buttons": "^2.0.2",
     "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
     "react-native-material-textfield": "^0.16.1",

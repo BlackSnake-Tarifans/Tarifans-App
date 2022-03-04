@@ -5,14 +5,13 @@ import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
 import { Button } from 'react-native'
 
 
-const CarouselCards = ({data}: any) => {
+const CarouselCards = ({ data }: any) => {
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
 
-
   return (
     <View style={styles.container}>
-        <Carousel
+      <Carousel
         layout={"tinder"}
         layoutCardOffset={18}
         ref={isCarousel}
@@ -23,34 +22,38 @@ const CarouselCards = ({data}: any) => {
         onSnapToItem={(index) => setIndex(index)}
         useScrollView={true}
       />
+      <View style={styles.ViewPagination}>
         <Pagination
-        dotsLength={data.length}
-        activeDotIndex={index}
-        tappableDots={true}
-        carouselRef={isCarousel}
-        dotStyle={styles.dotStyle}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-        
-      />
-      
-      
-    </View>
+          dotsLength={data.length}
+          activeDotIndex={index}
+          tappableDots={true}
+          carouselRef={isCarousel}
+          dotStyle={styles.dotStyle}
+          inactiveDotOpacity={0.2}
+          inactiveDotScale={0.6}
+        />
+      </View>
 
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        marginTop: 15,
-    },
-    dotStyle:{
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-        marginHorizontal: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.92)'
-    }
+  container: {
+    backgroundColor: 'transparent'
+  },
+  ViewPagination:{
+    backgroundColor:'transparent'
+  },
+  dotStyle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.92)',
+    position: 'relative',
+    top: 0
+  }
 })
 
 
