@@ -26,6 +26,7 @@ import CreateCateScreen from '../screens/CreateCateScreen';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import SelectSuscripcionScreen from '../screens/SelectSuscripcionScreen';
 import CreatePost from '../screens/CreatePost';
+import UploadImgScreen from '../screens/UploadImgScreen';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -63,6 +64,7 @@ function RootNavigator() {
       <Stack.Screen name='ChangePass' component={ChangePasswordScreen} options={{ headerShown: false }}/>
       <Stack.Screen name='SelectSusc' component={SelectSuscripcionScreen} options={{ headerShown: false }}/>
       <Stack.Screen name='CreatePost' component={CreatePost} options={{ headerShown: false }}/>
+      <Stack.Screen name='UploadImg' component={UploadImgScreen} options={{ headerShown: false }}/>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         
       </Stack.Group>
