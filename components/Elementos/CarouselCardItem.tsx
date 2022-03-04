@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4.65,
-    elevation: 10,
+    elevation: 4,
     marginTop:10
   },
   image: {
