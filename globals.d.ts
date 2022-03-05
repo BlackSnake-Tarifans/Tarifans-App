@@ -3,4 +3,4 @@ declare module 'react-native-material-textfield';
 declare module 'react-insect';
 declare module 'react-native-snap-carousel';
 declare module 'react-native-multi-select-picker';
- 
+declare module 'expo-image-picker'; 

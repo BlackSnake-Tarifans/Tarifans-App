@@ -187,9 +187,8 @@ const styles = StyleSheet.create({
         width: deviceWidth,
         alignItems: 'center',
         marginBottom: 10,
+        marginTop:20,
         backgroundColor:'transparent'
-
-
     },
 })
 

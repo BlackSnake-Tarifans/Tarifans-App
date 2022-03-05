@@ -40,7 +40,7 @@ const RegisterScreen = ({ navigation }: any) => {
           <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
           <TextInput
             style={{ flex: 1 }}
-            placeholder="Nombre de usuario."
+            placeholder="Nombre de usuario"
             placeholderTextColor={'#9D9D9E'}
             onChangeText={text => onChangeUser(text)}
           />

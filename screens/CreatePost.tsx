@@ -42,13 +42,9 @@ const CreateCateScreen = ({ route, navigation }: any) => {
               onChangeText={text => onChangeDesc(text)}
             />
           </View>
-          <View style={styles.SectionStyle}>
-            <Text style={styles.TextfileTitle}>Archivo adjunto</Text>
-            <TextInput
-              placeholder="Ingrese un archivo adjunto..."
-              placeholderTextColor={'#b3b3b3'}
-              onChangeText={text => onChangeName(text)}
-            />
+          <View style={styles.SectionStyleAdjunto}>
+            <Text style={styles.TextfileTitleAdjunto}>Archivo adjunto</Text>
+            <Boton onPress={() => navigation.navigate('UploadImg')} title="Cargar imagen" anchura={190} altura={45} />
           </View>
           <View style={styles.SectionStyleCategory}>
             <MultiSelector/>
@@ -117,9 +113,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
   },
+  SectionStyleAdjunto:{
+    flexDirection: 'column',
+    height: 100,
+    width: Dimensions.get('window').width * 0.8,
+    margin: 10,
+    borderRadius: 15,
+    padding: 10,
+    alignContent:'flex-start'
+  },
   TextfileTitle: {
     fontWeight: 'bold',
     color: '#f28e43'
+  },
+  TextfileTitleAdjunto:{
+    fontWeight: 'bold',
+    color: '#f28e43',
+    marginBottom:10
   },
   Botones: {
     marginTop: 30,
