@@ -47,9 +47,28 @@ const data = [
             "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/06/Anime-Demon-Slayer.jpeg?fit=1200%2C1048&ssl=1",
     },
 ];
-
+/*
+const Cuerpo = () => {
+    var [color, setColor]=useState('#966bee')
+    var [title, setTitle]=useState('Suscribirse')
+    return(
+    <View>
+        <View style={{borderColor:'black', borderRadius:3, alignContent:'center'}}>
+            <Image style={{width:'100%',height: '70%',resizeMode: 'contain',}} source={{uri: "http://1c0a-190-63-213-187.ngrok.io" + VALORES.profile_pic}}/>
+        </View>
+        <View style={{flexDirection: "row", justifyContent: "space-between" , marginHorizontal:10,alignItems:'center'}}>
+            <Text>{VALORES.user.first_name} {VALORES.user.last_name}</Text>
+            <Button title={title} style_button={{alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,backgroundColor: color}} onPress={() => {setColor("grey"); setTitle("Suscrito")}}/>
+        </View>
+        <View> */
 const ProfileScreen = ({ route, navigation }: any) => {
     return (
+
 
         <SafeAreaView style={styles.container}>
             <ScrollView>

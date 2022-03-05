@@ -4,6 +4,7 @@ import {  StyleSheet , Image , TouchableOpacity, ScrollView} from 'react-native'
 import { Dimensions } from 'react-native';
 import { TextInput } from "react-native";
 import {consultarCreadores} from '../hooks/backendAPI';
+import {useSelector} from 'react-redux';
 import Navigation from "../navigation";
 
 const SearchScreen = ({navigation}: any) => {
@@ -36,7 +37,7 @@ const Header = ({navigation}: any) =>(
 
 const Result = ({navigation}: any) => {
     var [RESULTS, setResults]=useState([])
-
+    const al = useSelector((state) => {return state})
     return(
     <View style={styles.resultcontainer}>
         <View style={styles.top}>
@@ -47,7 +48,7 @@ const Result = ({navigation}: any) => {
                     style={styles.input}
                     placeholder="Ingrese el nombre del creador..."
                     placeholderTextColor={'gray'}
-                    onChangeText={text => {consultarCreadores(text).
+                    onChangeText={text => {consultarCreadores(text, al as string).
                         then((res) => {
                         return res.data
                         })
@@ -66,7 +67,7 @@ const Result = ({navigation}: any) => {
 const Presentacion=({navigation, res}: any)=>(
         <ScrollView style={{marginHorizontal: 25,}}>
                 {res.map((result: any,index: any)=> (
-                <TouchableOpacity onPress={() => {navigation.navigate('Profile', {id:result.id})}} >
+                <TouchableOpacity key={result.id} onPress={() => {navigation.navigate('Profile', {id:result.id})}} >
                     <Perfil result={result} key={index}/> 
                 </TouchableOpacity>
                 ))}
@@ -74,7 +75,7 @@ const Presentacion=({navigation, res}: any)=>(
 )
 const Perfil=({result}: any)=>(
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Image style={styles.resultadoimg} source={{uri: "https://25ae-190-63-212-143.ngrok.io"+result.profile_pic}}/>
+        <Image style={styles.resultadoimg} source={{uri: "http://1c0a-190-63-213-187.ngrok.io"+result.profile_pic}}/>
         <Text>{result.first_name} {result.last_name}</Text>
     </View>
 )
