@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet, TextInput, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import { Dimensions } from 'react-native';
 import Boton from "../components/Elementos/Boton";
 import MultiSelector from "../components/Elementos/MultiSelector";
+
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -44,17 +45,17 @@ const CreateCateScreen = ({ route, navigation }: any) => {
           </View>
           <View style={styles.SectionStyleAdjunto}>
             <Text style={styles.TextfileTitleAdjunto}>Archivo adjunto</Text>
-            <Boton onPress={() => navigation.navigate('UploadImg')} title="Cargar imagen" anchura={190} altura={45} />
+            <TouchableOpacity onPress={() => navigation.navigate('UploadImg')} style={styles.BotonSubirImagen}>
+              <Text style={styles.title}>Subir archivo</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.SectionStyleCategory}>
-            <MultiSelector/>
+            <MultiSelector />
           </View>
         </View>
 
         <View style={styles.ViewEnd}>
-          <View style={styles.Botones}>
             <Boton onPress={() => navigation.navigate('Profile')} title="Crear Publicación" anchura={190} altura={45} />
-          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -83,9 +84,8 @@ const styles = StyleSheet.create({
   ViewEnd: {
     position: 'relative',
     alignItems: 'center',
-    bottom: 0,
-    top: -30,
     width: deviceWidth,
+    height:100
   },
   SectionStyle: {
     flexDirection: 'column',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
   },
-  SectionStyleCategory:{
+  SectionStyleCategory: {
     flexDirection: 'column',
     width: Dimensions.get('window').width * 0.8,
     margin: 10,
@@ -113,28 +113,49 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
   },
-  SectionStyleAdjunto:{
+  SectionStyleAdjunto: {
     flexDirection: 'column',
     height: 100,
     width: Dimensions.get('window').width * 0.8,
     margin: 10,
     borderRadius: 15,
-    padding: 10,
-    alignContent:'flex-start'
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
+    alignContent: 'flex-start',
   },
   TextfileTitle: {
     fontWeight: 'bold',
     color: '#f28e43'
   },
-  TextfileTitleAdjunto:{
+  TextfileTitleAdjunto: {
     fontWeight: 'bold',
     color: '#f28e43',
-    marginBottom:10
+    marginBottom: 10,
+    marginLeft:10,
+    marginTop:10
+  },  
+  BotonSubirImagen: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.50,
+    shadowRadius: 2.22,
+    backgroundColor: '#ad8feb',
+    width: 150,
+    height: 45,
+    borderBottomRightRadius:25,
+    borderTopRightRadius:25,
   },
-  Botones: {
-    marginTop: 30,
-    backgroundColor: 'transparent',
-  },
+  title: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: "center"
+  }
 });
 
 export default CreateCateScreen;

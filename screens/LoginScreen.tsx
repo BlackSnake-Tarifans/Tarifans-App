@@ -90,7 +90,7 @@ const LoginScreen = ({ navigation }: any) => {
           </View>
           <View style={styles.vistaRedes}>
             <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
-            <Text style={styles.textoFinal3} onPress={() => navigation.navigate('CreatePost')}>¡Inicia sesión con Facebook!</Text>
+            <Text style={styles.textoFinal3} onPress={() => navigation.navigate('SelectSusc')}>¡Inicia sesión con Facebook!</Text>
           </View>
           </View>
         </LinearGradient>

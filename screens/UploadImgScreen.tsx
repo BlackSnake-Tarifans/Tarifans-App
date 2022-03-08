@@ -7,12 +7,12 @@ import Boton from '../components/Elementos/Boton';
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
-
+const deviceWidth = Dimensions.get('window').width;
 const UploadImgScreen = ({ navigation }: any) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
   const tituloHeader1 = "Cargar archivo";
   const tituloHeader2 = "Previsualización:"
-  const dimensions = Dimensions.get('window');
+
 
 
   let openImagePickerAsync = async () => {
@@ -39,19 +39,32 @@ const UploadImgScreen = ({ navigation }: any) => {
   if (selectedImage !== null) {
     return (
       <SafeAreaView style={styles.containerPhoto}>
+        <ScrollView>
 
-        <ScrollView contentContainerStyle={styles.suscContainter}>
-          <HeaderDiferente props={tituloHeader2} />
-          <View style={styles.imgContainer}>
-            <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+          <View style={styles.ViewTop}>
+            <HeaderDiferente props={tituloHeader2} />
           </View>
 
-          <Boton onPress={openImagePickerAsync} title="Cargar una foto distinta" altura={70} anchura={200} />
-          <View style={{ margin: 12 }}></View>
-          <Boton onPress={() => { setSelectedImage(null) }} title="Volver" altura={70} anchura={200} />
-          <View style={{ margin: 12 }}></View>
-          <Boton onPress={() => navigation.navigate("CreatePost", { uri: selectedImage.localUri })} title="Continuar" altura={70} anchura={200} />
-          <View style={{ margin: 12 }}></View>
+          <View style={styles.ViewMiddlePhoto}>
+            <View style={styles.imgContainer}>
+              <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+            </View>
+          </View>
+
+          <View style={styles.ViewEndPhoto}>
+
+            <View style={styles.ViewCancelar}>
+              <TouchableOpacity onPress={openImagePickerAsync} style={styles.BotonCancelar}>
+                <Text style={styles.title}>Añadir nuevo archivo</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.ViewConfirmar}>
+              <Boton onPress={() => navigation.navigate("CreatePost", { uri: selectedImage.localUri })} title="Continuar" anchura={240} altura={55} />
+            </View>
+
+          </View>
+
         </ScrollView>
       </SafeAreaView>
     )
@@ -61,14 +74,29 @@ const UploadImgScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
 
-      <HeaderDiferente props={tituloHeader1} />
-      <Text style={styles.instructions}>
-        Selecciona la foto que quieras subir{"\n"}Videos disponibles muy pronto...
-      </Text>
+      <View style={styles.ViewTop}>
+        <HeaderDiferente props={tituloHeader1} />
+      </View>
 
-      <Boton onPress={openImagePickerAsync} title="Cargar imagen" altura={60} anchura={170} />
-      <View style={{ margin: 10 }}></View>
-      <Boton onPress={() => navigation.navigate("CreatePost")} title="Volver" altura={60} anchura={170} />
+      <View style={styles.ViewMiddle}>
+        <Text style={styles.instructions}>
+          ¡Carga los archivos que deseas compartir con tu comunidad!
+        </Text>
+      </View>
+
+      <View style={styles.ViewEnd}>
+
+        <View style={styles.ViewCancelar}>
+          <TouchableOpacity onPress={() => navigation.navigate('CreatePost')} style={styles.BotonCancelar}>
+            <Text style={styles.title}>Cancelar</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.ViewConfirmar}>
+          <Boton onPress={openImagePickerAsync} title="Cargar archivo" anchura={240} altura={55} />
+        </View>
+
+      </View>
 
 
     </SafeAreaView>
@@ -83,51 +111,89 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: "center",
     justifyContent: 'flex-start',
-
   },
   containerPhoto: {
-    backgroundColor: '#fff',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white'
   },
   instructions: {
-    color: '#9D9D9E',
-    fontSize: 15,
-    marginBottom: 20,
-    textAlign: "center",
-    lineHeight: 25,
-    width: Dimensions.get('window').width * 0.8,
-  },
-  buttonText: {
     fontSize: 20,
-    color: '#fff',
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    textAlign: "center",
+    width: deviceWidth * 0.7,
+    backgroundColor: 'transparent',
+    lineHeight: 32
+  },
+  ViewTop: {
+    position: 'relative',
+    width: deviceWidth,
+    backgroundColor: 'transparent',
+    alignItems: 'center'
+  },
+  ViewMiddle: {
+    position: 'relative',
+    top: -30,
+    width: deviceWidth,
+    alignItems: 'center',
+    backgroundColor: 'transparent'
+  },
+  ViewEnd: {
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+  },
+  ViewMiddlePhoto:{
+    position: 'relative',
+    width: deviceWidth,
+    alignItems: 'center',
+  },
+  ViewEndPhoto:{
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+    marginTop:30
+  },
+  ViewCancelar: {
+    backgroundColor: 'transparent'
+  },
+  ViewConfirmar: {
+    marginTop: 15,
+    backgroundColor: 'transparent'
+  },
+  BotonCancelar: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 240,
+    height: 55,
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: '#b3b3b3'
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    fontWeight: 'bold',
+    textAlign: "center"
   },
   thumbnail: {
-    width: ITEM_WIDTH,
-    height: 500,
-    resizeMode: 'contain',
-    alignSelf: "center"
-  },
-  suscContainter: {
-    flexGrow: 1,
-    backgroundColor: "white",
-    justifyContent: 'flex-start',
-    alignItems: "center"
-  }, imgContainer: {
-    marginBottom: 25,
-    borderColor: "black",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4.65,
-    elevation: 3,
-
+    width: deviceWidth*0.8,
+    height: deviceWidth*0.8,
+    alignSelf: "center",
+    borderRadius:25
+  },  
+  imgContainer: {
+    backgroundColor:'green',
+    borderRadius:25
   }
-
-
-
 });
 
 export default UploadImgScreen;

@@ -3,7 +3,10 @@ import { SafeAreaView, StyleSheet, Pressable, Image, Dimensions, TouchableOpacit
 import { Text, View } from '../components/Themed';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
 import Modal from "react-native-modal";
+import HeaderDiferente from "../components/Elementos/HeaderDiferente";
+import Boton from "../components/Elementos/Boton";
 
+const deviceWidth = Dimensions.get('window').width;
 
 //Datos de prueba
 const SUSCRIPCIONES = [
@@ -12,61 +15,52 @@ const SUSCRIPCIONES = [
         user: "Pepe",
         nombre: "Básica",
         desc: "Mira fotos y videos antes que todos",
-        precio: "$7.50 (mensual)",
-        nivel: 1
+        precio: "$7.5\n/mes",
+        nivel: 1,
+        icono: require('../assets/images/iconos/light.png')
     },
-    {   
+    {
         id: 2,
         user: "Pepe",
         nombre: "Premium",
         desc: "Fotos de arte exclusivas",
-        precio: "$15.00 (mensual)",
-        nivel: 2
+        precio: "$15\n/mes",
+        nivel: 2,
+        icono: require('../assets/images/iconos/star_icon.png')
     },
-    {   
+    {
         id: 3,
         user: "Pepe",
         nombre: "Master+",
-        desc: "Más fotos y videos de arte a tu alcance. Regalias incluidas",
-        precio: "$25.00 (mensual)",
-        nivel: 3
+        desc: "Más fotos y videos de arte a tu alcance.",
+        precio: "$25\n/mes",
+        nivel: 3,
+        icono: require('../assets/images/iconos/crown.png')
     },
 ]
 
-const SelectSuscripcionScreen = ({route, navigation} : any)=>{
-
-    let [fontsLoaded] = useFonts({
-        Rosario_400Regular,
-      });
-    
-    // const { id } = route.params;
-    // const [ SUSCRIPCIONES, setSuscripciones ] = useState([]);
-    return(
-
+const SelectSuscripcionScreen = ({ route, navigation }: any) => {
+    const Titulo = "Seleccione una categoría";
+    return (
         <SafeAreaView style={styles.container}>
-                <Header navigation={navigation}/>
-                <Suscripciones navigation={navigation} res={SUSCRIPCIONES}/>
-        </SafeAreaView>
+            <ScrollView>
 
+                <View style={styles.ViewTop}>
+                    <HeaderDiferente props={Titulo} />
+                </View>
+
+                <Suscripciones navigation={navigation} res={SUSCRIPCIONES} />
+
+                <View style={styles.ViewEnd}>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
-const Header = ({navigation}: any) =>{
-    return(
-    <View style={styles.headercontainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')} >
-            <Image style={styles.icons} source={require('../assets/images/iconos/atras.png')} />
-        </TouchableOpacity>
-        <View style={{backgroundColor: "#F28E43"}}>
-            <Text style={styles.textBar}>Seleccione su categoria de Suscripción</Text>
-        </View>
-    </View>
-    )
-}
-
-const Suscripciones = ({ navigation, res }: any) =>{
-    return(
-        <ScrollView contentContainerStyle={styles.suscContainter}>
+const Suscripciones = ({ navigation, res }: any) => {
+    return (
+        <ScrollView contentContainerStyle={styles.ViewMiddle}>
             {res.map((suscripcion: any, index: any) => (
                 <SuscData suscripcion={suscripcion} key={index} navigation={navigation} />
             ))}
@@ -74,207 +68,235 @@ const Suscripciones = ({ navigation, res }: any) =>{
     )
 }
 
-const SuscData = ({suscripcion, navigation}: any) => {
+const SuscData = ({ suscripcion, navigation }: any) => {
     const [modalVisible, setModalVisible] = useState(false);
+    return (
+        <View style={styles.suscData}>
+            <Modal
+                hasBackdrop={true}
+                isVisible={modalVisible}
+                onBackdropPress={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.container2}>
+                    <View style={styles.modalV}>
+                        <View style={{ flexDirection: "row-reverse", justifyContent: "space-around" }}>
+                            <Text style={styles.modalTitle}>Confirmación de Compra</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.modalText}>Suscripción: {suscripcion.nombre}</Text>
+                            <Text style={styles.modalText}>Beneficios: {suscripcion.desc}</Text>
+                            <Text style={styles.modalText}>Nivel de Suscripción: {suscripcion.nivel}</Text>
+                            <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
+                            <Text style={styles.modalText2}>¿Desea confirmar su compra a la siguiente suscripción?</Text>
+                        </View>
 
-    return(
-    <View style={styles.suscData}>
-         
-        <Modal
-            hasBackdrop={true}
-            isVisible={modalVisible}
-            onBackdropPress={() => {
-            setModalVisible(!modalVisible);
-            }}
-        >
-            <View style={styles.container2}>
-                <View style={styles.modalV}>
-                    <View style={{flexDirection: "row-reverse", justifyContent:"space-around"}}>
-                        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} >
-                                    <Image style={styles.iconM} source={require('../assets/images/iconos/cerrar_x.png')} />
-                        </TouchableOpacity>
-                        <Text style={styles.modalTitle}>Confirmación de Compra</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.modalText}>Suscripción: {suscripcion.nombre}</Text>
-                        <Text style={styles.modalText}>Beneficios: {suscripcion.desc}</Text>
-                        <Text style={styles.modalText}>Nivel de Suscripción: {suscripcion.nivel}</Text>
-                        <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
-                        <Text style={styles.modalText2}>¿Desea confirmar su compra a la siguiente suscripción?</Text>
-                    </View>
-                   
-                        <Pressable
-                            style={styles.button}
-                            onPress={() => {
-                                setModalVisible(!modalVisible);
+                        <View style={styles.ViewCancelar}>
+                            <TouchableOpacity onPress={() => navigation.navigate('CreatePost')} style={styles.BotonCancelar}>
+                                <Text style={styles.title}>Cancelar</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.ViewConfirmar}>
+                            <Boton onPress={() => {
+                                (!modalVisible);
                                 navigation.navigate('Profile')
                             }}
-                        >
-                            <Text style={styles.text_2}>Confirmar compra</Text>
-                        </Pressable>
+                                title="Confirmar" anchura={240} altura={55} />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            <View style={styles.ViewSuscripciones}>
+
+                <Text style={styles.TextoSuscripcionTitle}>{suscripcion.user} {suscripcion.nombre}</Text>
+
+                <View style={{marginTop:10, backgroundColor:'transparent', marginBottom:10}}>
+                    <Text style={styles.TextoSuscripcion}>{suscripcion.desc}</Text>
+                    <Text style={styles.TextoSuscripcion}>Nivel: {suscripcion.nivel}</Text>
+                </View>
+
+                <View style={styles.ViewComprarSuscripcion}>
+                    <Boton onPress={() => setModalVisible(!modalVisible)} title="Comprar" anchura={115} altura={55} />
                 </View>
             </View>
-        </Modal>
-        <View>
-            <Text style={styles.susTitle}>{suscripcion.user} {suscripcion.nombre}</Text>
+
+            <View style={styles.ViewSuscripcionesDerecha}>
+                <Image style={styles.backStyleImage} source={suscripcion.icono} />
+                <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.precio}</Text>
+            </View>
+
         </View>
-        <View>
-            <Text style={styles.susDesc}>{suscripcion.desc}</Text>
-        </View>
-        <View>
-            <Text style={styles.susText}>Nivel: {suscripcion.nivel}</Text>
-        </View>
-        <View>
-            <Text style={styles.susText}>Precio: {suscripcion.precio}</Text>
-        </View>
-        <View>
-            
-            <Button
-            onPress={()=>setModalVisible(!modalVisible)}
-            title="Comprar Suscripción"
-            style_button={styles.button}
-            style_text={styles.btext}
-            />
-        </View>
-    </View>
     )
 }
 
-function Button(props: { onPress: any; title: string | undefined; style_button: any, style_text: any }) {
-    const { onPress, title, style_button, style_text } = props;
-    
-    return (
-      <Pressable style={style_button} onPress={onPress} >
-        <Text style={style_text}>{title}</Text>
-      </Pressable>
-    );
-}
-
 const styles = StyleSheet.create({
-    container :{
-       flex: 1,
-       backgroundColor: "white",
-       justifyContent: "space-between",
+    container: {
+        flex: 1,
+        backgroundColor: "white",
+        justifyContent: "space-between",
+        width: deviceWidth
     },
-    headercontainer:{
-        padding:17,
-        backgroundColor: "#F28E43",
-        justifyContent:'space-around',
-        alignItems:'center',
-        flexDirection:'row',
-        marginTop: 22,
+    ViewTop: {
+        backgroundColor: 'transparent',
+        width: Dimensions.get('window').width,
+        position: 'relative',
+        top: 0,
     },
-    icons:{
+    ViewMiddle: {
+        flexGrow: 1,
+        backgroundColor: "transparent",
+        width: deviceWidth,
+        alignItems: 'center',
+        marginTop:0
+    },
+    ViewEnd: {
+        flexDirection: 'column',
+        backgroundColor: 'transparent',
+        width: Dimensions.get('window').width,
+        position: 'relative',
+        alignItems: 'center',
+        height: Dimensions.get('window').width * 0.2
+    },
+    suscData: {
+        flex: 1,
+        flexDirection: 'row',
+        borderRadius: 20,
+        margin: 20,
+        backgroundColor: 'white',
+        width: deviceWidth * 0.85,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.50,
+        shadowRadius: 2.22,
+        elevation: 2,
+    },
+    ViewSuscripciones: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'transparent',
+        width: deviceWidth,
+        position: 'relative',
+        padding: 20,
+        height:220
+    },
+    ViewSuscripcionesDerecha: {
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        marginRight:20
+    },
+    TextoSuscripcionTitle: {
+        fontSize: 25,
+        color: '#949494',
+        fontWeight: 'bold'
+    },
+    TextoSuscripcionPrecio: {
+        fontSize: 25,
+        color: '#949494',
+        fontWeight: 'bold',
+        width: deviceWidth * 0.3,
+        textAlign: 'center',
+        position: 'absolute',
+        bottom: 20
+    },
+    TextoSuscripcion: {
+        fontSize: 15,
+        color: '#949494',
+        width: deviceWidth * 0.4,
+
+    },
+    ViewComprarSuscripcion: {
+        backgroundColor: 'transparent',
+        width: 115,
+        position:'absolute',
+        bottom:0,
+        marginLeft:20,
+        marginBottom:20,
+    },
+    backStyleImage: {
+        height: 100,
+        width: 100,
+        resizeMode: 'stretch',
+        top: 20,
+    },
+    ViewCancelar: {
+        backgroundColor: 'transparent'
+    },
+    ViewConfirmar: {
+        marginTop: 15,
+        backgroundColor: 'transparent'
+    },
+    BotonCancelar: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        width: 240,
+        height: 55,
+        borderRadius: 35,
+        borderWidth: 1,
+        borderColor: '#b3b3b3'
+    },
+    title: {
+        fontSize: 20,
+        fontFamily: 'RosarioRegular',
+        color: '#949494',
+        fontWeight: 'bold',
+        textAlign: "center"
+    },
+    icons: {
         resizeMode: 'contain',
         marginTop: 2,
     },
-    iconM:{
+    iconM: {
         resizeMode: 'cover',
         height: 13,
         width: 13,
         marginTop: 12,
-      
+
     },
-    textBar:{
+    textBar: {
         color: 'white',
         fontSize: 20,
-        marginHorizontal:25,
+        marginHorizontal: 25,
         fontFamily: "Rosario_400Regular"
     },
-    suscContainter:{
-        flexGrow: 1,
-        backgroundColor: "white",
-        paddingTop: 10,
-        justifyContent: 'flex-start' 
-    },
-    suscData:{
-        alignItems: 'center',
-        padding: 10,
-        borderColor: "purple",
-        borderWidth: 1,
-        margin: 10,
-        borderRadius: 10,
-    },
-    susText:{
-        fontSize: 17.5,
-        marginHorizontal:10,
-        fontFamily: "Rosario_400Regular",
-        padding: 5,
-    },
-    susDesc:{
-        fontSize: 17.5,
-        marginHorizontal:8,
-        fontFamily: "Rosario_400Regular",
-        padding: 5,
-        lineHeight: 27
-    },
-    susTitle:{
-        fontSize: 20,
-        marginHorizontal:10,
-        fontFamily: "Rosario_400Regular",
-        padding: 5,
-        color: "purple",
-    },
-    button: {
-        marginTop: 7,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 32,
-        elevation: 3,
-        backgroundColor: '#966bee',
-        width: Dimensions.get('window').width * 0.6,
-        maxWidth: 540,
-        marginBottom: 5
-      },
-      btext: {
-        fontSize: 16,
-        lineHeight: 21,
-        letterSpacing: 0.25,
-        fontFamily: 'Rosario_400Regular',
-        color: 'white',
-      },
-      modalV:{
+    modalV: {
         padding: 22,
-        justifyContent: 'center',
+        alignContent: 'flex-start',
         alignItems: 'center',
         borderRadius: 20,
         borderColor: 'rgba(0, 0, 0, 0.1)',
-      },
-      container2: {
+    },
+    container2: {
         borderRadius: 25,
         borderStyle: "solid",
-      },
-      text_2: {
-        fontSize: 16,
-        lineHeight: 21,
-        letterSpacing: 0.25,
-        fontFamily: 'Rosario_400Regular',
-        color: 'white',
-      },
-      modalTitle:{
+        alignContent: 'flex-start'
+    },
+    modalTitle: {
         fontSize: 22,
         fontFamily: 'Rosario_400Regular',
         color: 'purple',
         marginRight: 35,
-      },
-      modalText:{
-        padding: 5 ,
+    },
+    modalText: {
+        padding: 5,
         fontSize: 17,
         fontFamily: 'Rosario_400Regular',
-        marginTop:5,
-        textAlign:"justify"
+        marginTop: 5,
+        textAlign: "justify"
     },
-    modalText2:{
-        padding: 5 ,
+    modalText2: {
+        padding: 5,
         fontSize: 18,
         fontFamily: 'Rosario_400Regular',
-        marginTop:5,
-        textAlign:"justify",
+        marginTop: 5,
+        textAlign: "justify",
         color: "purple",
     }
-   
 });
 
 export default SelectSuscripcionScreen;
