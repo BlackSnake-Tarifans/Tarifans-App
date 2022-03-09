@@ -10,8 +10,9 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 const deviceWidth = Dimensions.get('window').width;
 const UploadImgScreen = ({ navigation }: any) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
+  let [url, setUrl] = React.useState([]);
   const tituloHeader1 = "Cargar archivo";
-  const tituloHeader2 = "Previsualización:"
+  const tituloHeader2 = "Previsualización"
 
 
 
@@ -34,21 +35,41 @@ const UploadImgScreen = ({ navigation }: any) => {
 
 
     setSelectedImage({ localUri: pickerResult.uri });
+    setUrl([...url, pickerResult.uri.toString()]); 
   };
 
-  if (selectedImage !== null) {
+  const deleteFile = (urlFile: any)=>{
+    const newURL = url.filter((item) => item !== urlFile);
+    setUrl(newURL);
+  }
+
+  if (selectedImage !== null  && url.length!=0) {
     return (
       <SafeAreaView style={styles.containerPhoto}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.suscContainter}>
 
           <View style={styles.ViewTop}>
             <HeaderDiferente props={tituloHeader2} />
           </View>
 
           <View style={styles.ViewMiddlePhoto}>
-            <View style={styles.imgContainer}>
-              <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+            <View style={styles.instructions}>
+              <Text style={styles.instructions}>
+                Archivos cargados
+              </Text>
             </View>
+            {url.map((url: any, index: any) => (
+            <View style={{margin: 10}} key={url}>
+                <View style={styles.imgContainer2}>
+                <Image source={{ uri: url }} style={styles.thumbnail2} />
+                <View style={{ margin: 5 }}></View>
+                <Boton onPress={()=> deleteFile(url)} title="Quitar" altura={50} anchura={100} />
+              </View>
+              <View style={styles.imgContainer}>
+              <Image source={{ uri: url }} style={styles.thumbnail} />
+            </View>
+            </View>
+            ))}
           </View>
 
           <View style={styles.ViewEndPhoto}>
@@ -60,11 +81,32 @@ const UploadImgScreen = ({ navigation }: any) => {
             </View>
 
             <View style={styles.ViewConfirmar}>
-              <Boton onPress={() => navigation.navigate("CreatePost", { uri: selectedImage.localUri })} title="Continuar" anchura={240} altura={55} />
+              <Boton onPress={() =>{ setSelectedImage(null), navigation.navigate("CreatePost", { uris: url })}} title="Continuar" anchura={240} altura={55} />
             </View>
 
           </View>
 
+        </ScrollView>
+      </SafeAreaView>
+    )
+
+  }
+
+  if (selectedImage !== null && url.length===0) {
+    return (
+      
+      <SafeAreaView style={styles.container}>
+
+        <ScrollView contentContainerStyle={styles.suscContainter}>
+          <HeaderDiferente props={tituloHeader2} />
+          <Text style={styles.instructions}>
+            No hay archivos cargados.{"\n"}¡Te invitamos a subir uno!
+          </Text>
+          <Boton onPress={openImagePickerAsync} title="Añadir archivo a la publicación" altura={70} anchura={280} />
+          <View style={{ margin: 12 }}></View>
+          <Boton onPress={() => { setSelectedImage(null), navigation.navigate("CreatePost") }} title="Volver" altura={70} anchura={280} />
+          <View style={{ margin: 12 }}></View>
+          
         </ScrollView>
       </SafeAreaView>
     )
@@ -125,7 +167,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: deviceWidth * 0.7,
     backgroundColor: 'transparent',
-    lineHeight: 32
+    lineHeight: 32,
+    marginBottom: 12,
   },
   ViewTop: {
     position: 'relative',
@@ -165,7 +208,8 @@ const styles = StyleSheet.create({
   },
   ViewConfirmar: {
     marginTop: 15,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    marginBottom: 30,
   },
   BotonCancelar: {
     alignItems: 'center',
@@ -185,15 +229,57 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   thumbnail: {
-    width: deviceWidth*0.8,
-    height: deviceWidth*0.8,
+    width: deviceWidth*0.9,
+    height: (deviceWidth),
     alignSelf: "center",
-    borderRadius:25
+    borderRadius:25,
+    resizeMode: "contain"
   },  
   imgContainer: {
-    backgroundColor:'green',
-    borderRadius:25
-  }
+    backgroundColor:'white',
+    borderRadius:25,
+    borderColor: "black",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4.65,
+    elevation: 2,
+    
+  },
+  suscContainter: {
+    flexGrow: 1,
+    backgroundColor: "white",
+    justifyContent: 'flex-start',
+    alignItems: "center"
+  },
+  imgContainer2: {
+    flexDirection: "row",
+    marginBottom: 25,
+    borderColor: "black",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    elevation: 1,
+    padding: "5.5%",
+    marginHorizontal: 10,
+    borderRadius:25,
+
+  },
+  thumbnail2: {
+    width: "55%",
+    height: ITEM_WIDTH/2,
+    alignSelf: "center",
+    borderRadius:25,
+    
+  },
+
+
 });
 
 export default UploadImgScreen;
