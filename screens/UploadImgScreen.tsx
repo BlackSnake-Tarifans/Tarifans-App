@@ -35,15 +35,15 @@ const UploadImgScreen = ({ navigation }: any) => {
 
 
     setSelectedImage({ localUri: pickerResult.uri });
-    setUrl([...url, pickerResult.uri.toString()]); 
+    setUrl([...url, pickerResult.uri.toString()]);
   };
 
-  const deleteFile = (urlFile: any)=>{
+  const deleteFile = (urlFile: any) => {
     const newURL = url.filter((item) => item !== urlFile);
     setUrl(newURL);
   }
 
-  if (selectedImage !== null  && url.length!=0) {
+  if (selectedImage !== null && url.length != 0) {
     return (
       <SafeAreaView style={styles.containerPhoto}>
         <ScrollView contentContainerStyle={styles.suscContainter}>
@@ -59,16 +59,16 @@ const UploadImgScreen = ({ navigation }: any) => {
               </Text>
             </View>
             {url.map((url: any, index: any) => (
-            <View style={{margin: 10}} key={url}>
+              <View style={{ margin: 10 }} key={url}>
                 <View style={styles.imgContainer2}>
-                <Image source={{ uri: url }} style={styles.thumbnail2} />
-                <View style={{ margin: 5 }}></View>
-                <Boton onPress={()=> deleteFile(url)} title="Quitar" altura={50} anchura={100} />
+                  <Image source={{ uri: url }} style={styles.thumbnail2} />
+                  <View style={{ margin: 5 }}></View>
+                  <Boton onPress={() => deleteFile(url)} title="Quitar" altura={50} anchura={100} />
+                </View>
+                <View style={styles.imgContainer}>
+                  <Image source={{ uri: url }} style={styles.thumbnail} />
+                </View>
               </View>
-              <View style={styles.imgContainer}>
-              <Image source={{ uri: url }} style={styles.thumbnail} />
-            </View>
-            </View>
             ))}
           </View>
 
@@ -81,7 +81,7 @@ const UploadImgScreen = ({ navigation }: any) => {
             </View>
 
             <View style={styles.ViewConfirmar}>
-              <Boton onPress={() =>{ setSelectedImage(null), navigation.navigate("CreatePost", { uris: url })}} title="Continuar" anchura={240} altura={55} />
+              <Boton onPress={() => { setSelectedImage(null), navigation.navigate("CreatePost", { uris: url }) }} title="Continuar" anchura={240} altura={55} />
             </View>
 
           </View>
@@ -92,9 +92,9 @@ const UploadImgScreen = ({ navigation }: any) => {
 
   }
 
-  if (selectedImage !== null && url.length===0) {
+  if (selectedImage !== null && url.length === 0) {
     return (
-      
+
       <SafeAreaView style={styles.container}>
 
         <ScrollView contentContainerStyle={styles.suscContainter}>
@@ -106,7 +106,7 @@ const UploadImgScreen = ({ navigation }: any) => {
           <View style={{ margin: 12 }}></View>
           <Boton onPress={() => { setSelectedImage(null), navigation.navigate("CreatePost") }} title="Volver" altura={70} anchura={280} />
           <View style={{ margin: 12 }}></View>
-          
+
         </ScrollView>
       </SafeAreaView>
     )
@@ -190,18 +190,18 @@ const styles = StyleSheet.create({
     top: 0,
     backgroundColor: 'transparent',
   },
-  ViewMiddlePhoto:{
+  ViewMiddlePhoto: {
     position: 'relative',
     width: deviceWidth,
     alignItems: 'center',
   },
-  ViewEndPhoto:{
+  ViewEndPhoto: {
     position: 'relative',
     alignItems: 'center',
     bottom: 0,
     top: 0,
     backgroundColor: 'transparent',
-    marginTop:30
+    marginTop: 30
   },
   ViewCancelar: {
     backgroundColor: 'transparent'
@@ -229,15 +229,15 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   thumbnail: {
-    width: deviceWidth*0.9,
+    width: deviceWidth * 0.9,
     height: (deviceWidth),
     alignSelf: "center",
-    borderRadius:25,
+    borderRadius: 25,
     resizeMode: "contain"
-  },  
+  },
   imgContainer: {
-    backgroundColor:'white',
-    borderRadius:25,
+    backgroundColor: 'white',
+    borderRadius: 25,
     borderColor: "black",
     shadowColor: "#000",
     shadowOffset: {
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4.65,
     elevation: 2,
-    
+
   },
   suscContainter: {
     flexGrow: 1,
@@ -268,15 +268,15 @@ const styles = StyleSheet.create({
     elevation: 1,
     padding: "5.5%",
     marginHorizontal: 10,
-    borderRadius:25,
+    borderRadius: 25,
 
   },
   thumbnail2: {
     width: "55%",
-    height: ITEM_WIDTH/2,
+    height: ITEM_WIDTH / 2,
     alignSelf: "center",
-    borderRadius:25,
-    
+    borderRadius: 25,
+
   },
 
 
