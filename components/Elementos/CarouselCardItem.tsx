@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native"
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
@@ -7,13 +7,24 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 const CarouselCardItem = ({ item, index }: any) => {
   return (
     <View style={styles.container} key={index}>
-      <Image
-        source={{ uri: item.source }}
-        style={styles.image}
-      />
+      <ImgCard source={item.source}/>
       <Text style={styles.header}>{item.title}</Text>
       <Text style={styles.body}>{item.description}</Text>
     </View>
+  )
+}
+const ImgCard = ({ source }: any) => {
+  let [mode, onChangeMode] = React.useState(false);
+  return (
+    <TouchableOpacity onPress={() => onChangeMode(!mode)}>
+      <Image
+        source={{ uri: source }}
+        style={{
+          resizeMode: mode ? 'contain' : 'cover', width: ITEM_WIDTH,
+          height: 350,
+        }}
+      />
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
@@ -31,10 +42,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 4,
     marginTop:10
-  },
-  image: {
-    width: ITEM_WIDTH,
-    height: 300,
   },
   header: {
     color: "#F28E43",
