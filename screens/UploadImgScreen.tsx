@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, Button, Sa
 import * as ImagePicker from 'expo-image-picker';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
+import { ImgCard } from '../components/Elementos/CarouselCardItem';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
@@ -66,7 +67,7 @@ const UploadImgScreen = ({ navigation }: any) => {
                   <Boton onPress={() => deleteFile(url)} title="Quitar" altura={50} anchura={100} />
                 </View>
                 <View style={styles.imgContainer}>
-                  <Image source={{ uri: url }} style={styles.thumbnail} />
+                  <ImgCard source={url}/>
                 </View>
               </View>
             ))}
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
     height: ITEM_WIDTH / 2,
     alignSelf: "center",
     borderRadius: 25,
-
+    resizeMode: "contain"
   },
 
 

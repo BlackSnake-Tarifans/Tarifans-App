@@ -13,15 +13,18 @@ const CarouselCardItem = ({ item, index }: any) => {
     </View>
   )
 }
-const ImgCard = ({ source }: any) => {
+export const ImgCard = ({ source }: any) => {
   let [mode, onChangeMode] = React.useState(false);
   return (
     <TouchableOpacity onPress={() => onChangeMode(!mode)}>
       <Image
         source={{ uri: source }}
         style={{
-          resizeMode: mode ? 'contain' : 'cover', width: ITEM_WIDTH,
+          resizeMode: mode ? 'contain' : 'cover', 
+          width: ITEM_WIDTH,
           height: 350,
+          alignSelf: "center",
+          borderRadius: 20,
         }}
       />
     </TouchableOpacity>
