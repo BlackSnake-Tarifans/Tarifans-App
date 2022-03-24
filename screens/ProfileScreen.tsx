@@ -107,7 +107,7 @@ const ProfileScreen = ({ route, navigation }: any) => {
 
                 <View style={styles.ViewEnd}>
 
-                    <Boton onPress={() => navigation.navigate('Register')} title="Ver más publicaciones" anchura={190} altura={60} />
+                    <Boton onPress={() => navigation.navigate('Gallery')} title="Ver más publicaciones" anchura={190} altura={60} />
 
                 </View>
             </ScrollView>

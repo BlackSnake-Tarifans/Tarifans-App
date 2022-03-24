@@ -27,7 +27,7 @@ import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import SelectSuscripcionScreen from '../screens/SelectSuscripcionScreen';
 import CreatePost from '../screens/CreatePost';
 import UploadImgScreen from '../screens/UploadImgScreen';
-
+import GalleryScreen from '../screens/GalleryScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import PaginaInicio from '../screens/PaginaInicio';
@@ -65,6 +65,7 @@ function RootNavigator() {
       <Stack.Screen name='SelectSusc' component={SelectSuscripcionScreen} options={{ headerShown: false }}/>
       <Stack.Screen name='CreatePost' component={CreatePost} options={{ headerShown: false }}/>
       <Stack.Screen name='UploadImg' component={UploadImgScreen} options={{ headerShown: false }}/>
+      <Stack.Screen name='Gallery' component={GalleryScreen} options={{ headerShown: false }}/>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         
       </Stack.Group>

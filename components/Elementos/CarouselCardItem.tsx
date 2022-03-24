@@ -16,7 +16,7 @@ const CarouselCardItem = ({ item, index }: any) => {
 export const ImgCard = ({ source }: any) => {
   let [mode, onChangeMode] = React.useState(false);
   return (
-    <TouchableOpacity onPress={() => onChangeMode(!mode)}>
+    <TouchableOpacity activeOpacity={1} onPress={() => onChangeMode(!mode)}>
       <Image
         source={{ uri: source }}
         style={{
@@ -24,7 +24,6 @@ export const ImgCard = ({ source }: any) => {
           width: ITEM_WIDTH,
           height: 350,
           alignSelf: "center",
-          borderRadius: 20,
         }}
       />
     </TouchableOpacity>
