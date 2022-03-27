@@ -90,7 +90,7 @@ const LoginScreen = ({ navigation }: any) => {
             <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
             <View style={styles.vistaRedes}>
               <Image style={styles.imagenRedes} source={require('../assets/images/iconos/google.png')} />
-              <Text style={styles.textoFinal3} onPress={() => navigation.navigate('Category')}>¡Inicia sesión con Google!</Text>
+              <Text style={styles.textoFinal3} onPress={() => navigation.navigate('CreatePost')}>¡Inicia sesión con Google!</Text>
             </View>
             <View style={styles.vistaRedes}>
               <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
