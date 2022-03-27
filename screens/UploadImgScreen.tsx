@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, Button, Sa
 import * as ImagePicker from 'expo-image-picker';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
-import { ImgCard } from '../components/Elementos/CarouselCardItem';
+import { ImgCard } from '../components/Elementos/ImgCard';
 
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80

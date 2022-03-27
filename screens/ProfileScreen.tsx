@@ -101,7 +101,7 @@ const ProfileScreen = ({ route, navigation }: any) => {
 
                 <View style={styles.ViewPublicaciones}>
                     <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
-                    
+                    <CarouselCards data={data}></CarouselCards>
                 </View>
 
 

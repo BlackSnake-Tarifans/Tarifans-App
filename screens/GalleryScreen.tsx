@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, View, Dimensions, SafeAreaView, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Modal from "react-native-modal";
-import { ImgCard } from '../components/Elementos/CarouselCardItem';
+import { ImgCard } from '../components/Elementos/ImgCard';
 
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80
@@ -128,7 +128,7 @@ const GalleryScreen = ({ route, navigation }: any) => {
           {url.map((urls: any, index: any) => (
             <View key={index} style={{ margin: 1 }}>
               <TouchableOpacity activeOpacity={1} onPress={() => handleTap(urls, index)}>
-                <Image source={{ uri: "https://static.zerochan.net/Miyazono.Kaori.full.2311362.jpg" }} style={styles.thumbnail} />
+                <Image source={{ uri: urls }} style={styles.thumbnail} />
               </TouchableOpacity>
             </View>
           ))}
