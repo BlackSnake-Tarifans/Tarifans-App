@@ -3,8 +3,10 @@ import { Image, StyleSheet, Text, View, Dimensions, SafeAreaView, ScrollView, To
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Modal from "react-native-modal";
 import { ImgCard } from '../components/Elementos/CarouselCardItem';
-export const SLIDER_WIDTH = Dimensions.get('window').width + 80
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
+
+
+const SLIDER_WIDTH = Dimensions.get('window').width + 80
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width * 0.95;
@@ -21,7 +23,7 @@ const uris = [
 ]
 const GalleryScreen = ({ route, navigation }: any) => {
   const [ref, setRef] = React.useState(null);
-  //let { uris } = route.params
+  /*let { uris } = route.params*/
   let [url, setUrl] = React.useState(uris);
   let [selectedImg, setSelectedImg] = React.useState("");
   let [indexF, setIndexF] = React.useState(0);
@@ -123,10 +125,10 @@ const GalleryScreen = ({ route, navigation }: any) => {
         </Modal>
         <HeaderDiferente props={tituloHeader} />
         <View style={{ justifyContent: "center", flexDirection: "row", flexWrap: "wrap", }}>
-          {url.map((url: any, index: any) => (
+          {url.map((urls: any, index: any) => (
             <View key={index} style={{ margin: 1 }}>
-              <TouchableOpacity activeOpacity={1} onPress={() => handleTap(url, index)}>
-                <Image source={{ uri: url }} style={styles.thumbnail} />
+              <TouchableOpacity activeOpacity={1} onPress={() => handleTap(urls, index)}>
+                <Image source={{ uri: "https://static.zerochan.net/Miyazono.Kaori.full.2311362.jpg" }} style={styles.thumbnail} />
               </TouchableOpacity>
             </View>
           ))}

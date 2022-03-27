@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Platform, Image, Dimensions, TouchableHighlight } from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Alert, Pressable, Platform, Image, Dimensions, TouchableHighlight, ScrollView } from 'react-native';
 import { TOKEN_CHANGE } from '../redux/AuthToken';
 import { useDispatch } from 'react-redux';
 import { login } from '../hooks/backendAPI';
@@ -25,75 +25,80 @@ const LoginScreen = ({ navigation }: any) => {
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <LinearGradient style={styles.background} colors={['#f28e43', '#966bee']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.7 }} locations={[0, 0.95]}>
-          <View style={styles.ViewStart}>
-            <Text style={styles.titleInicio}>Bienvenidos a:</Text>
-            <Image style={styles.imageTitle1} source={require('../assets/images/tarifans_palabra_color_blanco.png')} />
-            <Image style={styles.imageTitle2} source={require('../assets/images/tarifans_logo_blanca.png')} />
-          </View>
-
-          <View style={styles.ViewMiddle}>
-            <Text style={styles.titleInicioMensaje}>Ingresa y obtén al momento noticias y {"\n"}actualizaciones de tus creadores favoritos.</Text>
-
-            <View style={styles.SectionStyle}>
-              <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
-              <TextInput
-                style={{ flex: 1 }}
-                placeholder="Nombre de usuario"
-                placeholderTextColor={'#9D9D9E'}
-                onChangeText={text => onChangeUser(text)}
-              />
-            </View>
-            <View style={styles.SectionStyle}>
-              <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-              <TextInput
-                style={{ flex: 1 }}
-                placeholder="Contraseña"
-                placeholderTextColor={'#9D9D9E'}
-                secureTextEntry={true}
-                onChangeText={text => onChangePass(text)}
-              />
+        <ScrollView style={styles.scroll}>
+          <LinearGradient style={styles.background} colors={['#f28e43', '#966bee']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.7 }} locations={[0, 0.95]}>
+            <View style={styles.ViewStart}>
+              <Text style={styles.titleInicio}>Bienvenidos a:</Text>
+              <Image style={styles.imageTitle1} source={require('../assets/images/tarifans_palabra_color_blanco.png')} />
+              <Image style={styles.imageTitle2} source={require('../assets/images/tarifans_logo_blanca.png')} />
             </View>
 
-            <View style={styles.buttons}>
-              <Button
-                onPress={() => {
-                  login({ username: user, password: pass })
-                    .then((res) => {
-                      return res.data
-                    })
-                    .then((data) => {
-                      changeToken(data['token'])
-                      navigation.navigate('Home')
-                    })
-                    .catch((error) => console.log(error))
-                }}
-                title="INICIAR SESIÓN"
-                style_button={styles.button_1}
-                style_text={styles.text_1}
-              />
-            </View>
-          </View>
+            <View style={styles.ViewMiddle}>
+              <Text style={styles.titleInicioMensaje}>Ingresa y obtén al momento noticias y {"\n"}actualizaciones de tus creadores favoritos.</Text>
 
-          <View style={styles.ViewEnd}>
-          <View style={styles.vistaFinal}>
-            <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
-            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Register')}>¡Regístrate aquí!</Text>
-          </View>
-          <View style={styles.vistaFinal}>
-            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('ChangePass')}>¿Olvidaste tu contraseña?</Text>
-          </View>
-          <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
-          <View style={styles.vistaRedes}>
-            <Image style={styles.imagenRedes} source={require('../assets/images/iconos/google.png')} />
-            <Text style={styles.textoFinal3} onPress={() => navigation.navigate('Category')}>¡Inicia sesión con Google!</Text>
-          </View>
-          <View style={styles.vistaRedes}>
-            <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
-            <Text style={styles.textoFinal3} onPress={() => navigation.navigate('SelectSusc')}>¡Inicia sesión con Facebook!</Text>
-          </View>
-          </View>
-        </LinearGradient>
+              <View style={styles.SectionStyle}>
+                <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+                <TextInput
+                  style={{ flex: 1 }}
+                  placeholder="Nombre de usuario"
+                  placeholderTextColor={'#9D9D9E'}
+                  onChangeText={text => onChangeUser(text)}
+                />
+              </View>
+              <View style={styles.SectionStyle}>
+                <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+                <TextInput
+                  style={{ flex: 1 }}
+                  placeholder="Contraseña"
+                  placeholderTextColor={'#9D9D9E'}
+                  secureTextEntry={true}
+                  onChangeText={text => onChangePass(text)}
+                />
+              </View>
+
+              <View style={styles.buttons}>
+                <Button
+                  onPress={() => {
+                    navigation.navigate('Home')
+                    //console.log("Hola")
+                    /*login({ username: user, password: pass })
+                      .then((res) => {
+                        return res.data
+                      })
+                      .then((data) => {
+                        
+                        changeToken(data['token'])
+                        navigation.navigate('Home')
+                      })
+                      .catch((error) => console.log(error))*/
+                  }}
+                  title="INICIAR SESIÓN"
+                  style_button={styles.button_1}
+                  style_text={styles.text_1}
+                />
+              </View>
+            </View>
+
+            <View style={styles.ViewEnd}>
+            <View style={styles.vistaFinal}>
+              <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
+              <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Register')}>¡Regístrate aquí!</Text>
+            </View>
+            <View style={styles.vistaFinal}>
+              <Text style={styles.textoFinal2} onPress={() => navigation.navigate('ChangePass')}>¿Olvidaste tu contraseña?</Text>
+            </View>
+            <Image style={styles.ImageStyleDivider} source={require('../assets/images/iconos/divider.png')} />
+            <View style={styles.vistaRedes}>
+              <Image style={styles.imagenRedes} source={require('../assets/images/iconos/google.png')} />
+              <Text style={styles.textoFinal3} onPress={() => navigation.navigate('Category')}>¡Inicia sesión con Google!</Text>
+            </View>
+            <View style={styles.vistaRedes}>
+              <Image style={styles.imagenRedes} source={require('../assets/images/iconos/facebook.png')} />
+              <Text style={styles.textoFinal3} onPress={() => navigation.navigate('SelectSusc')}>¡Inicia sesión con Facebook!</Text>
+            </View>
+            </View>
+          </LinearGradient>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -121,6 +126,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    paddingVertical: 20
   },
   ViewStart:{
     alignItems:'center',
@@ -282,6 +288,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'transparent',
+  },
+  scroll:{
+    width: '100%'
   }
 });
 

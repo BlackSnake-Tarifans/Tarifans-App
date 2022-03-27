@@ -80,7 +80,7 @@ const ProfileScreen = ({ route, navigation }: any) => {
                 </View>
                 <View style={styles.ViewMiddle}>
                     <View style={styles.Botones}>
-                        <Boton onPress={() => navigation.navigate('Register')} title="Seguir" anchura={100} altura={45} />
+                        <Boton onPress={() => navigation.navigate('SelectSusc')} title="Seguir" anchura={100} altura={45} />
                     </View>
                     <View style={styles.Info}>
                         <View style={styles.ViewInfoSeguidores}>
@@ -101,7 +101,7 @@ const ProfileScreen = ({ route, navigation }: any) => {
 
                 <View style={styles.ViewPublicaciones}>
                     <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
-                    <CarouselCards data={data}></CarouselCards>
+                    
                 </View>
 
 

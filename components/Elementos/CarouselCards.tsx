@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from "react-native"
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
+import {Carousel,  Pagination } from 'react-native-snap-carousel'
+import CarouselCardItem from './CarouselCardItem'
+import { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
 import { Button } from 'react-native'
 
 
@@ -19,7 +20,7 @@ const CarouselCards = ({ data }: any) => {
         renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
-        onSnapToItem={(index) => setIndex(index)}
+        onSnapToItem={(index : any) => setIndex(index)}
         useScrollView={true}
       />
       <View style={styles.ViewPagination}>

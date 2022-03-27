@@ -41,6 +41,8 @@ const SUSCRIPCIONES = [
 
 const SelectSuscripcionScreen = ({ route, navigation }: any) => {
     const Titulo = "Seleccione una categoría";
+    let [fontsLoaded] = useFonts({ Rosario_400Regular });
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>

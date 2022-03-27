@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Pressable, Image, Dimensions, Platform} from 'react-native';
+import { SafeAreaView, StyleSheet, TextInput, Pressable, Image, Dimensions, Platform, ScrollView} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
@@ -31,94 +31,96 @@ const RegisterScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.ViewTop}>
-        <HeaderDiferente props={tituloHeader} />
-      </View>
+      <ScrollView>
+        <View style={styles.ViewTop}>
+          <HeaderDiferente props={tituloHeader} />
+        </View>
 
-      <View style={styles.ViewMiddle}>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Nombre de usuario"
-            placeholderTextColor={'#9D9D9E'}
-            onChangeText={text => onChangeUser(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Correo electrónico"
-            placeholderTextColor={'#9D9D9E'}
-            onChangeText={text => onChangeEmail(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Contraseña"
-            placeholderTextColor={'#9D9D9E'}
-            secureTextEntry={true}
-            onChangeText={text => onChangePass(text)}
-          />
-        </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Confirmar contraseña"
-            placeholderTextColor={'#9D9D9E'}
-            secureTextEntry={true}
-            onChangeText={text => {
+        <View style={styles.ViewMiddle}>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder="Nombre de usuario"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => onChangeUser(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder="Correo electrónico"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => onChangeEmail(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder="Contraseña"
+              placeholderTextColor={'#9D9D9E'}
+              secureTextEntry={true}
+              onChangeText={text => onChangePass(text)}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder="Confirmar contraseña"
+              placeholderTextColor={'#9D9D9E'}
+              secureTextEntry={true}
+              onChangeText={text => {
 
-              onChangePassConf(text)
-            }}
-          />
+                onChangePassConf(text)
+              }}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder="Fecha de nacimiento dd/mm/aa"
+              placeholderTextColor={'#9D9D9E'}
+              onChangeText={text => {
+                var parts = text.split("/");
+                var dt = new Date(parseInt(parts[2], 10),
+                  parseInt(parts[1], 10) - 1,
+                  parseInt(parts[0], 10));
+                var dt2 = new Date(Date.parse(text))
+                if (dt instanceof Date && !isNaN(dt as any)) {
+                  onChangeDate(dt);
+                }
+                if (dt2 instanceof Date && !isNaN(dt2 as any)) {
+                  onChangeDate(dt2);
+                }
+              }}
+            />
+          </View>
         </View>
-        <View style={styles.SectionStyle}>
-          <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Fecha de nacimiento dd/mm/aa"
-            placeholderTextColor={'#9D9D9E'}
-            onChangeText={text => {
-              var parts = text.split("/");
-              var dt = new Date(parseInt(parts[2], 10),
-                parseInt(parts[1], 10) - 1,
-                parseInt(parts[0], 10));
-              var dt2 = new Date(Date.parse(text))
-              if (dt instanceof Date && !isNaN(dt as any)) {
-                onChangeDate(dt);
-              }
-              if (dt2 instanceof Date && !isNaN(dt2 as any)) {
-                onChangeDate(dt2);
-              }
-            }}
-          />
-        </View>
-      </View>
 
-      <View style={styles.ViewEnd}>
-        <View style={styles.ViewButtonRegister}>
-          <Boton onPress={() => {
-            register({
-              user: {
-                email: email,
-                username: user,
-                password: pass,
-                confirm_password: passConf
-              },
-              birth_date: birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate()
-            }).then((data) => { console.log(data); navigation.navigate('Login') })
-          }} title="Registrarse" anchura={150} altura={45} />
+        <View style={styles.ViewEnd}>
+          <View style={styles.ViewButtonRegister}>
+            <Boton onPress={() => {
+              register({
+                user: {
+                  email: email,
+                  username: user,
+                  password: pass,
+                  confirm_password: passConf
+                },
+                birth_date: birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate()
+              }).then((data) => { console.log(data); navigation.navigate('Login') })
+            }} title="Registrarse" anchura={150} altura={45} />
+          </View>
+          <View style={styles.vistaFinal}>
+            <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
+            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
+          </View>
         </View>
-        <View style={styles.vistaFinal}>
-          <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
-          <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     position:'absolute',
-    bottom:0
+    bottom:20,
   },
   textoFinal1: {
     fontSize: 15,

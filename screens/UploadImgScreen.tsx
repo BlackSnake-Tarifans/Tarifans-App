@@ -5,13 +5,14 @@ import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
 import { ImgCard } from '../components/Elementos/CarouselCardItem';
 
-export const SLIDER_WIDTH = Dimensions.get('window').width + 80
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
+
+const SLIDER_WIDTH = Dimensions.get('window').width + 80
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 const deviceWidth = Dimensions.get('window').width;
 const UploadImgScreen = ({ navigation }: any) => {
   let [selectedImage, setSelectedImage] = React.useState(null);
-  let [url, setUrl] = React.useState([]);
+  let [url, setUrl] = React.useState([] as any);
   const tituloHeader1 = "Cargar archivo";
   const tituloHeader2 = "Previsualización"
 
@@ -35,7 +36,7 @@ const UploadImgScreen = ({ navigation }: any) => {
     }
 
 
-    setSelectedImage({ localUri: pickerResult.uri });
+    setSelectedImage({ localUri: pickerResult.uri } as any);
     setUrl([...url, pickerResult.uri.toString()]);
   };
 
