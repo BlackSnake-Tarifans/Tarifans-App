@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, Button, SafeAreaView, ScrollView } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, Button, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
@@ -16,7 +16,9 @@ const UploadImgScreen = ({ navigation }: any) => {
   const tituloHeader1 = "Cargar archivo";
   const tituloHeader2 = "Previsualización"
 
-
+  const handleTap = (url: React.SetStateAction<string>) => {
+    setSelectedImage({ localUri: url } as any);
+  }
 
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -35,14 +37,21 @@ const UploadImgScreen = ({ navigation }: any) => {
       return;
     }
 
-
     setSelectedImage({ localUri: pickerResult.uri } as any);
     setUrl([...url, pickerResult.uri.toString()]);
+
   };
 
-  const deleteFile = (urlFile: any) => {
+  const deleteFileF = (urlFile: any) => {
+    let index = url.lastIndexOf(urlFile);
     const newURL = url.filter((item) => item !== urlFile);
     setUrl(newURL);
+    if (index === 0) {
+      setSelectedImage({ localUri: url[1] } as any);
+    }
+    else {
+      setSelectedImage({ localUri: url[index - 1] } as any);
+    }
   }
 
   if (selectedImage !== null && url.length != 0) {
@@ -60,18 +69,38 @@ const UploadImgScreen = ({ navigation }: any) => {
                 Archivos cargados
               </Text>
             </View>
-            {url.map((url: any, index: any) => (
-              <View style={{ margin: 10 }} key={url}>
-                <View style={styles.imgContainer2}>
-                  <Image source={{ uri: url }} style={styles.thumbnail2} />
-                  <View style={{ margin: 5 }}></View>
-                  <Boton onPress={() => deleteFile(url)} title="Quitar" altura={50} anchura={100} />
+            <View style={styles.imgContainer}>
+              <ImgCard source={selectedImage.localUri} />
+            </View>
+            <View style={styles.instructions}>
+
+            </View>
+            <View style={{ justifyContent: "center", flexDirection: "row", flexWrap: "wrap", }}>
+              {url.map((urls: any, index: any) => (
+                <View key={index} style={{ margin: 1 }}>
+                  <View style={{ margin: 1 }}>
+                    <TouchableOpacity activeOpacity={1} onPress={() => {
+                      handleTap(urls)
+                    }}>
+                      <Image
+                        source={{ uri: urls }}
+                        style={{
+                          width: ITEM_WIDTH / 4 - 2,
+                          height: 90,
+                          borderColor: selectedImage.localUri === urls ? "green" : "purple",
+                          borderWidth: selectedImage.localUri === urls ? 2 : 1,
+                          borderRadius: 10,
+                        }}
+
+                      />
+                    </TouchableOpacity>
+                    <View style={{ margin: 1 }} />
+                    <Boton onPress={() => deleteFileF(urls)} title="X" altura={30} anchura={ITEM_WIDTH / 4 - 2} />
+                  </View>
                 </View>
-                <View style={styles.imgContainer}>
-                  <ImgCard source={url}/>
-                </View>
-              </View>
-            ))}
+              ))}
+            </View>
+
           </View>
 
           <View style={styles.ViewEndPhoto}>
@@ -239,8 +268,8 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     backgroundColor: 'white',
-    borderRadius: 25,
-    borderColor: "black",
+    width: ITEM_WIDTH + 2,
+    paddingBottom: 30,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -248,9 +277,12 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4.65,
-    elevation: 2,
-
+    borderColor: "purple",
+    borderWidth: 1,
+    marginBottom: 10,
+    height: 352,
   },
+
   suscContainter: {
     flexGrow: 1,
     backgroundColor: "white",
@@ -270,8 +302,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     padding: "5.5%",
     marginHorizontal: 10,
-    borderRadius: 25,
-
+    borderRadius: 10,
   },
   thumbnail2: {
     width: "55%",
