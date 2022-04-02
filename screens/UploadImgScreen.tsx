@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
 import { ImgCard } from '../components/Elementos/ImgCard';
-
+import MediaElement from '../components/Elementos/MediaElement';
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
@@ -70,7 +70,7 @@ const UploadImgScreen = ({ navigation }: any) => {
               </Text>
             </View>
             <View style={styles.imgContainer}>
-              <ImgCard source={selectedImage.localUri} />
+              <MediaElement source={selectedImage.localUri} />
             </View>
             <View style={styles.instructions}>
 
