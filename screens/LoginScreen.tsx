@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }: any) => {
   } else {
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scroll}>
+        <ScrollView style={styles.scroll} contentContainerStyle={{flexGrow: 1}}>
           <LinearGradient style={styles.background} colors={['#f28e43', '#966bee']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.7 }} locations={[0, 0.95]}>
             <View style={styles.ViewStart}>
               <Text style={styles.titleInicio}>Bienvenidos a:</Text>

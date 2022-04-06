@@ -166,24 +166,27 @@ const styles = StyleSheet.create({
     Info: {
         width: deviceWidth - 80,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         backgroundColor: 'transparent',
         marginTop: 10,
     },
     ViewInfoSeguidores: {
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        margin: 20
     },
     ViewInfoSeguidos: {
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        margin: 20
     },
     ViewInfoPublicaciones: {
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        margin: 20
     },
     cabecerasInfo: {
         color: '#9D9D9E',

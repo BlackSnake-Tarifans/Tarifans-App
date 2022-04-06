@@ -15,8 +15,8 @@ const HeaderDiferente = ({ props }: any) => {
     return (
         <View style={styles.container}>
             <ImageBackground
-                style={{ flexDirection: 'column', height: imageHeight, width: imageWidth, backgroundColor: 'transparent', alignItems: 'flex-start' }}
-                resizeMode='cover'
+                style={{ flexDirection: 'column', height: (imageHeight > 400 ? 400 : imageHeight ), width: imageWidth, backgroundColor: 'transparent', alignItems: 'flex-start' , maxHeight: '400px'}}
+                resizeMode='stretch'
                 source={require('../../assets/images/iconos/header_purple.png')}>
                 <View style={styles.ViewBackButton}>
                     <BackButton onPress={() => navigation.navigate('Login')} />
