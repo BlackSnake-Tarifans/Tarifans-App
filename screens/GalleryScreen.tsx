@@ -41,6 +41,7 @@ const GalleryScreen = ({ route, navigation }: any) => {
     setSelectedImg(url);
   }
 
+
   if (url.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
@@ -102,6 +103,7 @@ const GalleryScreen = ({ route, navigation }: any) => {
                           index: index,
                           viewPosition: 0
                         })
+                        setIndexF(index);
                       }}>
                         <Image
                           source={{ uri: item }}
@@ -121,6 +123,40 @@ const GalleryScreen = ({ route, navigation }: any) => {
               />
             </View>
             </ScrollView>
+            <TouchableOpacity onPress={() => {
+              if(indexF===0){
+                return;
+              }
+              let prev = indexF - 1;
+              let img = url[prev];
+              ref.scrollToIndex({
+                animated: true,
+                index: prev,
+                viewPosition: 0
+              })
+              setSelectedImg(img)
+              setIndexF(prev);
+             
+            }} >
+                <Text style={styles.instructions}>Prev</Text>
+                </TouchableOpacity>
+            <TouchableOpacity onPress={() => 
+            {if(indexF===url.length-1){
+              return;
+            }
+            let next = indexF + 1;
+              let img = url[next];
+              ref.scrollToIndex({
+                animated: true,
+                index: next,
+                viewPosition: 0
+              })
+              setSelectedImg(img)
+              setIndexF(next);
+          }
+            } >
+            <Text style={styles.instructions}>Next</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
         <HeaderDiferente props={tituloHeader} />
