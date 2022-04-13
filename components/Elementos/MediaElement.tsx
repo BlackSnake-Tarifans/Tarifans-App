@@ -9,9 +9,9 @@ const MediaElement = ({source}: any) =>{
     const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
-    let extension = source.toString().split(".")[3]
+    let extension = source.toString().endsWith("mp4")
     let prefix = source.toString().substring(0,15);
-    if(extension =="mp4" || prefix=="data:video/mp4;"){
+    if(extension || prefix=="data:video/mp4;"){
         return(
             <Video
                 ref={video}
