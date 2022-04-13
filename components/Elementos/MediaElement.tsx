@@ -1,6 +1,6 @@
 import { ImgCard } from "./ImgCard";
 import { Video } from 'expo-av';
-import { View } from "react-native";
+import { Button, View } from "react-native";
 import { StyleSheet } from "react-native";
 import React from "react";
 import { ITEM_WIDTH } from "./ImgCard";
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     video: {
       alignSelf: 'center',
       width: ITEM_WIDTH,
-      height: 350,
+      height: ITEM_WIDTH,
     },
     buttons: {
       flexDirection: 'row',

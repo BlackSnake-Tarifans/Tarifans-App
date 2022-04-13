@@ -13,7 +13,7 @@ export const ImgCard = ({ source }: any) => {
           style={{
             resizeMode: mode ? 'contain' : 'cover', 
             width: ITEM_WIDTH,
-            height: 350,
+            height: ITEM_WIDTH*1.25,
             alignSelf: "center",
           }}
         />

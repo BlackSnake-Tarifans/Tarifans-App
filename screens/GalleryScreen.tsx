@@ -123,6 +123,7 @@ const GalleryScreen = ({ route, navigation }: any) => {
               />
             </View>
             </ScrollView>
+            <View style={{  flexDirection: "row",justifyContent: "space-around", }}>
             <TouchableOpacity onPress={() => {
               if(indexF===0){
                 return;
@@ -157,6 +158,7 @@ const GalleryScreen = ({ route, navigation }: any) => {
             } >
             <Text style={styles.instructions}>Next</Text>
             </TouchableOpacity>
+            </View>
           </View>
         </Modal>
         <HeaderDiferente props={tituloHeader} />
@@ -192,12 +194,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   instructions: {
-    color: '#9D9D9E',
+    color: 'black',
     fontSize: 15,
     marginBottom: 20,
     textAlign: "center",
     lineHeight: 25,
     width: Dimensions.get('window').width * 0.8,
+    fontWeight: "bold"
   },
   buttonText: {
     fontSize: 20,
@@ -255,7 +258,7 @@ const styles = StyleSheet.create({
   containerImg: {
     backgroundColor: 'white',
     width: ITEM_WIDTH + 2,
-    paddingBottom: 30,
+    
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -266,7 +269,7 @@ const styles = StyleSheet.create({
     borderColor: "purple",
     borderWidth: 1,
     marginBottom: 10,
-    height: 352,
+    
 
 
   }

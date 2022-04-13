@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   imgContainer: {
     backgroundColor: 'white',
     width: ITEM_WIDTH + 2,
-    paddingBottom: 30,
+    
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -279,8 +279,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     borderColor: "purple",
     borderWidth: 1,
-    marginBottom: 10,
-    height: 352,
+    
+    
   },
 
   suscContainter: {
