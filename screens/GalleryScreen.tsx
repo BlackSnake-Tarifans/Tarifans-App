@@ -32,9 +32,9 @@ const GalleryScreen = ({ route, navigation }: any) => {
 
 
   const handleTap = (url: React.SetStateAction<string>, index: React.SetStateAction<number>) => {
-    setSelectedImg(url), 
-    setModalVisible(!modalVisible), 
-    setIndexF(index);
+    setSelectedImg(url),
+      setModalVisible(!modalVisible),
+      setIndexF(index);
   }
 
   const handleTapModal = (url: React.SetStateAction<string>) => {
@@ -48,9 +48,9 @@ const GalleryScreen = ({ route, navigation }: any) => {
         <ScrollView contentContainerStyle={styles.ScrollContainter}>
           <HeaderDiferente props={tituloHeader} />
           <View style={styles.container}>
-          <Text style={styles.instructions}>
-            No hay archivos por cargar{"\n"}
-          </Text>
+            <Text style={styles.instructions}>
+              No hay archivos por cargar{"\n"}
+            </Text>
           </View>
 
 
@@ -66,28 +66,25 @@ const GalleryScreen = ({ route, navigation }: any) => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.ScrollContainter}>
         <Modal
-           hasBackdrop={true}
-           isVisible={modalVisible}
-           onBackdropPress={() => {
-           setModalVisible(!modalVisible);
-           }}
+          hasBackdrop={true}
+          isVisible={modalVisible}
+          onBackdropPress={() => {
+            setModalVisible(!modalVisible);
+          }}
         >
-          <View style={styles.container2}>
+
+
           <ScrollView contentContainerStyle={styles.ScrollContainter}>
             <View style={styles.modalV}>
-              <View style={{ flexDirection: "row-reverse", justifyContent: "space-around" }}>
-                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} >
-                  <Image style={styles.iconM} source={require('../assets/images/iconos/cerrar_x.png')} />
-                </TouchableOpacity>
-                <Text style={styles.modalTitle}>Confirmación de Compra</Text>
-              </View>
+
               <View style={styles.containerImg}>
                 <ImgCard source={selectedImg} />
               </View>
+              <View style={{flex: 1}}>
               <FlatList
                 ref={(ref) => { setRef(ref) }}
                 initialScrollIndex={indexF}
-                style={{width: ITEM_WIDTH}}
+                style={{ width: ITEM_WIDTH }}
                 data={url}
                 keyExtractor={(item) => item}
                 contentContainerStyle={{}}
@@ -95,21 +92,21 @@ const GalleryScreen = ({ route, navigation }: any) => {
                 horizontal
                 renderItem={({ item, index }) => {
                   return (
-                    <View style={{margin: 1}}>
+                    <View style={{ margin: 1 }}>
                       <TouchableOpacity activeOpacity={1} onPress={() => {
-                        handleTapModal(item), 
-                        ref.scrollToIndex({
-                          animated: true,
-                          index: index,
-                          viewPosition: 0
-                        })
+                        handleTapModal(item),
+                          ref.scrollToIndex({
+                            animated: true,
+                            index: index,
+                            viewPosition: 0
+                          })
                         setIndexF(index);
                       }}>
                         <Image
                           source={{ uri: item }}
                           style={{
                             width: ITEM_WIDTH / 4 - 2,
-                            height: 90,
+                            height: 75,
                             borderColor: selectedImg === item ? "green" : "purple",
                             borderWidth: selectedImg === item ? 2 : 1,
                             borderRadius: 10,
@@ -121,45 +118,65 @@ const GalleryScreen = ({ route, navigation }: any) => {
                   );
                 }}
               />
+              </View>
             </View>
-            </ScrollView>
-            <View style={{  flexDirection: "row",justifyContent: "space-around", }}>
-            <TouchableOpacity onPress={() => {
-              if(indexF===0){
-                return;
-              }
-              let prev = indexF - 1;
-              let img = url[prev];
-              ref.scrollToIndex({
-                animated: true,
-                index: prev,
-                viewPosition: 0
-              })
-              setSelectedImg(img)
-              setIndexF(prev);
-             
-            }} >
-                <Text style={styles.instructions}>Prev</Text>
-                </TouchableOpacity>
-            <TouchableOpacity onPress={() => 
-            {if(indexF===url.length-1){
-              return;
-            }
-            let next = indexF + 1;
-              let img = url[next];
-              ref.scrollToIndex({
-                animated: true,
-                index: next,
-                viewPosition: 0
-              })
-              setSelectedImg(img)
-              setIndexF(next);
-          }
-            } >
-            <Text style={styles.instructions}>Next</Text>
-            </TouchableOpacity>
-            </View>
-          </View>
+            <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around", }}>
+                <View style={styles.modalButton}>
+                  <TouchableOpacity onPress={() => {
+                    if (indexF === 0) {
+                      return;
+                    }
+                    let prev = indexF - 1;
+                    let img = url[prev];
+                    ref.scrollToIndex({
+                      animated: true,
+                      index: prev,
+                      viewPosition: 0
+                    })
+                    setSelectedImg(img)
+                    setIndexF(prev);
+
+                  }}
+
+                  >
+                    <Text style={styles.instructions}>Prev</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.modalButton}>
+                  <TouchableOpacity onPress={() => {
+                    if (indexF === url.length - 1) {
+                      return;
+                    }
+                    let next = indexF + 1;
+                    let img = url[next];
+                    ref.scrollToIndex({
+                      animated: true,
+                      index: next,
+                      viewPosition: 0
+                    })
+                    setSelectedImg(img)
+                    setIndexF(next);
+                  }
+                  }
+
+                  >
+                    <Text style={styles.instructions}>Next</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.modalButton}>
+                  <TouchableOpacity onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+
+                  >
+                    <Text style={styles.instructions}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+          </ScrollView>
+
+
+
         </Modal>
         <HeaderDiferente props={tituloHeader} />
         <View style={{ justifyContent: "center", flexDirection: "row", flexWrap: "wrap", }}>
@@ -195,11 +212,8 @@ const styles = StyleSheet.create({
   },
   instructions: {
     color: 'black',
-    fontSize: 15,
-    marginBottom: 20,
+    padding: 10,
     textAlign: "center",
-    lineHeight: 25,
-    width: Dimensions.get('window').width * 0.8,
     fontWeight: "bold"
   },
   buttonText: {
@@ -207,7 +221,6 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   thumbnail: {
-
     width: deviceWidth / 2 - 6,
     height: deviceHeight / 3,
     borderColor: "purple",
@@ -222,7 +235,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   modalV: {
-    padding: 22,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -257,8 +270,6 @@ const styles = StyleSheet.create({
   },
   containerImg: {
     backgroundColor: 'white',
-    width: ITEM_WIDTH + 2,
-    
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -269,9 +280,15 @@ const styles = StyleSheet.create({
     borderColor: "purple",
     borderWidth: 1,
     marginBottom: 10,
+  },
+  modalButton:{
     
-
-
+    justifyContent: "center",
+    borderColor: "purple",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 15,
+    flex: 1
   }
 });
 

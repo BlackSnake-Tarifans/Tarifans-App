@@ -11,9 +11,10 @@ export const ImgCard = ({ source }: any) => {
         <Image
           source={{ uri: source }}
           style={{
+            maxWidth: "100%",
             resizeMode: mode ? 'contain' : 'cover', 
-            width: ITEM_WIDTH,
-            height: ITEM_WIDTH*1.25,
+            width: ITEM_WIDTH>500?ITEM_WIDTH/1.5:ITEM_WIDTH,
+            height: ITEM_WIDTH>500?ITEM_WIDTH/1.75:ITEM_WIDTH*1.3,
             alignSelf: "center",
           }}
         />

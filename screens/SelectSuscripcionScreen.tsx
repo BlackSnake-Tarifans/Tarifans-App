@@ -95,7 +95,7 @@ const SuscData = ({ suscripcion, navigation }: any) => {
                         </View>
 
                         <View style={styles.ViewCancelar}>
-                            <TouchableOpacity onPress={() => navigation.navigate('CreatePost')} style={styles.BotonCancelar}>
+                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={styles.BotonCancelar}>
                                 <Text style={styles.title}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>
