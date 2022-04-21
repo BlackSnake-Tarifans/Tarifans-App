@@ -1,16 +1,17 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, Button, SafeAreaView, ScrollView, FlatList } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Dimensions, SafeAreaView, ScrollView, } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from '../components/Elementos/Boton';
-import { ImgCard } from '../components/Elementos/ImgCard';
 import MediaElement from '../components/Elementos/MediaElement';
+import Modal from "react-native-modal";
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 const deviceWidth = Dimensions.get('window').width;
 const UploadImgScreen = ({ navigation }: any) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
   let [selectedImage, setSelectedImage] = React.useState(null);
   let [url, setUrl] = React.useState([] as any);
   const tituloHeader1 = "Cargar archivo";
@@ -31,6 +32,8 @@ const UploadImgScreen = ({ navigation }: any) => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
 
       mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
 
     });
     if (pickerResult.cancelled === true) {
@@ -41,6 +44,27 @@ const UploadImgScreen = ({ navigation }: any) => {
     setUrl([...url, pickerResult.uri.toString()]);
 
   };
+
+  let openCamera = async () => {
+    // Ask the user for the permission to access the camera
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("You've refused to allow this appp to access your camera!");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setSelectedImage({ localUri: result.uri } as any);
+      setUrl([...url, result.uri.toString()]);
+    }
+  }
 
   const deleteFileF = (urlFile: any) => {
     let index = url.lastIndexOf(urlFile);
@@ -57,6 +81,46 @@ const UploadImgScreen = ({ navigation }: any) => {
   if (selectedImage !== null && url.length != 0) {
     return (
       <SafeAreaView style={styles.containerPhoto}>
+        <Modal
+          hasBackdrop={true}
+          isVisible={modalVisible}
+          onBackdropPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={{
+            borderRadius: 25,
+            borderStyle: "solid",
+            alignContent: 'flex-start',
+            backgroundColor: "white"
+          }}>
+            <View style={styles.modalV}>
+              <View style={{ flexDirection: "row-reverse", justifyContent: "space-around" }}>
+                <Text style={styles.modalTitle}>Cargar desde:</Text>
+              </View>
+
+              <View style={styles.ViewCancelar}>
+                <Boton onPress={() => {
+                  openImagePickerAsync();
+                  setModalVisible(!modalVisible)
+                }}
+                  title="Galería" anchura={240} altura={55} />
+              </View>
+              <View style={styles.ViewCancelar}>
+                <Boton onPress={() => {
+                  openCamera();
+                  setModalVisible(!modalVisible)
+                }}
+                  title="Cámara" anchura={240} altura={55} />
+              </View>
+              <View style={styles.ViewCancelar}>
+                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={styles.BotonCancelar}>
+                  <Text style={styles.title}>Cerrar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
         <ScrollView contentContainerStyle={styles.suscContainter}>
 
           <View style={styles.ViewTop}>
@@ -106,7 +170,7 @@ const UploadImgScreen = ({ navigation }: any) => {
           <View style={styles.ViewEndPhoto}>
 
             <View style={styles.ViewCancelar}>
-              <TouchableOpacity onPress={openImagePickerAsync} style={styles.BotonCancelar}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={styles.BotonCancelar}>
                 <Text style={styles.title}>Añadir nuevo archivo</Text>
               </TouchableOpacity>
             </View>
@@ -146,12 +210,51 @@ const UploadImgScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.ViewTop}>
         <HeaderDiferente props={tituloHeader1} />
       </View>
 
       <View style={styles.ViewMiddle}>
+        <Modal
+          hasBackdrop={true}
+          isVisible={modalVisible}
+          onBackdropPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={{
+            borderRadius: 25,
+            borderStyle: "solid",
+            alignContent: 'flex-start',
+            backgroundColor: "white"
+          }}>
+            <View style={styles.modalV}>
+              <View style={{ flexDirection: "row-reverse", justifyContent: "space-around" }}>
+                <Text style={styles.modalTitle}>Cargar desde:</Text>
+              </View>
+
+              <View style={styles.ViewCancelar}>
+                <Boton onPress={() => {
+                  openImagePickerAsync();
+                  setModalVisible(!modalVisible)
+                }}
+                  title="Galería" anchura={240} altura={55} />
+              </View>
+              <View style={styles.ViewCancelar}>
+                <Boton onPress={() => {
+                  openCamera();
+                  setModalVisible(!modalVisible)
+                }}
+                  title="Cámara" anchura={240} altura={55} />
+              </View>
+              <View style={styles.ViewCancelar}>
+                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={styles.BotonCancelar}>
+                  <Text style={styles.title}>Cerrar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
         <Text style={styles.instructions}>
           ¡Carga los archivos que deseas compartir con tu comunidad!
         </Text>
@@ -166,7 +269,7 @@ const UploadImgScreen = ({ navigation }: any) => {
         </View>
 
         <View style={styles.ViewConfirmar}>
-          <Boton onPress={openImagePickerAsync} title="Cargar archivo" anchura={240} altura={55} />
+          <Boton onPress={() => { setModalVisible(!modalVisible); }} title="Cargar archivo" anchura={240} altura={55} />
         </View>
 
       </View>
@@ -235,10 +338,11 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   ViewCancelar: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    margin: 5
   },
   ViewConfirmar: {
-    marginTop: 15,
+    margin: 10,
     backgroundColor: 'transparent',
     marginBottom: 30,
   },
@@ -269,7 +373,7 @@ const styles = StyleSheet.create({
   imgContainer: {
     backgroundColor: 'white',
     width: ITEM_WIDTH + 2,
-    
+
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -279,10 +383,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     borderColor: "purple",
     borderWidth: 1,
-    
-    
   },
-
+  modalTitle: {
+    fontSize: 22,
+    color: 'black',
+    padding: 10,
+    textAlign: 'center'
+  },
   suscContainter: {
     flexGrow: 1,
     backgroundColor: "white",
@@ -310,6 +417,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 25,
     resizeMode: "contain"
+  },
+  modalV: {
+    padding: 22,
+    alignContent: 'flex-start',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
   },
 
 

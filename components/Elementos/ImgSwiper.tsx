@@ -18,7 +18,7 @@ const ImgSwiper = ({ images }: any) => {
             <Swiper
                 from={0}
                 loop
-                timeout={3.5}
+                timeout={5.5}
                 controlsProps={{
                     dotsTouchable: true,
                     dotActiveStyle: { backgroundColor: '#f28e43' },

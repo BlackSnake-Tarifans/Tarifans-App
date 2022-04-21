@@ -1,13 +1,25 @@
 import { ImgCard } from "./ImgCard";
-import { Video } from 'expo-av';
-import { Text, View } from "react-native";
+import { Video, VideoFullscreenUpdateEvent } from 'expo-av';
 import { StyleSheet } from "react-native";
 import React from "react";
 import { ITEM_WIDTH } from "./ImgCard";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 const MediaElement = ({source}: any) =>{
-    const video = React.useRef(null);
+  const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
+
+  const onFullscreenUpdate = async ({
+    fullscreenUpdate,
+  }: VideoFullscreenUpdateEvent) => {
+    if (fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_DID_PRESENT) {
+      await ScreenOrientation.unlockAsync();
+    } else if (fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS) {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT,
+      );
+    }
+  };
 
     let extension = source.toString().endsWith("mp4")
     let prefix = source.toString().substring(0,15);
@@ -23,6 +35,7 @@ const MediaElement = ({source}: any) =>{
                 resizeMode="contain"
                 isLooping
                 onPlaybackStatusUpdate={status => setStatus(() => status)}
+                onFullscreenUpdate={onFullscreenUpdate}
             />
       )
     }else{

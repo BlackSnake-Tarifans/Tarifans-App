@@ -50,14 +50,10 @@ const data = [
     },
 ];
 const uris = [
-    "https://static.zerochan.net/Vladilena.Milizé.full.3601354.jpg",
-    "https://static.zerochan.net/Kaguya-sama.wa.Kokurasetai.full.3596676.jpg",
-    "https://static.zerochan.net/Sword.Art.Online.Progressive%3A.Hoshi.Naki.Yoru.no.Aria.full.3379738.jpg",
-    "https://static.zerochan.net/Spy.x.Family.full.3493445.jpg",
-    "https://static.zerochan.net/Fate.Grand.Order%3A.Solomon.full.3419130.png",
-    "https://static.zerochan.net/Miyazono.Kaori.full.2311362.jpg",
-    "https://static.zerochan.net/Horimiya.full.3259444.jpg",
-    "https://static.zerochan.net/Horimiya.full.3282799.jpg"
+    "https://www.pdvg.it/wp-content/uploads/2019/03/neon-genesis-evangelion-netflix-pdvg-1024x576.jpg",
+    "https://cdn.vox-cdn.com/thumbor/8MxxvqA5HpSR0tGnqISBf3AADZI=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/23314861/Anime_SpyxFamily_Featured_1.jpg",
+    "https://www.masgamers.com/wp-content/uploads/2022/04/suzume-no-tojimari-1-1085x1536.jpg",
+    "https://gruposaedal.com/wp-content/uploads/2022/01/1643485169_965_Como-ver-el-anime-de-Hyouka-y-la-lista-de.jpg"
   ]
 /*
 const Cuerpo = () => {
