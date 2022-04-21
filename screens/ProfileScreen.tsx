@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Text, View } from '../components/Themed';
-import { SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, ScrollView, ImageBackground, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 import Boton from "../components/Elementos/Boton";
 import CarouselCards from "../components/Elementos/CarouselCards";
+import Swiper from "react-native-web-swiper";
+import ImgSwiper from "../components/Elementos/ImgSwiper";
 
 const VALORES = {
     id: 1,
@@ -47,6 +49,16 @@ const data = [
             "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/06/Anime-Demon-Slayer.jpeg?fit=1200%2C1048&ssl=1",
     },
 ];
+const uris = [
+    "https://static.zerochan.net/Vladilena.Milizé.full.3601354.jpg",
+    "https://static.zerochan.net/Kaguya-sama.wa.Kokurasetai.full.3596676.jpg",
+    "https://static.zerochan.net/Sword.Art.Online.Progressive%3A.Hoshi.Naki.Yoru.no.Aria.full.3379738.jpg",
+    "https://static.zerochan.net/Spy.x.Family.full.3493445.jpg",
+    "https://static.zerochan.net/Fate.Grand.Order%3A.Solomon.full.3419130.png",
+    "https://static.zerochan.net/Miyazono.Kaori.full.2311362.jpg",
+    "https://static.zerochan.net/Horimiya.full.3259444.jpg",
+    "https://static.zerochan.net/Horimiya.full.3282799.jpg"
+  ]
 /*
 const Cuerpo = () => {
     var [color, setColor]=useState('#966bee')
@@ -100,9 +112,10 @@ const ProfileScreen = ({ route, navigation }: any) => {
                 </View>
 
                 <View style={styles.ViewPublicaciones}>
-                    <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
-                    <CarouselCards data={data}></CarouselCards>
-                </View>
+                   <Text style={styles.datosCabeceraInfo}>Mis creaciones</Text>
+                   <ImgSwiper images={uris}></ImgSwiper>
+              </View>
+              
 
 
                 <View style={styles.ViewEnd}>
@@ -195,7 +208,7 @@ const styles = StyleSheet.create({
     datosCabeceraInfo: {
         color: '#f28e43',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
     },
     textoBio: {
         marginTop: 20,
