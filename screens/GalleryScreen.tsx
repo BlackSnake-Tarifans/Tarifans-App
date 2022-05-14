@@ -12,14 +12,15 @@ let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width * 0.95;
 
 const uris = [
-  "https://static.zerochan.net/Vladilena.Milizé.full.3601354.jpg",
-  "https://static.zerochan.net/Kaguya-sama.wa.Kokurasetai.full.3596676.jpg",
-  "https://static.zerochan.net/Sword.Art.Online.Progressive%3A.Hoshi.Naki.Yoru.no.Aria.full.3379738.jpg",
-  "https://static.zerochan.net/Spy.x.Family.full.3493445.jpg",
-  "https://static.zerochan.net/Fate.Grand.Order%3A.Solomon.full.3419130.png",
-  "https://static.zerochan.net/Miyazono.Kaori.full.2311362.jpg",
-  "https://static.zerochan.net/Horimiya.full.3259444.jpg",
-  "https://static.zerochan.net/Horimiya.full.3282799.jpg"
+  "https://c.wallhere.com/photos/2c/fa/Shigatsu_wa_Kimi_no_Uso_Miyazono_Kaori_Sawabe_Tsubaki_Arima_Kousei-41795.jpg!d",
+  "https://br.atsit.in/es/wp-content/uploads/2022/01/fecha-y-hora-de-lanzamiento-del-episodio-4-de-my-dress-up-darling-confirmadas.jpg",
+  "https://img1.ak.crunchyroll.com/i/spire4/aca67c20cfebb66369acb168168d0bdc1637343068_main.png",
+  "https://as01.epimg.net/meristation/imagenes/2021/03/13/reportajes/1615633069_923466_1616262218_noticia_normal.jpg",
+  "https://safebooru.org//images/3836/c398b5408cfc2d1d5dc1872fdf183bfaf3a7e636.jpg",
+  "https://safebooru.org//images/3836/0bfdd3df7805936d96fff0df7bcae59ab1a59c79.jpg",
+  "https://safebooru.org//images/3822/d8e9dc75d495439a5c396950c0f977c267c1ac20.jpg",
+  "https://safebooru.org//images/379/616e6e9819af08ecb7191260d0d0ac4ccc7814f5.jpg"
+
 ]
 const GalleryScreen = ({ route, navigation }: any) => {
   const [ref, setRef] = React.useState(null);
@@ -280,6 +281,8 @@ const styles = StyleSheet.create({
     borderColor: "purple",
     borderWidth: 1,
     marginBottom: 10,
+    width: ITEM_WIDTH
+    
   },
   modalButton:{
     

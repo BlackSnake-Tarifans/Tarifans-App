@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     backgroundColor: 'white',
-    width: ITEM_WIDTH + 2,
+    width: ITEM_WIDTH+2,
 
     shadowColor: "#000",
     shadowOffset: {
