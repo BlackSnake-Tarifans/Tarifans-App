@@ -91,11 +91,14 @@ const SuscData = ({ suscripcion, navigation }: any) => {
                             <Text style={styles.modalText}>Beneficios: {suscripcion.desc}</Text>
                             <Text style={styles.modalText}>Nivel de Suscripción: {suscripcion.nivel}</Text>
                             <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
-                            <Text style={styles.modalText2}>¿Desea confirmar su compra a la siguiente suscripción?</Text>
+                            <Text style={styles.modalText2}>
+                                ¿Desea confirmar su compra a la siguiente suscripción?
+                            </Text>
                         </View>
 
                         <View style={styles.ViewCancelar}>
-                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style={styles.BotonCancelar}>
+                            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} 
+                                style={styles.BotonCancelar}>
                                 <Text style={styles.title}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>
@@ -120,7 +123,8 @@ const SuscData = ({ suscripcion, navigation }: any) => {
                 </View>
 
                 <View style={styles.ViewComprarSuscripcion}>
-                    <Boton onPress={() => setModalVisible(!modalVisible)} title="Comprar" anchura={115} altura={55} />
+                    <Boton onPress={() => setModalVisible(!modalVisible)} 
+                    title="Comprar" anchura={115} altura={55} />
                 </View>
             </View>
 

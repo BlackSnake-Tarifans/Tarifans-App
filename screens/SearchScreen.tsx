@@ -42,8 +42,11 @@ const Result = ({navigation}: any) => {
     <View style={styles.resultcontainer}>
         <View style={styles.top}>
             <View style={{flexDirection: 'row', alignItems: "center"}}>
-                <Image style={{position:"absolute", width: '90%' ,  resizeMode: 'stretch'}} source={require('../assets/images/iconos/RectangleSearch.png')}/>
-                <Image style={{marginLeft: 15, marginRight: 10}}source={require('../assets/images/iconos/lupa.png')}/>
+                <Image 
+                    style={{position:"absolute", width: '90%' ,  resizeMode: 'stretch'}} 
+                    source={require('../assets/images/iconos/RectangleSearch.png')}/>
+                <Image style={{marginLeft: 15, marginRight: 10}}
+                    source={require('../assets/images/iconos/lupa.png')}/>
                 <TextInput
                     style={styles.input}
                     placeholder="Ingrese el nombre del creador..."

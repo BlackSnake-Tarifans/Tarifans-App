@@ -31,7 +31,9 @@ const ImgSwiper = ({ images }: any) => {
                         <Image style={{
                             width: "100%",
                             height: "100%",
-                            resizeMode: "contain"
+                            borderWidth: 1,
+                            borderRadius: 10, 
+                            resizeMode: "cover"
                         }} source={{ uri: img }} />
                     </View>
                 ))}

@@ -11,7 +11,7 @@ const CreateCateScreen = ({ route, navigation }: any) => {
 
 
   const [name, onChangeName] = useState("New Category");
-  const [desc, onChangeDesc] = useState("Todo lo que deseas y más");
+  const [description, onChangeDescription] = useState("Todo lo que deseas y más");
   const [price, onChangePrice] = useState(0);
   const [nivel, onChangeNivel] = useState(1);
   const titulo = "Registro Categoría Suscripción";
@@ -38,7 +38,7 @@ const CreateCateScreen = ({ route, navigation }: any) => {
             <TextInput
               placeholder="Ingrese una descripcion..."
               placeholderTextColor={'#b3b3b3'}
-              onChangeText={text => onChangeDesc(text)}
+              onChangeText={text => onChangeDescription(text)}
             />
           </View>
           <View style={styles.SectionStyle}>
