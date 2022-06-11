@@ -13,7 +13,7 @@ const CreateCateScreen = ({ route, navigation }: any) => {
   const [name, onChangeName] = useState("New Category");
   const [description, onChangeDescription] = useState("Todo lo que deseas y más");
   const [price, onChangePrice] = useState(0);
-  const [nivel, onChangeNivel] = useState(1);
+  //const [nivel, onChangeNivel] = useState(1);
   const titulo = "Registro Categoría Suscripción";
 
   return (
@@ -51,7 +51,7 @@ const CreateCateScreen = ({ route, navigation }: any) => {
               onChangeText={text => onChangePrice(parseFloat(text))}
             />
           </View>
-          <View style={styles.SectionStyle}>
+       {/*  <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nivel</Text>
             <TextInput
               placeholder="NivelAAA"
@@ -60,12 +60,33 @@ const CreateCateScreen = ({ route, navigation }: any) => {
               maxLength={10}
               onChangeText={text => onChangeNivel(parseInt(text))}
             />
-          </View>
+          </View> */}
         </View>
 
         <View style={styles.ViewEnd}>
           <View style={styles.Botones}>
-            <Boton onPress={() => navigation.navigate('Profile')} title="Crear Categoría" anchura={180} altura={45} />
+            <Boton onPress={async () => {
+               /* Añadir aquí metodo para crear categoría/plan de subscripción */
+               
+             /*  try {
+                const response = await createSubsPlan({
+                    content_creator: user_id**,
+                    fee: price,
+                    label: name,
+                    description: description,
+                })
+
+                if (response.status == 201) { // 201 == HTTP_CREATED
+                  data = response.data
+                  console.log(data); 
+                  navigation.navigate('Profile')
+                }
+
+              }catch (error) {
+                Alert.alert(error)
+              } */
+              
+              }} title="Crear Categoría" anchura={180} altura={45} />
           </View>
         </View>
       </ScrollView>
