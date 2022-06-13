@@ -1,17 +1,24 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Pressable, Image, Dimensions, Platform, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  Image,
+  Dimensions,
+  Platform,
+  ScrollView,
+} from 'react-native';
 
-import { Text, View } from '../components/Themed';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
+import { Text, View } from '../components/Themed';
 import { register } from '../hooks/backendAPI';
-import HeaderDiferente from "../components/Elementos/HeaderDiferente";
-import Boton from "../components/Elementos/Boton";
+import HeaderDiferente from '../components/Elementos/HeaderDiferente';
+import Boton from '../components/Elementos/Boton';
 
-
-
-const RegisterScreen = ({ navigation }: any) => {
-  const [email, onChangeEmail] = React.useState("");
-  const [user, onChangeUser] = React.useState("");
+function RegisterScreen({ navigation }: any) {
+  const [email, onChangeEmail] = React.useState('');
+  const [user, onChangeUser] = React.useState('');
   const [pass, onChangePass] = React.useState('');
   const [passConf, onChangePassConf] = React.useState('');
   const [birthDate, onChangeDate] = React.useState(new Date());
@@ -22,12 +29,12 @@ const RegisterScreen = ({ navigation }: any) => {
     onChangeDate(currentDate);
   };
   const dimensions = Dimensions.get('window');
-  const imageHeight = Math.round(dimensions.width * 13 / 16);
+  const imageHeight = Math.round((dimensions.width * 13) / 16);
   const imageWidth = dimensions.width;
   const [text1, onChangeNumber] = React.useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  let [fontsLoaded] = useFonts({ Rosario_400Regular });
-  const tituloHeader = "Crear Cuenta";
+  const [fontsLoaded] = useFonts({ Rosario_400Regular });
+  const tituloHeader = 'Crear Cuenta';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,58 +45,74 @@ const RegisterScreen = ({ navigation }: any) => {
 
         <View style={styles.ViewMiddle}>
           <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/nombre_usuario.png')} />
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/nombre_usuario.png')}
+            />
             <TextInput
               style={{ flex: 1 }}
               placeholder="Nombre de usuario"
-              placeholderTextColor={'#9D9D9E'}
+              placeholderTextColor="#9D9D9E"
               onChangeText={text => onChangeUser(text)}
             />
           </View>
           <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/email.png')} />
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/email.png')}
+            />
             <TextInput
               style={{ flex: 1 }}
               placeholder="Correo electrónico"
-              placeholderTextColor={'#9D9D9E'}
+              placeholderTextColor="#9D9D9E"
               onChangeText={text => onChangeEmail(text)}
             />
           </View>
           <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/password.png')}
+            />
             <TextInput
               style={{ flex: 1 }}
               placeholder="Contraseña"
-              placeholderTextColor={'#9D9D9E'}
-              secureTextEntry={true}
+              placeholderTextColor="#9D9D9E"
+              secureTextEntry
               onChangeText={text => onChangePass(text)}
             />
           </View>
           <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/password.png')} />
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/password.png')}
+            />
             <TextInput
               style={{ flex: 1 }}
               placeholder="Confirmar contraseña"
-              placeholderTextColor={'#9D9D9E'}
-              secureTextEntry={true}
+              placeholderTextColor="#9D9D9E"
+              secureTextEntry
               onChangeText={text => {
-
-                onChangePassConf(text)
+                onChangePassConf(text);
               }}
             />
           </View>
           <View style={styles.SectionStyle}>
-            <Image style={styles.ImageStyle} source={require('../assets/images/iconos/date.png')} />
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/date.png')}
+            />
             <TextInput
               style={{ flex: 1 }}
               placeholder="Fecha de nacimiento dd/mm/aa"
-              placeholderTextColor={'#9D9D9E'}
+              placeholderTextColor="#9D9D9E"
               onChangeText={text => {
-                var parts = text.split("/");
-                var dt = new Date(parseInt(parts[2], 10),
+                const parts = text.split('/');
+                const dt = new Date(
+                  parseInt(parts[2], 10),
                   parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));
-                var dt2 = new Date(Date.parse(text))
+                  parseInt(parts[0], 10),
+                );
+                const dt2 = new Date(Date.parse(text));
                 if (dt instanceof Date && !isNaN(dt as any)) {
                   onChangeDate(dt);
                 }
@@ -103,29 +126,49 @@ const RegisterScreen = ({ navigation }: any) => {
 
         <View style={styles.ViewEnd}>
           <View style={styles.ViewButtonRegister}>
-            <Boton onPress={() => {
-              register({
-                user: {
-                  email: email,
-                  username: user,
-                  password: pass,
-                  confirm_password: passConf
-                },
-                birth_date: birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate()
-              }).then((data) => { console.log(data); navigation.navigate('Login') })
-            }} title="Registrarse" anchura={150} altura={45} />
+            <Boton
+              onPress={() => {
+                register({
+                  user: {
+                    email,
+                    username: user,
+                    password: pass,
+                    confirm_password: passConf,
+                  },
+                  birth_date: `${birthDate.getFullYear()}-${
+                    birthDate.getMonth() + 1
+                  }-${birthDate.getDate()}`,
+                }).then(data => {
+                  console.log(data);
+                  navigation.navigate('Login');
+                });
+              }}
+              title="Registrarse"
+              anchura={150}
+              altura={45}
+            />
           </View>
           <View style={styles.vistaFinal}>
             <Text style={styles.textoFinal1}>¿Ya tienes una cuenta? </Text>
-            <Text style={styles.textoFinal2} onPress={() => navigation.navigate('Login')}>Inicia Sesión</Text>
+            <Text
+              style={styles.textoFinal2}
+              onPress={() => navigation.navigate('Login')}
+            >
+              Inicia Sesión
+            </Text>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
-function Button(props: { onPress: any; title: string | undefined; style_button: any, style_text: any }) {
+function Button(props: {
+  onPress: any;
+  title: string | undefined;
+  style_button: any;
+  style_text: any;
+}) {
   const { onPress, title = 'Save', style_button, style_text } = props;
   return (
     <Pressable style={style_button} onPress={onPress}>
@@ -145,21 +188,21 @@ const styles = StyleSheet.create({
     left: 40,
     backgroundColor: 'transparent',
     marginTop: 60,
-    marginBottom: 10
+    marginBottom: 10,
   },
   title: {
     fontSize: 50,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontFamily: 'RosarioRegular',
     color: 'white',
     marginLeft: 40,
-    lineHeight: 50
+    lineHeight: 50,
   },
-  /*separator: {
+  /* separator: {
     marginVertical: 30,
     height: 1,
     width: '80%',
-  },*/
+  }, */
   SectionStyle: {
     flexDirection: 'row',
     height: 50,
@@ -174,23 +217,22 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     position: 'relative',
     top: 0,
-    marginBottom:-40
+    marginBottom: -40,
   },
   ViewMiddle: {
     alignItems: 'center',
     backgroundColor: 'transparent',
     width: Dimensions.get('window').width,
     position: 'relative',
-    marginBottom:25
-
+    marginBottom: 25,
   },
   ViewEnd: {
     flexDirection: 'column',
     backgroundColor: 'transparent',
     width: Dimensions.get('window').width,
     position: 'relative',
-    alignItems:'center',
-    height:140
+    alignItems: 'center',
+    height: 140,
   },
   ImageStyle: {
     padding: 10,
@@ -201,7 +243,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     alignItems: 'center',
     alignSelf: 'center',
-    opacity: 0.4
+    opacity: 0.4,
   },
   input: {
     flex: 1,
@@ -213,18 +255,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.05)',
     padding: 10,
     color: 'transparent',
-    borderColor: 'white'
-  }, 
-  ViewButtonRegister:{
-    backgroundColor:'transparent',
-    width:150
+    borderColor: 'white',
+  },
+  ViewButtonRegister: {
+    backgroundColor: 'transparent',
+    width: 150,
   },
   vistaFinal: {
     backgroundColor: 'transparent',
     alignSelf: 'center',
     flexDirection: 'row',
-    position:'absolute',
-    bottom:20,
+    position: 'absolute',
+    bottom: 20,
   },
   textoFinal1: {
     fontSize: 15,
@@ -236,8 +278,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     fontFamily: 'RosarioRegular',
     color: '#f28e43',
-  }
+  },
 });
-
 
 export default RegisterScreen;

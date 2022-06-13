@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet, TextInput, ScrollView } from "react-native";
-import HeaderDiferente from "../components/Elementos/HeaderDiferente";
-import { Dimensions } from 'react-native';
-import Boton from "../components/Elementos/Boton";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
+
+import HeaderDiferente from '../components/Elementos/HeaderDiferente';
+import Boton from '../components/Elementos/Boton';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const CreateCateScreen = ({ route, navigation }: any) => {
-  //const { id } = route.params;
+function CreateCateScreen({ route, navigation }: any) {
+  // const { id } = route.params;
 
-
-  const [name, onChangeName] = useState("New Category");
-  const [description, onChangeDescription] = useState("Todo lo que deseas y más");
+  const [name, onChangeName] = useState('New Category');
+  const [description, onChangeDescription] = useState(
+    'Todo lo que deseas y más',
+  );
   const [price, onChangePrice] = useState(0);
-  //const [nivel, onChangeNivel] = useState(1);
-  const titulo = "Registro Categoría Suscripción";
+  // const [nivel, onChangeNivel] = useState(1);
+  const titulo = 'Registro Categoría Suscripción';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,12 +33,11 @@ const CreateCateScreen = ({ route, navigation }: any) => {
         </View>
 
         <View style={styles.ViewMiddle}>
-
           <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nombre</Text>
             <TextInput
               placeholder="Ingrese el nombre de la categoría"
-              placeholderTextColor={'#b3b3b3'}
+              placeholderTextColor="#b3b3b3"
               onChangeText={text => onChangeName(text)}
             />
           </View>
@@ -37,7 +45,7 @@ const CreateCateScreen = ({ route, navigation }: any) => {
             <Text style={styles.TextfileTitle}>Descripcion</Text>
             <TextInput
               placeholder="Ingrese una descripcion..."
-              placeholderTextColor={'#b3b3b3'}
+              placeholderTextColor="#b3b3b3"
               onChangeText={text => onChangeDescription(text)}
             />
           </View>
@@ -45,13 +53,13 @@ const CreateCateScreen = ({ route, navigation }: any) => {
             <Text style={styles.TextfileTitle}>Precio ($)</Text>
             <TextInput
               placeholder="Precio"
-              placeholderTextColor={'#b3b3b3'}
-              keyboardType='numeric'
+              placeholderTextColor="#b3b3b3"
+              keyboardType="numeric"
               maxLength={10}
               onChangeText={text => onChangePrice(parseFloat(text))}
             />
           </View>
-       {/*  <View style={styles.SectionStyle}>
+          {/*  <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nivel</Text>
             <TextInput
               placeholder="NivelAAA"
@@ -65,10 +73,10 @@ const CreateCateScreen = ({ route, navigation }: any) => {
 
         <View style={styles.ViewEnd}>
           <View style={styles.Botones}>
-            <Boton onPress={async () => {
-               /* Añadir aquí metodo para crear categoría/plan de subscripción */
-               
-             /*  try {
+            <Boton
+              onPress={async () => {
+                /* Añadir aquí metodo para crear categoría/plan de subscripción */
+                /*  try {
                 const response = await createSubsPlan({
                     content_creator: user_id**,
                     fee: price,
@@ -85,13 +93,15 @@ const CreateCateScreen = ({ route, navigation }: any) => {
               }catch (error) {
                 Alert.alert(error)
               } */
-              
-              }} title="Crear Categoría" anchura={180} altura={45} />
+              }}
+              title="Crear Categoría"
+              anchura={180}
+              altura={45}
+            />
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-
   );
 }
 
@@ -111,7 +121,6 @@ const styles = StyleSheet.create({
     top: -30,
     width: deviceWidth,
     alignItems: 'center',
-
   },
   ViewEnd: {
     position: 'relative',
@@ -140,7 +149,7 @@ const styles = StyleSheet.create({
   },
   TextfileTitle: {
     fontWeight: 'bold',
-    color: '#f28e43'
+    color: '#f28e43',
   },
   Botones: {
     marginTop: 30,

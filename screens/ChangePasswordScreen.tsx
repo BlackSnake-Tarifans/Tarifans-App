@@ -1,73 +1,96 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Pressable, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  Image,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
-import Modal from "react-native-modal";
-import HeaderDiferente from "../components/Elementos/HeaderDiferente";
-import Boton from "../components/Elementos/Boton";
-
+import Modal from 'react-native-modal';
+import { Text, View } from '../components/Themed';
+import HeaderDiferente from '../components/Elementos/HeaderDiferente';
+import Boton from '../components/Elementos/Boton';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const ChangePasswordScreen = ({ navigation }: any) => {
-  const [email, onChangeEmail] = React.useState("");
+function ChangePasswordScreen({ navigation }: any) {
+  const [email, onChangeEmail] = React.useState('');
   const [newpass, onChangeNewPass] = React.useState('');
   const [newpassConf, onChangeNewPassConf] = React.useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalText, setModalText] = useState('');
   const [changeStatus, setChangeStatus] = useState(true);
-  const [changeText, setChangeText] = useState("");
-  const titulo = "Cambia tu \nContraseña";
+  const [changeText, setChangeText] = useState('');
+  const titulo = 'Cambia tu \nContraseña';
 
-  let [fontsLoaded] = useFonts({ Rosario_400Regular });
+  const [fontsLoaded] = useFonts({ Rosario_400Regular });
 
   const cambioPasswordText = () => {
     if (changeStatus) {
-      setModalText("¡Su contraseña ha sido restablecida con éxito!");
-      setChangeText("Volver")
+      setModalText('¡Su contraseña ha sido restablecida con éxito!');
+      setChangeText('Volver');
     } else {
-      setModalText("Error");
-      setChangeText("Cerrar")
+      setModalText('Error');
+      setChangeText('Cerrar');
     }
-  }
+  };
 
   const manejarCambio = () => {
     if (changeStatus) {
       setModalVisible(!modalVisible);
-      navigation.navigate("Login");
+      navigation.navigate('Login');
     } else {
       setModalVisible(!modalVisible);
     }
-  }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-
         <View style={styles.ViewTop}>
           <HeaderDiferente props={titulo} />
         </View>
 
         <Modal
-          hasBackdrop={true}
+          hasBackdrop
           isVisible={modalVisible}
           onBackdropPress={() => {
             setModalVisible(!modalVisible);
-          }}>
+          }}
+        >
           <View style={styles.modalV}>
-            <Text style={{ padding: 10, fontSize: 20, fontFamily: 'RosarioRegular', color: '#949494', textAlign: 'center' }}>{modalText}</Text>
-            <Boton onPress={() => { manejarCambio(); }} title={changeText} anchura={120} altura={45} />
+            <Text
+              style={{
+                padding: 10,
+                fontSize: 20,
+                fontFamily: 'RosarioRegular',
+                color: '#949494',
+                textAlign: 'center',
+              }}
+            >
+              {modalText}
+            </Text>
+            <Boton
+              onPress={() => {
+                manejarCambio();
+              }}
+              title={changeText}
+              anchura={120}
+              altura={45}
+            />
           </View>
         </Modal>
 
         <View style={styles.ViewMiddle}>
-
           <View style={styles.SectionStyle}>
-
             <Text style={styles.TextfileTitle}>Correo Electrónico</Text>
             <TextInput
               placeholder="Ingrese su correo electrónico..."
-              placeholderTextColor={'#b3b3b3'}
+              placeholderTextColor="#b3b3b3"
               onChangeText={text => onChangeEmail(text)}
             />
           </View>
@@ -76,8 +99,8 @@ const ChangePasswordScreen = ({ navigation }: any) => {
             <Text style={styles.TextfileTitle}>Nueva Contraseña</Text>
             <TextInput
               placeholder="Ingrese la nueva contraseña..."
-              placeholderTextColor={'#b3b3b3'}
-              secureTextEntry={true}
+              placeholderTextColor="#b3b3b3"
+              secureTextEntry
               onChangeText={text => onChangeNewPass(text)}
             />
           </View>
@@ -86,27 +109,29 @@ const ChangePasswordScreen = ({ navigation }: any) => {
             <Text style={styles.TextfileTitle}>Confirmar contraseña</Text>
             <TextInput
               placeholder="Ingrese la nueva contraseña..."
-              placeholderTextColor={'#b3b3b3'}
-              secureTextEntry={true}
+              placeholderTextColor="#b3b3b3"
+              secureTextEntry
               onChangeText={text => {
-                onChangeNewPassConf(text)
+                onChangeNewPassConf(text);
               }}
             />
           </View>
-
         </View>
 
         <View style={styles.ViewEnd}>
-
           <View style={styles.ViewCancelar}>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.BotonCancelar}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              style={styles.BotonCancelar}
+            >
               <Text style={styles.title}>Cancelar</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.ViewConfirmar}>
-            <Boton onPress={() => {
-              /* Añadir aquí metodo para cambiar contraseña  
+            <Boton
+              onPress={() => {
+                /* Añadir aquí metodo para cambiar contraseña  
               cambiarPassword({
                 user: {
                   email: email,
@@ -114,24 +139,27 @@ const ChangePasswordScreen = ({ navigation }: any) => {
                   confirm_password: newpassConf
                 },
                 birth_date: birthDate.getFullYear()+'-' + (birthDate.getMonth()+1) + '-'+birthDate.getDate()
-              }).then((data) => { console.log(data); navigation.navigate('Login') })*/
-              setModalVisible(!modalVisible);
-              cambioPasswordText();
-            }} title="Confirmar Contraseña" anchura={240} altura={55} />
+              }).then((data) => { console.log(data); navigation.navigate('Login') }) */
+                setModalVisible(!modalVisible);
+                cambioPasswordText();
+              }}
+              title="Confirmar Contraseña"
+              anchura={240}
+              altura={55}
+            />
           </View>
-
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   SectionStyle: {
     flexDirection: 'column',
@@ -145,14 +173,14 @@ const styles = StyleSheet.create({
   ViewTop: {
     position: 'relative',
     width: deviceWidth,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   ViewMiddle: {
     position: 'relative',
     top: -30,
     width: deviceWidth,
     alignItems: 'center',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   ViewEnd: {
     position: 'relative',
@@ -167,37 +195,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 35,
     borderColor: 'rgba(0, 0, 0, 0.1)',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   TextfileTitle: {
     fontWeight: 'bold',
-    color: '#f28e43'
+    color: '#f28e43',
   },
-  ViewCancelar:{
-    backgroundColor:'transparent'
+  ViewCancelar: {
+    backgroundColor: 'transparent',
   },
-  ViewConfirmar:{
-    marginTop:15,
-    backgroundColor:'transparent'
+  ViewConfirmar: {
+    marginTop: 15,
+    backgroundColor: 'transparent',
   },
-  BotonCancelar:{
+  BotonCancelar: {
     alignItems: 'center',
-    justifyContent: 'center',   
+    justifyContent: 'center',
     backgroundColor: 'white',
     width: 240,
     height: 55,
-    borderRadius:35,
-    borderWidth:1,
-    borderColor:'#b3b3b3'
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: '#b3b3b3',
   },
   title: {
     fontSize: 20,
     fontFamily: 'RosarioRegular',
     color: '#949494',
     fontWeight: 'bold',
-    textAlign: "center"
-}
+    textAlign: 'center',
+  },
 });
-
 
 export default ChangePasswordScreen;

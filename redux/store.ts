@@ -1,6 +1,6 @@
-import { createStore } from 'redux'
-import authTokenReducer from './AuthToken'
+import { createStore } from 'redux';
+import authTokenReducer from './AuthToken';
 
-const store = createStore(authTokenReducer)
+const store = createStore(authTokenReducer);
 
-export default store
+export default store;

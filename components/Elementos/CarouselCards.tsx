@@ -1,31 +1,24 @@
-import React from 'react'
-import { View, StyleSheet } from "react-native"
-import CarouselCardItem from './CarouselCardItem'
-import { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem';
 
-
-
-const CarouselCards = ({ data }: any) => {
-  const [index, setIndex] = React.useState(0)
-  const isCarousel = React.useRef(null)
+function CarouselCards({ data }: any) {
+  const [index, setIndex] = React.useState(0);
+  const isCarousel = React.useRef(null);
 
   return (
     <View style={styles.container}>
-      
-      <View style={styles.ViewPagination}>
-        
-      </View>
-
+      <View style={styles.ViewPagination} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
-  ViewPagination:{
-    backgroundColor:'transparent'
+  ViewPagination: {
+    backgroundColor: 'transparent',
   },
   dotStyle: {
     width: 10,
@@ -34,10 +27,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.92)',
     position: 'relative',
-    top: 0
-  }
-})
-
-
+    top: 0,
+  },
+});
 
 export default CarouselCards;

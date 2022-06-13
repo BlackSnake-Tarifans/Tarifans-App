@@ -5,11 +5,14 @@
  */
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
-
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -28,15 +31,24 @@ import SelectSuscripcionScreen from '../screens/SelectSuscripcionScreen';
 import CreatePost from '../screens/CreatePost';
 import UploadImgScreen from '../screens/UploadImgScreen';
 import GalleryScreen from '../screens/GalleryScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import {
+  RootStackParamList,
+  RootTabParamList,
+  RootTabScreenProps,
+} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import PaginaInicio from '../screens/PaginaInicio';
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({
+  colorScheme,
+}: {
+  colorScheme: ColorSchemeName;
+}) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -49,29 +61,81 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator();
 
 function RootNavigator() {
-
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={PaginaInicio} options={{ headerShown: false }} />
-      <Stack.Screen name="Inicio" component={PaginaInicio} options={{ headerShown: false }} />
-      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='Search' component={SearchScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name="Category" component={CreateCateScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name='ChangePass' component={ChangePasswordScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name='SelectSusc' component={SelectSuscripcionScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name='CreatePost' component={CreatePost} options={{ headerShown: false }}/>
-      <Stack.Screen name='UploadImg' component={UploadImgScreen} options={{ headerShown: false }}/>
-      <Stack.Screen name='Gallery' component={GalleryScreen} options={{ headerShown: false }}/>
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        
-      </Stack.Group>
+      <Stack.Screen
+        name="Root"
+        component={PaginaInicio}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Inicio"
+        component={PaginaInicio}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: 'Oops!' }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Category"
+        component={CreateCateScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ChangePass"
+        component={ChangePasswordScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SelectSusc"
+        component={SelectSuscripcionScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreatePost"
+        component={CreatePost}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UploadImg"
+        component={UploadImgScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Gallery"
+        component={GalleryScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Group screenOptions={{ presentation: 'modal' }} />
     </Stack.Navigator>
   );
-
 }
 
 /**
@@ -88,7 +152,8 @@ function BottomTabNavigator() {
       initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
+      }}
+    >
       <BottomTab.Screen
         name="TabOne"
         component={RegisterScreen}
@@ -100,7 +165,8 @@ function BottomTabNavigator() {
               onPress={() => navigation.navigate('Modal')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
+              })}
+            >
               <FontAwesome
                 name="info-circle"
                 size={25}
@@ -122,7 +188,8 @@ function BottomTabNavigator() {
               onPress={() => navigation.navigate('Modal')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
+              })}
+            >
               <FontAwesome
                 name="info-circle"
                 size={25}

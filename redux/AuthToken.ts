@@ -1,18 +1,15 @@
-export const TOKEN_CHANGE = 'TOKEN_CHANGE'
+export const TOKEN_CHANGE = 'TOKEN_CHANGE';
 
-var initialState : any = ""
+const initialState: any = { auth_token: '' };
 
 const authTokenReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case TOKEN_CHANGE:
-        {
-            initialState=action.payload
-            return action.payload
-        }
-      
-    
+    case TOKEN_CHANGE: {
+      initialState.auth_token = action.payload;
+      return initialState;
+    }
   }
-  return state
-}
+  return state;
+};
 
-export default authTokenReducer
+export default authTokenReducer;
