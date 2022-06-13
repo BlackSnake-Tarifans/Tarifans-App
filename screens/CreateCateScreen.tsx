@@ -14,6 +14,58 @@ import Boton from '../components/Elementos/Boton';
 
 const deviceWidth = Dimensions.get('window').width;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+  },
+  ViewTop: {
+    position: 'relative',
+    width: deviceWidth,
+  },
+  ViewMiddle: {
+    position: 'relative',
+    top: -30,
+    width: deviceWidth,
+    alignItems: 'center',
+  },
+  ViewEnd: {
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: -30,
+    width: deviceWidth,
+  },
+  SectionStyle: {
+    flexDirection: 'column',
+    height: 70,
+    width: Dimensions.get('window').width * 0.8,
+    margin: 10,
+    borderRadius: 15,
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
+    padding: 10,
+  },
+  SectionStyleDescripcion: {
+    flexDirection: 'column',
+    height: 100,
+    width: Dimensions.get('window').width * 0.8,
+    margin: 10,
+    borderRadius: 15,
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
+    padding: 10,
+  },
+  TextfileTitle: {
+    fontWeight: 'bold',
+    color: '#f28e43',
+  },
+  Botones: {
+    marginTop: 30,
+    backgroundColor: 'transparent',
+  },
+});
+
 function CreateCateScreen({ route, navigation }: any) {
   // const { id } = route.params;
 
@@ -104,57 +156,5 @@ function CreateCateScreen({ route, navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'white',
-  },
-  ViewTop: {
-    position: 'relative',
-    width: deviceWidth,
-  },
-  ViewMiddle: {
-    position: 'relative',
-    top: -30,
-    width: deviceWidth,
-    alignItems: 'center',
-  },
-  ViewEnd: {
-    position: 'relative',
-    alignItems: 'center',
-    bottom: 0,
-    top: -30,
-    width: deviceWidth,
-  },
-  SectionStyle: {
-    flexDirection: 'column',
-    height: 70,
-    width: Dimensions.get('window').width * 0.8,
-    margin: 10,
-    borderRadius: 15,
-    backgroundColor: 'rgba(52, 52, 52, 0.04)',
-    padding: 10,
-  },
-  SectionStyleDescripcion: {
-    flexDirection: 'column',
-    height: 100,
-    width: Dimensions.get('window').width * 0.8,
-    margin: 10,
-    borderRadius: 15,
-    backgroundColor: 'rgba(52, 52, 52, 0.04)',
-    padding: 10,
-  },
-  TextfileTitle: {
-    fontWeight: 'bold',
-    color: '#f28e43',
-  },
-  Botones: {
-    marginTop: 30,
-    backgroundColor: 'transparent',
-  },
-});
 
 export default CreateCateScreen;

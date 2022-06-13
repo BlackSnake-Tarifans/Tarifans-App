@@ -16,6 +16,110 @@ import { register } from '../hooks/backendAPI';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+  },
+  ViewBackButton: {
+    left: 40,
+    backgroundColor: 'transparent',
+    marginTop: 60,
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    fontFamily: 'RosarioRegular',
+    color: 'white',
+    marginLeft: 40,
+    lineHeight: 50,
+  },
+  /* separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  }, */
+  SectionStyle: {
+    flexDirection: 'row',
+    height: 50,
+    width: Dimensions.get('window').width * 0.8,
+    margin: 10,
+    borderRadius: 15,
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
+    padding: 10,
+  },
+  ViewTop: {
+    backgroundColor: 'transparent',
+    width: Dimensions.get('window').width,
+    position: 'relative',
+    top: 0,
+    marginBottom: -40,
+  },
+  ViewMiddle: {
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width: Dimensions.get('window').width,
+    position: 'relative',
+    marginBottom: 25,
+  },
+  ViewEnd: {
+    flexDirection: 'column',
+    backgroundColor: 'transparent',
+    width: Dimensions.get('window').width,
+    position: 'relative',
+    alignItems: 'center',
+    height: 140,
+  },
+  ImageStyle: {
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 5,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    alignSelf: 'center',
+    opacity: 0.4,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    width: Dimensions.get('window').width * 0.7,
+    marginLeft: 40,
+    marginTop: 25,
+    borderRadius: 5,
+    backgroundColor: 'rgba(52, 52, 52, 0.05)',
+    padding: 10,
+    color: 'transparent',
+    borderColor: 'white',
+  },
+  ViewButtonRegister: {
+    backgroundColor: 'transparent',
+    width: 150,
+  },
+  vistaFinal: {
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 20,
+  },
+  textoFinal1: {
+    fontSize: 15,
+    fontFamily: 'RosarioRegular',
+    color: '#9D9D9E',
+  },
+  textoFinal2: {
+    fontSize: 15,
+    letterSpacing: 0.25,
+    fontFamily: 'RosarioRegular',
+    color: '#f28e43',
+  },
+});
+
 function RegisterScreen({ navigation }: any) {
   const [email, onChangeEmail] = React.useState('');
   const [user, onChangeUser] = React.useState('');
@@ -176,109 +280,5 @@ function Button(props: {
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'white',
-  },
-  ViewBackButton: {
-    left: 40,
-    backgroundColor: 'transparent',
-    marginTop: 60,
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    fontFamily: 'RosarioRegular',
-    color: 'white',
-    marginLeft: 40,
-    lineHeight: 50,
-  },
-  /* separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  }, */
-  SectionStyle: {
-    flexDirection: 'row',
-    height: 50,
-    width: Dimensions.get('window').width * 0.8,
-    margin: 10,
-    borderRadius: 15,
-    backgroundColor: 'rgba(52, 52, 52, 0.04)',
-    padding: 10,
-  },
-  ViewTop: {
-    backgroundColor: 'transparent',
-    width: Dimensions.get('window').width,
-    position: 'relative',
-    top: 0,
-    marginBottom: -40,
-  },
-  ViewMiddle: {
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    width: Dimensions.get('window').width,
-    position: 'relative',
-    marginBottom: 25,
-  },
-  ViewEnd: {
-    flexDirection: 'column',
-    backgroundColor: 'transparent',
-    width: Dimensions.get('window').width,
-    position: 'relative',
-    alignItems: 'center',
-    height: 140,
-  },
-  ImageStyle: {
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 5,
-    height: 20,
-    width: 20,
-    resizeMode: 'stretch',
-    alignItems: 'center',
-    alignSelf: 'center',
-    opacity: 0.4,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    width: Dimensions.get('window').width * 0.7,
-    marginLeft: 40,
-    marginTop: 25,
-    borderRadius: 5,
-    backgroundColor: 'rgba(52, 52, 52, 0.05)',
-    padding: 10,
-    color: 'transparent',
-    borderColor: 'white',
-  },
-  ViewButtonRegister: {
-    backgroundColor: 'transparent',
-    width: 150,
-  },
-  vistaFinal: {
-    backgroundColor: 'transparent',
-    alignSelf: 'center',
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 20,
-  },
-  textoFinal1: {
-    fontSize: 15,
-    fontFamily: 'RosarioRegular',
-    color: '#9D9D9E',
-  },
-  textoFinal2: {
-    fontSize: 15,
-    letterSpacing: 0.25,
-    fontFamily: 'RosarioRegular',
-    color: '#f28e43',
-  },
-});
 
 export default RegisterScreen;

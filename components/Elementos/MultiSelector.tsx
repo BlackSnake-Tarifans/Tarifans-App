@@ -9,6 +9,30 @@ import {
 } from 'react-native';
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
+const styles = StyleSheet.create({
+  TextfileTitle: {
+    fontWeight: 'bold',
+    color: '#f28e43',
+  },
+  ViewPicker: {
+    height: 50,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'transparent',
+  },
+  TextfileCate: {
+    fontWeight: 'bold',
+    color: '#949494',
+  },
+  CheckBoxStyle: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#edd4ff',
+    borderRadius: 20,
+  },
+});
+
 export default class App extends React.Component<any, {}> {
   state = {
     selectectedItems: [],
@@ -63,26 +87,3 @@ export default class App extends React.Component<any, {}> {
     );
   }
 }
-const styles = StyleSheet.create({
-  TextfileTitle: {
-    fontWeight: 'bold',
-    color: '#f28e43',
-  },
-  ViewPicker: {
-    height: 50,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: 'transparent',
-  },
-  TextfileCate: {
-    fontWeight: 'bold',
-    color: '#949494',
-  },
-  CheckBoxStyle: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#edd4ff',
-    borderRadius: 20,
-  },
-});

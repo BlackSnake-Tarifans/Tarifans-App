@@ -13,28 +13,6 @@ import {
 } from 'react-native-responsive-screen';
 import { Text, View } from '../../components/Themed';
 
-function HeaderSinLogo({ navigation }: any) {
-  return (
-    <View>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Image
-            style={styles.backStyleImage}
-            source={require('../../assets/images/elementos/back.png')}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Registrar Categoría</Text>
-        <Image
-          style={styles.imagenSettigns}
-          source={require('../../assets/images/assetsTarifans/settings.png')}
-        />
-      </View>
-    </View>
-  );
-}
-
-export default HeaderSinLogo;
-
 const deviceScale = Dimensions.get('window').scale;
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -76,6 +54,29 @@ const styles = StyleSheet.create({
     left: 55,
   },
 });
+
+function HeaderSinLogo({ navigation }: any) {
+  return (
+    <View>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Image
+            style={styles.backStyleImage}
+            source={require('../../assets/images/elementos/back.png')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.title}>Registrar Categoría</Text>
+        <Image
+          style={styles.imagenSettigns}
+          source={require('../../assets/images/assetsTarifans/settings.png')}
+        />
+      </View>
+    </View>
+  );
+}
+
+export default HeaderSinLogo;
+
 function onChangeUser(text: string): void {
   throw new Error('Function not implemented.');
 }

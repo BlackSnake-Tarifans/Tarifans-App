@@ -3,6 +3,26 @@ import { Divider } from 'react-native-paper';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
 
+const styles = StyleSheet.create({
+  footerIcon: {
+    width: 33,
+    height: 33,
+    resizeMode: 'contain',
+    marginHorizontal: 4,
+  },
+  leftFooterIconsContainer: {
+    flexDirection: 'row',
+    width: '32%',
+    justifyContent: 'flex-start',
+  },
+  rightFooterIconsContainer: {
+    flexDirection: 'row',
+    width: '32%',
+    justifyContent: 'flex-end',
+    marginLeft: 'auto',
+  },
+});
+
 const postFooterIcons = [
   {
     name: 'Like',
@@ -110,25 +130,5 @@ function Icon({ imgStyle, imgUrl }: any) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  footerIcon: {
-    width: 33,
-    height: 33,
-    resizeMode: 'contain',
-    marginHorizontal: 4,
-  },
-  leftFooterIconsContainer: {
-    flexDirection: 'row',
-    width: '32%',
-    justifyContent: 'flex-start',
-  },
-  rightFooterIconsContainer: {
-    flexDirection: 'row',
-    width: '32%',
-    justifyContent: 'flex-end',
-    marginLeft: 'auto',
-  },
-});
 
 export default Post;

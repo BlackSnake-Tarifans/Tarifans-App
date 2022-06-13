@@ -16,166 +16,6 @@ import Boton from '../components/Elementos/Boton';
 
 const deviceWidth = Dimensions.get('window').width;
 
-// Datos de prueba
-const SUSCRIPCIONES = [
-  {
-    id: 1,
-    user: 'Pepe',
-    nombre: 'Básica',
-    desc: 'Mira fotos y videos antes que todos',
-    precio: '$7.5\n/mes',
-    nivel: 1,
-    icono: require('../assets/images/iconos/light.png'),
-  },
-  {
-    id: 2,
-    user: 'Pepe',
-    nombre: 'Premium',
-    desc: 'Fotos de arte exclusivas',
-    precio: '$15\n/mes',
-    nivel: 2,
-    icono: require('../assets/images/iconos/star_icon.png'),
-  },
-  {
-    id: 3,
-    user: 'Pepe',
-    nombre: 'Master+',
-    desc: 'Más fotos y videos de arte a tu alcance.',
-    precio: '$25\n/mes',
-    nivel: 3,
-    icono: require('../assets/images/iconos/crown.png'),
-  },
-];
-
-function SelectSuscripcionScreen({ route, navigation }: any) {
-  const Titulo = 'Seleccione una categoría';
-  const [fontsLoaded] = useFonts({ Rosario_400Regular });
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.ViewTop}>
-          <HeaderDiferente props={Titulo} />
-        </View>
-
-        <Suscripciones navigation={navigation} res={SUSCRIPCIONES} />
-
-        <View style={styles.ViewEnd} />
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function Suscripciones({ navigation, res }: any) {
-  return (
-    <ScrollView contentContainerStyle={styles.ViewMiddle}>
-      {res.map((suscripcion: any, index: any) => (
-        <SuscData
-          suscripcion={suscripcion}
-          key={index}
-          navigation={navigation}
-        />
-      ))}
-    </ScrollView>
-  );
-}
-
-function SuscData({ suscripcion, navigation }: any) {
-  const [modalVisible, setModalVisible] = useState(false);
-  return (
-    <View style={styles.suscData}>
-      <Modal
-        hasBackdrop
-        isVisible={modalVisible}
-        onBackdropPress={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.container2}>
-          <View style={styles.modalV}>
-            <View
-              style={{
-                flexDirection: 'row-reverse',
-                justifyContent: 'space-around',
-              }}
-            >
-              <Text style={styles.modalTitle}>Confirmación de Compra</Text>
-            </View>
-            <View>
-              <Text style={styles.modalText}>
-                Suscripción: {suscripcion.nombre}
-              </Text>
-              <Text style={styles.modalText}>
-                Beneficios: {suscripcion.desc}
-              </Text>
-              <Text style={styles.modalText}>
-                Nivel de Suscripción: {suscripcion.nivel}
-              </Text>
-              <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
-              <Text style={styles.modalText2}>
-                ¿Desea confirmar su compra a la siguiente suscripción?
-              </Text>
-            </View>
-
-            <View style={styles.ViewCancelar}>
-              <TouchableOpacity
-                onPress={() => setModalVisible(!modalVisible)}
-                style={styles.BotonCancelar}
-              >
-                <Text style={styles.title}>Cancelar</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.ViewConfirmar}>
-              <Boton
-                onPress={() => {
-                  !modalVisible;
-                  navigation.navigate('Profile');
-                }}
-                title="Confirmar"
-                anchura={240}
-                altura={55}
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      <View style={styles.ViewSuscripciones}>
-        <Text style={styles.TextoSuscripcionTitle}>
-          {suscripcion.user} {suscripcion.nombre}
-        </Text>
-
-        <View
-          style={{
-            marginTop: 10,
-            backgroundColor: 'transparent',
-            marginBottom: 10,
-          }}
-        >
-          <Text style={styles.TextoSuscripcion}>{suscripcion.desc}</Text>
-          <Text style={styles.TextoSuscripcion}>
-            Nivel: {suscripcion.nivel}
-          </Text>
-        </View>
-
-        <View style={styles.ViewComprarSuscripcion}>
-          <Boton
-            onPress={() => setModalVisible(!modalVisible)}
-            title="Comprar"
-            anchura={115}
-            altura={55}
-          />
-        </View>
-      </View>
-
-      <View style={styles.ViewSuscripcionesDerecha}>
-        <Image style={styles.backStyleImage} source={suscripcion.icono} />
-        <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.precio}</Text>
-      </View>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -341,5 +181,165 @@ const styles = StyleSheet.create({
     color: 'purple',
   },
 });
+
+// Datos de prueba
+const SUSCRIPCIONES = [
+  {
+    id: 1,
+    user: 'Pepe',
+    nombre: 'Básica',
+    desc: 'Mira fotos y videos antes que todos',
+    precio: '$7.5\n/mes',
+    nivel: 1,
+    icono: require('../assets/images/iconos/light.png'),
+  },
+  {
+    id: 2,
+    user: 'Pepe',
+    nombre: 'Premium',
+    desc: 'Fotos de arte exclusivas',
+    precio: '$15\n/mes',
+    nivel: 2,
+    icono: require('../assets/images/iconos/star_icon.png'),
+  },
+  {
+    id: 3,
+    user: 'Pepe',
+    nombre: 'Master+',
+    desc: 'Más fotos y videos de arte a tu alcance.',
+    precio: '$25\n/mes',
+    nivel: 3,
+    icono: require('../assets/images/iconos/crown.png'),
+  },
+];
+
+function SelectSuscripcionScreen({ route, navigation }: any) {
+  const Titulo = 'Seleccione una categoría';
+  const [fontsLoaded] = useFonts({ Rosario_400Regular });
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.ViewTop}>
+          <HeaderDiferente props={Titulo} />
+        </View>
+
+        <Suscripciones navigation={navigation} res={SUSCRIPCIONES} />
+
+        <View style={styles.ViewEnd} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function Suscripciones({ navigation, res }: any) {
+  return (
+    <ScrollView contentContainerStyle={styles.ViewMiddle}>
+      {res.map((suscripcion: any, index: any) => (
+        <SuscData
+          suscripcion={suscripcion}
+          key={index}
+          navigation={navigation}
+        />
+      ))}
+    </ScrollView>
+  );
+}
+
+function SuscData({ suscripcion, navigation }: any) {
+  const [modalVisible, setModalVisible] = useState(false);
+  return (
+    <View style={styles.suscData}>
+      <Modal
+        hasBackdrop
+        isVisible={modalVisible}
+        onBackdropPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.container2}>
+          <View style={styles.modalV}>
+            <View
+              style={{
+                flexDirection: 'row-reverse',
+                justifyContent: 'space-around',
+              }}
+            >
+              <Text style={styles.modalTitle}>Confirmación de Compra</Text>
+            </View>
+            <View>
+              <Text style={styles.modalText}>
+                Suscripción: {suscripcion.nombre}
+              </Text>
+              <Text style={styles.modalText}>
+                Beneficios: {suscripcion.desc}
+              </Text>
+              <Text style={styles.modalText}>
+                Nivel de Suscripción: {suscripcion.nivel}
+              </Text>
+              <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
+              <Text style={styles.modalText2}>
+                ¿Desea confirmar su compra a la siguiente suscripción?
+              </Text>
+            </View>
+
+            <View style={styles.ViewCancelar}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(!modalVisible)}
+                style={styles.BotonCancelar}
+              >
+                <Text style={styles.title}>Cancelar</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.ViewConfirmar}>
+              <Boton
+                onPress={() => {
+                  !modalVisible;
+                  navigation.navigate('Profile');
+                }}
+                title="Confirmar"
+                anchura={240}
+                altura={55}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      <View style={styles.ViewSuscripciones}>
+        <Text style={styles.TextoSuscripcionTitle}>
+          {suscripcion.user} {suscripcion.nombre}
+        </Text>
+
+        <View
+          style={{
+            marginTop: 10,
+            backgroundColor: 'transparent',
+            marginBottom: 10,
+          }}
+        >
+          <Text style={styles.TextoSuscripcion}>{suscripcion.desc}</Text>
+          <Text style={styles.TextoSuscripcion}>
+            Nivel: {suscripcion.nivel}
+          </Text>
+        </View>
+
+        <View style={styles.ViewComprarSuscripcion}>
+          <Boton
+            onPress={() => setModalVisible(!modalVisible)}
+            title="Comprar"
+            anchura={115}
+            altura={55}
+          />
+        </View>
+      </View>
+
+      <View style={styles.ViewSuscripcionesDerecha}>
+        <Image style={styles.backStyleImage} source={suscripcion.icono} />
+        <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.precio}</Text>
+      </View>
+    </View>
+  );
+}
 
 export default SelectSuscripcionScreen;

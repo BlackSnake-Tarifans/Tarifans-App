@@ -13,6 +13,54 @@ import { consultarCreadores } from '../hooks/backendAPI';
 import { Text, View } from '../components/Themed';
 import Navigation from '../navigation';
 
+const styles = StyleSheet.create({
+  headercontainer: {
+    height: 70,
+    backgroundColor: '#F28E43',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    // height: Dimensions.get('window').height,
+  },
+  resultcontainer: {
+    margin: 25,
+    // height: Dimensions.get('window').height,
+  },
+  top: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  icons: {
+    marginHorizontal: 15,
+    // width: '15%',
+    resizeMode: 'contain',
+    marginTop: 2,
+  },
+  input: {
+    height: 40,
+    width: '60%',
+    // margin: 12,
+    // borderWidth: 3,
+    // padding: 10,
+    // color: 'black',
+    // borderColor: 'black'
+  },
+  resultHead: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // height: ,
+  },
+  resultadoimg: {
+    borderRadius: 50,
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginRight: 25,
+  },
+});
+
 function SearchScreen({ navigation }: any) {
   return (
     <View style={{ flex: 1 }}>
@@ -122,53 +170,5 @@ function Perfil({ result }: any) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  headercontainer: {
-    height: 70,
-    backgroundColor: '#F28E43',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
-    // height: Dimensions.get('window').height,
-  },
-  resultcontainer: {
-    margin: 25,
-    // height: Dimensions.get('window').height,
-  },
-  top: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  icons: {
-    marginHorizontal: 15,
-    // width: '15%',
-    resizeMode: 'contain',
-    marginTop: 2,
-  },
-  input: {
-    height: 40,
-    width: '60%',
-    // margin: 12,
-    // borderWidth: 3,
-    // padding: 10,
-    // color: 'black',
-    // borderColor: 'black'
-  },
-  resultHead: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // height: ,
-  },
-  resultadoimg: {
-    borderRadius: 50,
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
-    marginRight: 25,
-  },
-});
 
 export default SearchScreen;

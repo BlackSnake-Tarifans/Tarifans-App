@@ -36,6 +36,104 @@ const dimensions = Dimensions.get('window');
 const deviceWidth = dimensions.width;
 const deviceHeight = dimensions.height;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+  },
+  ViewTop: {
+    position: 'relative',
+    width: deviceWidth,
+    backgroundColor: 'transparent',
+  },
+  ViewMiddle: {
+    position: 'relative',
+    top: 0,
+    width: deviceWidth,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  ViewEnd: {
+    position: 'relative',
+    bottom: 0,
+    top: 0,
+    width: deviceWidth,
+    height: 100,
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  ProfileView: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    width: deviceWidth,
+    bottom: 0,
+    alignItems: 'center',
+  },
+  profileImage: {
+    height: 120,
+    width: 120,
+    borderRadius: 60,
+    borderColor: 'white',
+    borderWidth: 5,
+  },
+  Botones: {
+    marginTop: 10,
+    backgroundColor: 'transparent',
+  },
+  Info: {
+    width: deviceWidth - 80,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    marginTop: 10,
+  },
+  ViewInfoSeguidores: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    margin: 20,
+  },
+  ViewInfoSeguidos: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    margin: 20,
+  },
+  ViewInfoPublicaciones: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    margin: 20,
+  },
+  cabecerasInfo: {
+    color: '#9D9D9E',
+    fontSize: 15,
+  },
+  datosCabeceraInfo: {
+    color: '#f28e43',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  textoBio: {
+    marginTop: 20,
+    width: deviceWidth - 80,
+    color: '#9D9D9E',
+    fontSize: 15,
+    textAlign: 'justify',
+  },
+  ViewPublicaciones: {
+    flex: 1,
+    width: deviceWidth,
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    backgroundColor: 'transparent',
+  },
+});
+
 const data = [
   {
     title: 'Coral Reef',
@@ -144,103 +242,5 @@ function ProfileScreen({ route, navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'white',
-  },
-  ViewTop: {
-    position: 'relative',
-    width: deviceWidth,
-    backgroundColor: 'transparent',
-  },
-  ViewMiddle: {
-    position: 'relative',
-    top: 0,
-    width: deviceWidth,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  ViewEnd: {
-    position: 'relative',
-    bottom: 0,
-    top: 0,
-    width: deviceWidth,
-    height: 100,
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  ProfileView: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    width: deviceWidth,
-    bottom: 0,
-    alignItems: 'center',
-  },
-  profileImage: {
-    height: 120,
-    width: 120,
-    borderRadius: 60,
-    borderColor: 'white',
-    borderWidth: 5,
-  },
-  Botones: {
-    marginTop: 10,
-    backgroundColor: 'transparent',
-  },
-  Info: {
-    width: deviceWidth - 80,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    marginTop: 10,
-  },
-  ViewInfoSeguidores: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    margin: 20,
-  },
-  ViewInfoSeguidos: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    margin: 20,
-  },
-  ViewInfoPublicaciones: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    margin: 20,
-  },
-  cabecerasInfo: {
-    color: '#9D9D9E',
-    fontSize: 15,
-  },
-  datosCabeceraInfo: {
-    color: '#f28e43',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  textoBio: {
-    marginTop: 20,
-    width: deviceWidth - 80,
-    color: '#9D9D9E',
-    fontSize: 15,
-    textAlign: 'justify',
-  },
-  ViewPublicaciones: {
-    flex: 1,
-    width: deviceWidth,
-    alignItems: 'center',
-    marginBottom: 10,
-    marginTop: 20,
-    backgroundColor: 'transparent',
-  },
-});
 
 export default ProfileScreen;

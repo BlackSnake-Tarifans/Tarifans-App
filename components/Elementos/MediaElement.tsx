@@ -4,6 +4,24 @@ import React from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { ITEM_WIDTH, ImgCard } from './ImgCard';
 
+const styles = StyleSheet.create({
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+  },
+  video: {
+    alignSelf: 'center',
+    width: ITEM_WIDTH,
+    height: ITEM_WIDTH > 1000 ? ITEM_WIDTH / 2 : ITEM_WIDTH,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
 function MediaElement({ source }: any) {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
@@ -43,21 +61,4 @@ function MediaElement({ source }: any) {
   return <ImgCard source={source} />;
 }
 
-const styles = StyleSheet.create({
-  container2: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-  },
-  video: {
-    alignSelf: 'center',
-    width: ITEM_WIDTH,
-    height: ITEM_WIDTH > 1000 ? ITEM_WIDTH / 2 : ITEM_WIDTH,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 export default MediaElement;

@@ -36,6 +36,13 @@ const POSTS = [
 ];
 // const POSTS={POST.map((post,index)=> (<Post post={post} key={index}/> ))}
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+  },
+});
+
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
@@ -50,10 +57,3 @@ function HomeScreen({ navigation }) {
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
-  },
-});

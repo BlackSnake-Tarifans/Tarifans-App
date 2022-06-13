@@ -20,163 +20,6 @@ import { Text, View } from '../components/Themed';
 import { login } from '../hooks/backendAPI';
 import { TOKEN_CHANGE } from '../redux/AuthToken';
 
-function LoginScreen({ navigation }: any) {
-  const route = useRoute();
-  const [user, onChangeUser] = React.useState('');
-  const [pass, onChangePass] = React.useState('');
-  const [fontsLoaded] = useFonts({
-    RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
-  });
-  const dispatch = useDispatch();
-  const changeToken = (item: any) =>
-    dispatch({ type: TOKEN_CHANGE, payload: item });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1 }}>
-        <LinearGradient
-          style={styles.background}
-          colors={['#f28e43', '#966bee']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0.7 }}
-          locations={[0, 0.95]}
-        >
-          <View style={styles.ViewStart}>
-            <Text style={styles.titleInicio}>Bienvenidos a:</Text>
-            <Image
-              style={styles.imageTitle1}
-              source={require('../assets/images/tarifans_palabra_color_blanco.png')}
-            />
-            <Image
-              style={styles.imageTitle2}
-              source={require('../assets/images/tarifans_logo_blanca.png')}
-            />
-          </View>
-
-          <View style={styles.ViewMiddle}>
-            <Text style={styles.titleInicioMensaje}>
-              Ingresa y obtén al momento noticias y {'\n'}actualizaciones de tus
-              creadores favoritos.
-            </Text>
-
-            <View style={styles.SectionStyle}>
-              <Image
-                style={styles.ImageStyle}
-                source={require('../assets/images/iconos/nombre_usuario.png')}
-              />
-              <TextInput
-                style={{ flex: 1 }}
-                placeholder="Nombre de usuario"
-                placeholderTextColor="#9D9D9E"
-                onChangeText={text => onChangeUser(text)}
-              />
-            </View>
-            <View style={styles.SectionStyle}>
-              <Image
-                style={styles.ImageStyle}
-                source={require('../assets/images/iconos/password.png')}
-              />
-              <TextInput
-                style={{ flex: 1 }}
-                placeholder="Contraseña"
-                placeholderTextColor="#9D9D9E"
-                secureTextEntry
-                onChangeText={text => onChangePass(text)}
-              />
-            </View>
-
-            <View style={styles.buttons}>
-              <Button
-                onPress={() => {
-                  // navigation.navigate('Home')
-                  // console.log("Hola")
-                  login({ username: user, password: pass })
-                    .then(res => {
-                      return res.data;
-                    })
-                    .then(data => {
-                      changeToken(data.token);
-                      navigation.navigate('Home');
-                    })
-                    .catch(error => console.log(error));
-                }}
-                title="INICIAR SESIÓN"
-                style_button={styles.button_1}
-                style_text={styles.text_1}
-              />
-            </View>
-          </View>
-
-          <View style={styles.ViewEnd}>
-            <View style={styles.vistaFinal}>
-              <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
-              <Text
-                style={styles.textoFinal2}
-                onPress={() => navigation.navigate('Register')}
-              >
-                ¡Regístrate aquí!
-              </Text>
-            </View>
-            <View style={styles.vistaFinal}>
-              <Text
-                style={styles.textoFinal2}
-                onPress={() => navigation.navigate('ChangePass')}
-              >
-                ¿Olvidaste tu contraseña?
-              </Text>
-            </View>
-            <Image
-              style={styles.ImageStyleDivider}
-              source={require('../assets/images/iconos/divider.png')}
-            />
-            <View style={styles.vistaRedes}>
-              <Image
-                style={styles.imagenRedes}
-                source={require('../assets/images/iconos/google.png')}
-              />
-              <Text
-                style={styles.textoFinal3}
-                onPress={() => navigation.navigate('CreatePost')}
-              >
-                ¡Inicia sesión con Google!
-              </Text>
-            </View>
-            <View style={styles.vistaRedes}>
-              <Image
-                style={styles.imagenRedes}
-                source={require('../assets/images/iconos/facebook.png')}
-              />
-              <Text
-                style={styles.textoFinal3}
-                onPress={() => navigation.navigate('SelectSusc')}
-              >
-                ¡Inicia sesión con Facebook!
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-function Button(props: {
-  onPress: any;
-  title: string | undefined;
-  style_button: any;
-  style_text: any;
-}) {
-  const { onPress, title = 'Save', style_button, style_text } = props;
-  return (
-    <Pressable style={style_button} onPress={onPress}>
-      <Text style={style_text}>{title}</Text>
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -355,5 +198,162 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+function LoginScreen({ navigation }: any) {
+  const route = useRoute();
+  const [user, onChangeUser] = React.useState('');
+  const [pass, onChangePass] = React.useState('');
+  const [fontsLoaded] = useFonts({
+    RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
+  });
+  const dispatch = useDispatch();
+  const changeToken = (item: any) =>
+    dispatch({ type: TOKEN_CHANGE, payload: item });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scroll} contentContainerStyle={{ flexGrow: 1 }}>
+        <LinearGradient
+          style={styles.background}
+          colors={['#f28e43', '#966bee']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0.7 }}
+          locations={[0, 0.95]}
+        >
+          <View style={styles.ViewStart}>
+            <Text style={styles.titleInicio}>Bienvenidos a:</Text>
+            <Image
+              style={styles.imageTitle1}
+              source={require('../assets/images/tarifans_palabra_color_blanco.png')}
+            />
+            <Image
+              style={styles.imageTitle2}
+              source={require('../assets/images/tarifans_logo_blanca.png')}
+            />
+          </View>
+
+          <View style={styles.ViewMiddle}>
+            <Text style={styles.titleInicioMensaje}>
+              Ingresa y obtén al momento noticias y {'\n'}actualizaciones de tus
+              creadores favoritos.
+            </Text>
+
+            <View style={styles.SectionStyle}>
+              <Image
+                style={styles.ImageStyle}
+                source={require('../assets/images/iconos/nombre_usuario.png')}
+              />
+              <TextInput
+                style={{ flex: 1 }}
+                placeholder="Nombre de usuario"
+                placeholderTextColor="#9D9D9E"
+                onChangeText={text => onChangeUser(text)}
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <Image
+                style={styles.ImageStyle}
+                source={require('../assets/images/iconos/password.png')}
+              />
+              <TextInput
+                style={{ flex: 1 }}
+                placeholder="Contraseña"
+                placeholderTextColor="#9D9D9E"
+                secureTextEntry
+                onChangeText={text => onChangePass(text)}
+              />
+            </View>
+
+            <View style={styles.buttons}>
+              <Button
+                onPress={() => {
+                  // navigation.navigate('Home')
+                  // console.log("Hola")
+                  login({ username: user, password: pass })
+                    .then(res => {
+                      return res.data;
+                    })
+                    .then(data => {
+                      changeToken(data.token);
+                      navigation.navigate('Home');
+                    })
+                    .catch(error => console.log(error));
+                }}
+                title="INICIAR SESIÓN"
+                style_button={styles.button_1}
+                style_text={styles.text_1}
+              />
+            </View>
+          </View>
+
+          <View style={styles.ViewEnd}>
+            <View style={styles.vistaFinal}>
+              <Text style={styles.textoFinal1}>¿No tienes una cuenta? </Text>
+              <Text
+                style={styles.textoFinal2}
+                onPress={() => navigation.navigate('Register')}
+              >
+                ¡Regístrate aquí!
+              </Text>
+            </View>
+            <View style={styles.vistaFinal}>
+              <Text
+                style={styles.textoFinal2}
+                onPress={() => navigation.navigate('ChangePass')}
+              >
+                ¿Olvidaste tu contraseña?
+              </Text>
+            </View>
+            <Image
+              style={styles.ImageStyleDivider}
+              source={require('../assets/images/iconos/divider.png')}
+            />
+            <View style={styles.vistaRedes}>
+              <Image
+                style={styles.imagenRedes}
+                source={require('../assets/images/iconos/google.png')}
+              />
+              <Text
+                style={styles.textoFinal3}
+                onPress={() => navigation.navigate('CreatePost')}
+              >
+                ¡Inicia sesión con Google!
+              </Text>
+            </View>
+            <View style={styles.vistaRedes}>
+              <Image
+                style={styles.imagenRedes}
+                source={require('../assets/images/iconos/facebook.png')}
+              />
+              <Text
+                style={styles.textoFinal3}
+                onPress={() => navigation.navigate('SelectSusc')}
+              >
+                ¡Inicia sesión con Facebook!
+              </Text>
+            </View>
+          </View>
+        </LinearGradient>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+function Button(props: {
+  onPress: any;
+  title: string | undefined;
+  style_button: any;
+  style_text: any;
+}) {
+  const { onPress, title = 'Save', style_button, style_text } = props;
+  return (
+    <Pressable style={style_button} onPress={onPress}>
+      <Text style={style_text}>{title}</Text>
+    </Pressable>
+  );
+}
 
 export default LoginScreen;

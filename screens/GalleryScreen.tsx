@@ -20,6 +20,96 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width * 0.95;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  containerPhoto: {
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+  },
+  instructions: {
+    color: 'black',
+    padding: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  thumbnail: {
+    width: deviceWidth / 2 - 6,
+    height: deviceHeight / 3,
+    borderColor: 'purple',
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 2,
+  },
+  ScrollContainter: {
+    flexGrow: 1,
+    backgroundColor: 'white',
+    justifyContent: 'flex-start',
+    borderRadius: 20,
+  },
+  modalV: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  container2: {
+    borderRadius: 25,
+    borderStyle: 'solid',
+    backgroundColor: '#fff',
+  },
+  iconM: {
+    resizeMode: 'cover',
+    height: 13,
+    width: 13,
+  },
+  modalTitle: {
+    fontSize: 20,
+    color: 'white',
+    marginRight: 35,
+  },
+  thumbnail2: {
+    alignSelf: 'center',
+    width: 80,
+    height: 80,
+    borderColor: 'purple',
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 2,
+  },
+  containerImg: {
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4.65,
+    borderColor: 'purple',
+    borderWidth: 1,
+    marginBottom: 10,
+    width: ITEM_WIDTH,
+  },
+  modalButton: {
+    justifyContent: 'center',
+    borderColor: 'purple',
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 15,
+    flex: 1,
+  },
+});
+
 const uris = [
   'https://c.wallhere.com/photos/2c/fa/Shigatsu_wa_Kimi_no_Uso_Miyazono_Kaori_Sawabe_Tsubaki_Arima_Kousei-41795.jpg!d',
   'https://br.atsit.in/es/wp-content/uploads/2022/01/fecha-y-hora-de-lanzamiento-del-episodio-4-de-my-dress-up-darling-confirmadas.jpg',
@@ -210,95 +300,5 @@ function GalleryScreen({ route, navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  containerPhoto: {
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
-  instructions: {
-    color: 'black',
-    padding: 10,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  thumbnail: {
-    width: deviceWidth / 2 - 6,
-    height: deviceHeight / 3,
-    borderColor: 'purple',
-    borderWidth: 1,
-    borderRadius: 10,
-    margin: 2,
-  },
-  ScrollContainter: {
-    flexGrow: 1,
-    backgroundColor: 'white',
-    justifyContent: 'flex-start',
-    borderRadius: 20,
-  },
-  modalV: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  container2: {
-    borderRadius: 25,
-    borderStyle: 'solid',
-    backgroundColor: '#fff',
-  },
-  iconM: {
-    resizeMode: 'cover',
-    height: 13,
-    width: 13,
-  },
-  modalTitle: {
-    fontSize: 20,
-    color: 'white',
-    marginRight: 35,
-  },
-  thumbnail2: {
-    alignSelf: 'center',
-    width: 80,
-    height: 80,
-    borderColor: 'purple',
-    borderWidth: 1,
-    borderRadius: 10,
-    margin: 2,
-  },
-  containerImg: {
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4.65,
-    borderColor: 'purple',
-    borderWidth: 1,
-    marginBottom: 10,
-    width: ITEM_WIDTH,
-  },
-  modalButton: {
-    justifyContent: 'center',
-    borderColor: 'purple',
-    borderRadius: 10,
-    borderWidth: 1,
-    margin: 15,
-    flex: 1,
-  },
-});
 
 export default GalleryScreen;

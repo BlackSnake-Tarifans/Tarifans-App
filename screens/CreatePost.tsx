@@ -16,66 +16,6 @@ import MultiSelector from '../components/Elementos/MultiSelector';
 
 const deviceWidth = Dimensions.get('window').width;
 
-function CreateCateScreen({ route, navigation }: any) {
-  // const { id } = route.params;
-
-  const [name, onChangeName] = useState('New Category');
-  const [desc, onChangeDesc] = useState('Todo lo que deseas y más');
-  const [price, onChangePrice] = useState(0);
-  const [nivel, onChangeNivel] = useState(1);
-  const titulo = 'Crear Nueva Publicación';
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.ViewTop}>
-          <HeaderDiferente props={titulo} />
-        </View>
-
-        <View style={styles.ViewMiddle}>
-          <View style={styles.SectionStyle}>
-            <Text style={styles.TextfileTitle}>Título</Text>
-            <TextInput
-              placeholder="Ingrese el título..."
-              placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeName(text)}
-            />
-          </View>
-          <View style={styles.SectionStyleDescripcion}>
-            <Text style={styles.TextfileTitle}>Descripcion</Text>
-            <TextInput
-              placeholder="Ingrese una descripcion..."
-              placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeDesc(text)}
-            />
-          </View>
-          <View style={styles.SectionStyleAdjunto}>
-            <Text style={styles.TextfileTitleAdjunto}>Archivo adjunto</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('UploadImg')}
-              style={styles.BotonSubirImagen}
-            >
-              <Text style={styles.title}>Subir archivo</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.SectionStyleCategory}>
-            <MultiSelector />
-          </View>
-        </View>
-
-        <View style={styles.ViewEnd}>
-          <Boton
-            onPress={() => navigation.navigate('Profile')}
-            title="Crear Publicación"
-            anchura={190}
-            altura={45}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -169,5 +109,65 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+function CreateCateScreen({ route, navigation }: any) {
+  // const { id } = route.params;
+
+  const [name, onChangeName] = useState('New Category');
+  const [desc, onChangeDesc] = useState('Todo lo que deseas y más');
+  const [price, onChangePrice] = useState(0);
+  const [nivel, onChangeNivel] = useState(1);
+  const titulo = 'Crear Nueva Publicación';
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.ViewTop}>
+          <HeaderDiferente props={titulo} />
+        </View>
+
+        <View style={styles.ViewMiddle}>
+          <View style={styles.SectionStyle}>
+            <Text style={styles.TextfileTitle}>Título</Text>
+            <TextInput
+              placeholder="Ingrese el título..."
+              placeholderTextColor="#b3b3b3"
+              onChangeText={text => onChangeName(text)}
+            />
+          </View>
+          <View style={styles.SectionStyleDescripcion}>
+            <Text style={styles.TextfileTitle}>Descripcion</Text>
+            <TextInput
+              placeholder="Ingrese una descripcion..."
+              placeholderTextColor="#b3b3b3"
+              onChangeText={text => onChangeDesc(text)}
+            />
+          </View>
+          <View style={styles.SectionStyleAdjunto}>
+            <Text style={styles.TextfileTitleAdjunto}>Archivo adjunto</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('UploadImg')}
+              style={styles.BotonSubirImagen}
+            >
+              <Text style={styles.title}>Subir archivo</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.SectionStyleCategory}>
+            <MultiSelector />
+          </View>
+        </View>
+
+        <View style={styles.ViewEnd}>
+          <Boton
+            onPress={() => navigation.navigate('Profile')}
+            title="Crear Publicación"
+            anchura={190}
+            altura={45}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 
 export default CreateCateScreen;

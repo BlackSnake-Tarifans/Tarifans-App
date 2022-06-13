@@ -5,16 +5,6 @@ import { ImgCard } from './ImgCard';
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
-function CarouselCardItem({ item, index }: any) {
-  return (
-    <View style={styles.container} key={index}>
-      <ImgCard source={item.source} />
-      <Text style={styles.header}>{item.title}</Text>
-      <Text style={styles.body}>{item.description}</Text>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -44,5 +34,15 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
 });
+
+function CarouselCardItem({ item, index }: any) {
+  return (
+    <View style={styles.container} key={index}>
+      <ImgCard source={item.source} />
+      <Text style={styles.header}>{item.title}</Text>
+      <Text style={styles.body}>{item.description}</Text>
+    </View>
+  );
+}
 
 export default CarouselCardItem;

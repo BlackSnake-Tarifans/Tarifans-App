@@ -28,72 +28,6 @@ import { login } from '../hooks/backendAPI';
 
 import { TOKEN_CHANGE } from '../redux/AuthToken';
 
-function LoginScreen({ navigation }: any) {
-  const route = useRoute();
-  const [user, onChangeUser] = React.useState('');
-  const [pass, onChangePass] = React.useState('');
-  const [fontsLoaded] = useFonts({
-    RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
-  });
-  const dispatch = useDispatch();
-  const changeToken = (item: any) =>
-    dispatch({ type: TOKEN_CHANGE, payload: item });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-  return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        style={styles.background}
-        colors={['#f28e43', '#966bee']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0.7 }}
-        locations={[0, 0.95]}
-      >
-        <Text style={styles.titleInicio}>Bienvenidos a:</Text>
-        <Image
-          style={styles.imageTitle1}
-          source={require('../assets/images/tarifans_palabra_color_blanco.png')}
-        />
-        <Image
-          style={styles.imageTitle2}
-          source={require('../assets/images/tarifans_logo_blanca.png')}
-        />
-
-        <View style={styles.buttons}>
-          <Button
-            onPress={() => navigation.navigate('Login')}
-            title="Iniciar Sesión"
-            style_button={styles.button_1}
-            style_text={styles.text_1}
-          />
-          <Button
-            onPress={() => navigation.navigate('Register')}
-            title="Registrarse"
-            style_button={styles.button_2}
-            style_text={styles.text_2}
-          />
-        </View>
-      </LinearGradient>
-    </SafeAreaView>
-  );
-}
-
-function Button(props: {
-  onPress: any;
-  title: string | undefined;
-  style_button: any;
-  style_text: any;
-}) {
-  const { onPress, title = 'Save', style_button, style_text } = props;
-  return (
-    <Pressable style={style_button} onPress={onPress}>
-      <Text style={style_text}>{title}</Text>
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -233,5 +167,71 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+function LoginScreen({ navigation }: any) {
+  const route = useRoute();
+  const [user, onChangeUser] = React.useState('');
+  const [pass, onChangePass] = React.useState('');
+  const [fontsLoaded] = useFonts({
+    RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
+  });
+  const dispatch = useDispatch();
+  const changeToken = (item: any) =>
+    dispatch({ type: TOKEN_CHANGE, payload: item });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+        style={styles.background}
+        colors={['#f28e43', '#966bee']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0.7 }}
+        locations={[0, 0.95]}
+      >
+        <Text style={styles.titleInicio}>Bienvenidos a:</Text>
+        <Image
+          style={styles.imageTitle1}
+          source={require('../assets/images/tarifans_palabra_color_blanco.png')}
+        />
+        <Image
+          style={styles.imageTitle2}
+          source={require('../assets/images/tarifans_logo_blanca.png')}
+        />
+
+        <View style={styles.buttons}>
+          <Button
+            onPress={() => navigation.navigate('Login')}
+            title="Iniciar Sesión"
+            style_button={styles.button_1}
+            style_text={styles.text_1}
+          />
+          <Button
+            onPress={() => navigation.navigate('Register')}
+            title="Registrarse"
+            style_button={styles.button_2}
+            style_text={styles.text_2}
+          />
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
+  );
+}
+
+function Button(props: {
+  onPress: any;
+  title: string | undefined;
+  style_button: any;
+  style_text: any;
+}) {
+  const { onPress, title = 'Save', style_button, style_text } = props;
+  return (
+    <Pressable style={style_button} onPress={onPress}>
+      <Text style={style_text}>{title}</Text>
+    </Pressable>
+  );
+}
 
 export default LoginScreen;

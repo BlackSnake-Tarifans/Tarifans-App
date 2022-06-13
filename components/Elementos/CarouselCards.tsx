@@ -2,16 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem';
 
-function CarouselCards({ data }: any) {
-  const [index, setIndex] = React.useState(0);
-  const isCarousel = React.useRef(null);
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.ViewPagination} />
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -30,5 +20,18 @@ const styles = StyleSheet.create({
     top: 0,
   },
 });
+
+function CarouselCards({ data }: any) {
+  const [index, setIndex] = React.useState(0);
+  const isCarousel = React.useRef(null);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.ViewPagination} />
+    </View>
+  );
+}
+
+
 
 export default CarouselCards;

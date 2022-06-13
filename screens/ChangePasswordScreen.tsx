@@ -18,6 +18,79 @@ import Boton from '../components/Elementos/Boton';
 
 const deviceWidth = Dimensions.get('window').width;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  SectionStyle: {
+    flexDirection: 'column',
+    height: 70,
+    width: Dimensions.get('window').width * 0.8,
+    margin: 10,
+    borderRadius: 15,
+    backgroundColor: 'rgba(52, 52, 52, 0.04)',
+    padding: 10,
+  },
+  ViewTop: {
+    position: 'relative',
+    width: deviceWidth,
+    backgroundColor: 'transparent',
+  },
+  ViewMiddle: {
+    position: 'relative',
+    top: -30,
+    width: deviceWidth,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  ViewEnd: {
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+  },
+  modalV: {
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 35,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    backgroundColor: 'white',
+  },
+  TextfileTitle: {
+    fontWeight: 'bold',
+    color: '#f28e43',
+  },
+  ViewCancelar: {
+    backgroundColor: 'transparent',
+  },
+  ViewConfirmar: {
+    marginTop: 15,
+    backgroundColor: 'transparent',
+  },
+  BotonCancelar: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 240,
+    height: 55,
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: '#b3b3b3',
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
+
 function ChangePasswordScreen({ navigation }: any) {
   const [email, onChangeEmail] = React.useState('');
   const [newpass, onChangeNewPass] = React.useState('');
@@ -153,78 +226,5 @@ function ChangePasswordScreen({ navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  SectionStyle: {
-    flexDirection: 'column',
-    height: 70,
-    width: Dimensions.get('window').width * 0.8,
-    margin: 10,
-    borderRadius: 15,
-    backgroundColor: 'rgba(52, 52, 52, 0.04)',
-    padding: 10,
-  },
-  ViewTop: {
-    position: 'relative',
-    width: deviceWidth,
-    backgroundColor: 'transparent',
-  },
-  ViewMiddle: {
-    position: 'relative',
-    top: -30,
-    width: deviceWidth,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  ViewEnd: {
-    position: 'relative',
-    alignItems: 'center',
-    bottom: 0,
-    top: 0,
-    backgroundColor: 'transparent',
-  },
-  modalV: {
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 35,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-    backgroundColor: 'white',
-  },
-  TextfileTitle: {
-    fontWeight: 'bold',
-    color: '#f28e43',
-  },
-  ViewCancelar: {
-    backgroundColor: 'transparent',
-  },
-  ViewConfirmar: {
-    marginTop: 15,
-    backgroundColor: 'transparent',
-  },
-  BotonCancelar: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: 240,
-    height: 55,
-    borderRadius: 35,
-    borderWidth: 1,
-    borderColor: '#b3b3b3',
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: 'RosarioRegular',
-    color: '#949494',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 export default ChangePasswordScreen;

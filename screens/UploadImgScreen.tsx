@@ -19,9 +19,158 @@ const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 const deviceWidth = Dimensions.get('window').width;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  containerPhoto: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  instructions: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    textAlign: 'center',
+    width: deviceWidth * 0.7,
+    backgroundColor: 'transparent',
+    lineHeight: 32,
+    marginBottom: 12,
+  },
+  ViewTop: {
+    position: 'relative',
+    width: deviceWidth,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+  },
+  ViewMiddle: {
+    position: 'relative',
+    top: -30,
+    width: deviceWidth,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  ViewEnd: {
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+  },
+  ViewMiddlePhoto: {
+    position: 'relative',
+    width: deviceWidth,
+    alignItems: 'center',
+  },
+  ViewEndPhoto: {
+    position: 'relative',
+    alignItems: 'center',
+    bottom: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+    marginTop: 30,
+  },
+  ViewCancelar: {
+    backgroundColor: 'transparent',
+    margin: 5,
+  },
+  ViewConfirmar: {
+    margin: 10,
+    backgroundColor: 'transparent',
+    marginBottom: 30,
+  },
+  BotonCancelar: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 240,
+    height: 55,
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: '#b3b3b3',
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: deviceWidth * 0.9,
+    height: deviceWidth,
+    alignSelf: 'center',
+    borderRadius: 25,
+    resizeMode: 'contain',
+  },
+  imgContainer: {
+    backgroundColor: 'white',
+    width: ITEM_WIDTH + 2,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4.65,
+    borderColor: 'purple',
+    borderWidth: 1,
+  },
+  modalTitle: {
+    fontSize: 22,
+    color: 'black',
+    padding: 10,
+    textAlign: 'center',
+  },
+  suscContainter: {
+    flexGrow: 1,
+    backgroundColor: 'white',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  imgContainer2: {
+    flexDirection: 'row',
+    marginBottom: 25,
+    borderColor: 'black',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    elevation: 1,
+    padding: '5.5%',
+    marginHorizontal: 10,
+    borderRadius: 10,
+  },
+  thumbnail2: {
+    width: '55%',
+    height: ITEM_WIDTH / 2,
+    alignSelf: 'center',
+    borderRadius: 25,
+    resizeMode: 'contain',
+  },
+  modalV: {
+    padding: 22,
+    alignContent: 'flex-start',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+});
+
 function UploadImgScreen({ navigation }: any) {
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [selectedImage, setSelectedImage] = React.useState(null);
+  const [selectedImage, setSelectedImage] = React.useState<any>({
+    localUri: '',
+  });
   const [url, setUrl] = React.useState([] as any);
   const tituloHeader1 = 'Cargar archivo';
   const tituloHeader2 = 'Previsualización';
@@ -75,7 +224,9 @@ function UploadImgScreen({ navigation }: any) {
 
   const deleteFileF = (urlFile: any) => {
     const index = url.lastIndexOf(urlFile);
-    const newURL = url.filter(item => item !== urlFile);
+    const newURL = url.filter((item: any) => {
+      return item !== urlFile;
+    });
     setUrl(newURL);
     if (index === 0) {
       setSelectedImage({ localUri: url[1] } as any);
@@ -351,151 +502,5 @@ function UploadImgScreen({ navigation }: any) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  containerPhoto: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  instructions: {
-    fontSize: 20,
-    fontFamily: 'RosarioRegular',
-    color: '#949494',
-    textAlign: 'center',
-    width: deviceWidth * 0.7,
-    backgroundColor: 'transparent',
-    lineHeight: 32,
-    marginBottom: 12,
-  },
-  ViewTop: {
-    position: 'relative',
-    width: deviceWidth,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-  },
-  ViewMiddle: {
-    position: 'relative',
-    top: -30,
-    width: deviceWidth,
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  ViewEnd: {
-    position: 'relative',
-    alignItems: 'center',
-    bottom: 0,
-    top: 0,
-    backgroundColor: 'transparent',
-  },
-  ViewMiddlePhoto: {
-    position: 'relative',
-    width: deviceWidth,
-    alignItems: 'center',
-  },
-  ViewEndPhoto: {
-    position: 'relative',
-    alignItems: 'center',
-    bottom: 0,
-    top: 0,
-    backgroundColor: 'transparent',
-    marginTop: 30,
-  },
-  ViewCancelar: {
-    backgroundColor: 'transparent',
-    margin: 5,
-  },
-  ViewConfirmar: {
-    margin: 10,
-    backgroundColor: 'transparent',
-    marginBottom: 30,
-  },
-  BotonCancelar: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: 240,
-    height: 55,
-    borderRadius: 35,
-    borderWidth: 1,
-    borderColor: '#b3b3b3',
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: 'RosarioRegular',
-    color: '#949494',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: deviceWidth * 0.9,
-    height: deviceWidth,
-    alignSelf: 'center',
-    borderRadius: 25,
-    resizeMode: 'contain',
-  },
-  imgContainer: {
-    backgroundColor: 'white',
-    width: ITEM_WIDTH + 2,
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4.65,
-    borderColor: 'purple',
-    borderWidth: 1,
-  },
-  modalTitle: {
-    fontSize: 22,
-    color: 'black',
-    padding: 10,
-    textAlign: 'center',
-  },
-  suscContainter: {
-    flexGrow: 1,
-    backgroundColor: 'white',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  imgContainer2: {
-    flexDirection: 'row',
-    marginBottom: 25,
-    borderColor: 'black',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
-    elevation: 1,
-    padding: '5.5%',
-    marginHorizontal: 10,
-    borderRadius: 10,
-  },
-  thumbnail2: {
-    width: '55%',
-    height: ITEM_WIDTH / 2,
-    alignSelf: 'center',
-    borderRadius: 25,
-    resizeMode: 'contain',
-  },
-  modalV: {
-    padding: 22,
-    alignContent: 'flex-start',
-    alignItems: 'center',
-    borderRadius: 20,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-});
 
 export default UploadImgScreen;
