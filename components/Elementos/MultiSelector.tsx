@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  
 } from 'react-native';
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
@@ -33,37 +34,35 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class App extends React.Component<any, {}> {
-  state = {
-    selectectedItems: [],
-    isShownPicker: false,
-  };
+function Multiselector({selected}: any){
+  
 
-  multiSelect: any;
-
-  render() {
+    let [selectectedItems, setSelectedItems] = React.useState(selected!==[]?selected: []);
+    let [isShownPicker, setIsShownPicker] = React.useState(false);
+  
     const items = [
       { label: 'Básica', value: '1' },
       { label: 'Premium', value: '2' },
       { label: 'Platinum', value: '3' },
     ];
+
     return (
       <ScrollView>
         <TouchableOpacity
           onPress={() => {
-            this.setState({ isShownPicker: !this.state.isShownPicker });
+            setIsShownPicker(!isShownPicker);
           }}
           style={styles.ViewPicker}
         >
           <Text style={styles.TextfileTitle}>Categorías</Text>
         </TouchableOpacity>
-        {this.state.isShownPicker ? (
+        {isShownPicker ? (
           <MultipleSelectPicker
             items={items}
             onSelectionsChange={(ele: any) => {
-              this.setState({ selectectedItems: ele });
+              setSelectedItems(ele);
             }}
-            selectedItems={this.state.selectectedItems}
+            selectedItems={selectectedItems}
             buttonStyle={{
               height: 100,
               justifyContent: 'center',
@@ -76,7 +75,7 @@ export default class App extends React.Component<any, {}> {
           />
         ) : null}
 
-        {(this.state.selectectedItems || []).map((item: any, index) => {
+        {(selectectedItems || []).map((item: any, index) => {
           return (
             <Text style={{ color: '#b3b3b3' }} key={index}>
               {item.label}
@@ -85,5 +84,7 @@ export default class App extends React.Component<any, {}> {
         })}
       </ScrollView>
     );
-  }
+  
 }
+
+export default Multiselector;

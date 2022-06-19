@@ -12,7 +12,8 @@ import {
 
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
-import MultiSelector from '../components/Elementos/MultiSelector';
+import Multiselector from '../components/Elementos/MultiSelector';
+import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -37,7 +38,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     width: deviceWidth,
-    height: 100,
+    //height: 100,
+    marginBottom: 20,
   },
   SectionStyle: {
     flexDirection: 'column',
@@ -108,16 +110,45 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  TextfileTitle2: {
+    fontWeight: 'bold',
+    color: '#f28e43',
+  },
+  ViewPicker: {
+    height: 50,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'transparent',
+  },
+  TextfileCate: {
+    fontWeight: 'bold',
+    color: '#949494',
+  },
+  CheckBoxStyle: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#edd4ff',
+    borderRadius: 20,
+  },
 });
 
 function CreateCateScreen({ route, navigation }: any) {
   // const { id } = route.params;
 
-  const [name, onChangeName] = useState('New Category');
-  const [desc, onChangeDesc] = useState('Todo lo que deseas y más');
-  const [price, onChangePrice] = useState(0);
-  const [nivel, onChangeNivel] = useState(1);
+  const [name, onChangeName] = useState('Title');
+  const [description, onChangeDesc] = useState('Todo lo que deseas y más');
   const titulo = 'Crear Nueva Publicación';
+
+  /*Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
+  const items = [
+    { label: 'Básica', value: '1' },
+    { label: 'Premium', value: '2' },
+    { label: 'Platinum', value: '3' },
+  ];
+
+  let [selectectedItems, setSelectedItems] = React.useState([]);
+  let [isShownPicker, setIsShownPicker] = React.useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -128,7 +159,7 @@ function CreateCateScreen({ route, navigation }: any) {
 
         <View style={styles.ViewMiddle}>
           <View style={styles.SectionStyle}>
-            <Text style={styles.TextfileTitle}>Título</Text>
+            <Text style={styles.TextfileTitle2}>Título</Text>
             <TextInput
               placeholder="Ingrese el título..."
               placeholderTextColor="#b3b3b3"
@@ -136,34 +167,81 @@ function CreateCateScreen({ route, navigation }: any) {
             />
           </View>
           <View style={styles.SectionStyleDescripcion}>
-            <Text style={styles.TextfileTitle}>Descripcion</Text>
+            <Text style={styles.TextfileTitle2}>Descripcion</Text>
             <TextInput
               placeholder="Ingrese una descripcion..."
               placeholderTextColor="#b3b3b3"
               onChangeText={text => onChangeDesc(text)}
             />
           </View>
-          <View style={styles.SectionStyleAdjunto}>
-            <Text style={styles.TextfileTitleAdjunto}>Archivo adjunto</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('UploadImg')}
-              style={styles.BotonSubirImagen}
-            >
-              <Text style={styles.title}>Subir archivo</Text>
-            </TouchableOpacity>
-          </View>
           <View style={styles.SectionStyleCategory}>
-            <MultiSelector />
+          <ScrollView>
+        <TouchableOpacity
+          onPress={() => {
+            setIsShownPicker(!isShownPicker);
+          }}
+          style={styles.ViewPicker}
+        >
+          <Text style={styles.TextfileTitle2}>Categorías</Text>
+        </TouchableOpacity>
+        {isShownPicker ? (
+          <MultipleSelectPicker
+            items={items}
+            onSelectionsChange={(ele: any) => {
+              setSelectedItems(ele);
+            }}
+            selectedItems={selectectedItems}
+            buttonStyle={{
+              height: 100,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            buttonText="hello"
+            checkboxStyle={styles.CheckBoxStyle}
+            rowStyle={{ backgroundColor: 'transparent' }}
+            labelStyle={styles.TextfileCate}
+          />
+        ) : null}
+
+        {(selectectedItems || []).map((item: any, index) => {
+          return (
+            <Text style={{ color: '#b3b3b3' }} key={index}>
+              {item.label}
+            </Text>
+          );
+        })}
+      </ScrollView>
           </View>
         </View>
 
         <View style={styles.ViewEnd}>
           <Boton
+            onPress={()=> 
+              {navigation.navigate('UploadImg', 
+              { name: name, 
+                description: description,
+                selected: selectectedItems,
+              }
+            )}
+            }
+            title="Adjuntar archivo a la publicación"
+            anchura={220}
+            altura={65}
+          />
+          {
+                /*
+                Aqui en este botón se mandaría a crear la publicación.
+
+                
+              */}
+          <View style={{margin: 10}}/>
+          <Boton
             onPress={() => navigation.navigate('Profile')}
             title="Crear Publicación"
-            anchura={190}
-            altura={45}
+            anchura={220}
+            altura={65}
           />
+          <View style={{margin: 10}}/>
         </View>
       </ScrollView>
     </SafeAreaView>
