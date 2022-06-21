@@ -1,9 +1,4 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons , Feather, FontAwesome} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   NavigationContainer,
@@ -58,13 +53,72 @@ export default function Navigation({
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
+
+const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
+function HomeTabs() {
+  return (
+    <BottomTab.Navigator 
+      screenOptions={{
+        headerShown:false,
+        tabBarActiveBackgroundColor:'#F28E43',
+        tabBarInactiveBackgroundColor:'white',
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor:'#F28E43',
+        //tabBarShowLabel:false,
+        tabBarStyle:{
+          position:'absolute',
+          left: 15,
+          right: 15,
+          borderRadius: 20,
+        },
+        tabBarItemStyle:{ //Add this 
+          borderTopRightRadius:20,//add border top right radius
+          borderTopLeftRadius:20,//add border top left radius
+          paddingVertical:3
+      },
+        }}
+        >
+      <BottomTab.Screen name="home" component={HomeScreen}
+        options={{
+          tabBarLabel: 'Inicio',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }} />
+      <BottomTab.Screen name="search" component={SearchScreen} 
+        options={{
+          tabBarLabel: 'Buscar',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="md-search" size={24} color={color} />
+          ),
+        }}/>
+      <BottomTab.Screen name="upload" component={NotFoundScreen} 
+        options={{
+          tabBarLabel: 'Subir',
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="upload" size={24} color={color} />
+          ),
+        }}/>
+      <BottomTab.Screen name="perfil" component={NotFoundScreen} 
+        options={{
+          tabBarLabel: 'Perfil',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user-circle-o" size={24} color={color} />
+          ),
+        }}/>
+    </BottomTab.Navigator>
+  );
+}
+
 
 function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
+        //component={HomeTabs}
         component={PaginaInicio}
         options={{ headerShown: false }}
       />
@@ -75,7 +129,7 @@ function RootNavigator() {
       />
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeTabs}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -142,7 +196,7 @@ function RootNavigator() {
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+/*const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -207,9 +261,10 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
+/*function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
+*/
