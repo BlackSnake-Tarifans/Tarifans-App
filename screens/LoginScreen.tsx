@@ -224,7 +224,6 @@ function LoginScreen({ navigation }: any) {
           locations={[0, 0.95]}
         >
           <View style={styles.ViewStart}>
-            <Text style={styles.titleInicio}>Bienvenidos a:</Text>
             <Image
               style={styles.imageTitle1}
               source={require('../assets/images/tarifans_palabra_color_blanco.png')}
@@ -270,7 +269,7 @@ function LoginScreen({ navigation }: any) {
             <View style={styles.buttons}>
               <Button
                 onPress={() => {
-                  // navigation.navigate('Home')
+                  //navigation.navigate('Home')
                   // console.log("Hola")
                   login({ username: user, password: pass })
                     .then(res => {
