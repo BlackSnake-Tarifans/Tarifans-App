@@ -18,20 +18,28 @@ function Header({ navigation }: any) {
         />
       </TouchableOpacity>
       <View style={styles.SectionStyle}>
+        <Image
+          style={styles.ImageStyle}
+          source={require('../../assets/images/iconos/lupa.png')}
+        />
         <TextInput
-          style={{ flex: 1 }}
-          placeholder="Nombre de usuario"
+          style={{ flex: 1, fontSize: 15 }}
+          placeholder="Busca un usuario..."
           placeholderTextColor="#9D9D9E"
           onFocus={() => {
             navigation.navigate('Search');
           }}
-          onChangeText={() => {}}
+          onChangeText={() => { }}
         />
       </View>
-      <Image
-        style={styles.imagenSettigns}
-        source={require('../../assets/images/assetsTarifans/settings.png')}
-      />
+      
+      <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+        <Image
+          style={styles.imagenSettigns}
+          source={require('../../assets/images/assetsTarifans/settings.png')}
+        />
+      </TouchableOpacity>
+      
     </View>
   );
 }

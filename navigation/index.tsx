@@ -20,12 +20,15 @@ import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import MyProfileScreen from '../screens/MyProfileScreen';
 import CreateCateScreen from '../screens/CreateCateScreen';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import SelectSuscripcionScreen from '../screens/SelectSuscripcionScreen';
 import CreatePost from '../screens/CreatePost';
 import UploadImgScreen from '../screens/UploadImgScreen';
 import GalleryScreen from '../screens/GalleryScreen';
+import EditProfileScreen from '../screens/EditProfileScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import {
   RootStackParamList,
   RootTabParamList,
@@ -86,7 +89,7 @@ function HomeTabs() {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-        }} />
+        }} />        
       <BottomTab.Screen name="search" component={SearchScreen} 
         options={{
           tabBarLabel: 'Buscar',
@@ -94,14 +97,14 @@ function HomeTabs() {
             <Ionicons name="md-search" size={24} color={color} />
           ),
         }}/>
-      <BottomTab.Screen name="upload" component={NotFoundScreen} 
+      <BottomTab.Screen name="upload" component={UploadImgScreen} 
         options={{
           tabBarLabel: 'Subir',
           tabBarIcon: ({ color, size }) => (
             <Feather name="upload" size={24} color={color} />
           ),
         }}/>
-      <BottomTab.Screen name="perfil" component={NotFoundScreen} 
+      <BottomTab.Screen name="perfil" component={MyProfileScreen} 
         options={{
           tabBarLabel: 'Perfil',
           tabBarIcon: ({ color, size }) => (
@@ -185,6 +188,16 @@ function RootNavigator() {
       <Stack.Screen
         name="Gallery"
         component={GalleryScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{ headerShown: false }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }} />

@@ -269,7 +269,7 @@ function LoginScreen({ navigation }: any) {
             <View style={styles.buttons}>
               <Button
                 onPress={() => {
-                  //navigation.navigate('Home')
+                  navigation.navigate('Home')
                   // console.log("Hola")
                   login({ username: user, password: pass })
                     .then(res => {

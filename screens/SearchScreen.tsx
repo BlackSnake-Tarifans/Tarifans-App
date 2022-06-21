@@ -7,6 +7,10 @@ import {
   Dimensions,
   TextInput,
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import { useSelector } from 'react-redux';
 import { consultarCreadores } from '../hooks/backendAPI';
@@ -30,7 +34,7 @@ const styles = StyleSheet.create({
   top: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   icons: {
     marginHorizontal: 15,
@@ -58,6 +62,25 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
     marginRight: 25,
+  },
+  SectionStyle: {
+    flexDirection: 'row',
+    width: wp('50%'),
+    height: wp('6 %'),
+    borderRadius: 25,
+    backgroundColor: '#ededed',
+    padding: 10,
+  },
+  ImageStyle: {
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 5,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+    alignSelf: 'center',
+    opacity: 0.4,
   },
 });
 
@@ -101,38 +124,23 @@ function Result({ navigation }: any) {
   });
   return (
     <View style={styles.resultcontainer}>
-      <View style={styles.top}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image
-            style={{
-              position: 'absolute',
-              width: '90%',
-              resizeMode: 'stretch',
-            }}
-            source={require('../assets/images/iconos/RectangleSearch.png')}
-          />
-          <Image
-            style={{ marginLeft: 15, marginRight: 10 }}
-            source={require('../assets/images/iconos/lupa.png')}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Ingrese el nombre del creador..."
-            placeholderTextColor="gray"
-            onChangeText={text => {
-              consultarCreadores(text, al as string)
-                .then(res => {
-                  return res.data;
-                })
-                .then(data => {
-                  setResults(data);
-                  // refresh();
-                })
-                .catch(error => console.log(error));
-            }}
-          />
+      <View style={styles.top}>     
+          <View style={styles.SectionStyle}>
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/lupa.png')}
+            />
+            <TextInput
+              style={{ flex: 1, fontSize: 15 }}
+              placeholder="Busca un usuario..."
+              placeholderTextColor="#9D9D9E"
+              onFocus={() => {
+                navigation.navigate('Search');
+              }}
+              onChangeText={() => { }}
+            />
         </View>
-        <Text style={{ color: '#966BEE', fontSize: 15 }}>Cancelar</Text>
+        <Text style={{ color: '#966BEE', fontSize: 15, marginLeft: 15 }}>Cancelar</Text>
       </View>
       <Presentacion navigation={navigation} res={RESULTS} />
     </View>
