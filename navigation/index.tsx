@@ -97,7 +97,7 @@ function HomeTabs() {
             <Ionicons name="md-search" size={24} color={color} />
           ),
         }}/>
-      <BottomTab.Screen name="upload" component={UploadImgScreen} 
+      <BottomTab.Screen name="upload" component={CreatePost} 
         options={{
           tabBarLabel: 'Subir',
           tabBarIcon: ({ color, size }) => (
