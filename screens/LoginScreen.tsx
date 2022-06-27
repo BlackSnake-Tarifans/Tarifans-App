@@ -317,7 +317,7 @@ function LoginScreen({ navigation }: any) {
               />
               <Text
                 style={styles.textoFinal3}
-                onPress={() => navigation.navigate('CreatePost')}
+                onPress={() => navigation.navigate('Category')}
               >
                 ¡Inicia sesión con Google!
               </Text>
