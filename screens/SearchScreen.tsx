@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import {
   StyleSheet,
+  StatusBar,
+  SafeAreaView,
   Image,
   TouchableOpacity,
   ScrollView,
   Dimensions,
   TextInput,
 } from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 import { useSelector } from 'react-redux';
 import { consultarCreadores } from '../hooks/backendAPI';
@@ -19,17 +17,14 @@ import Navigation from '../navigation';
 
 const styles = StyleSheet.create({
   headercontainer: {
-    height: 70,
+    height:Dimensions.get('window').height*0.15,
     backgroundColor: '#F28E43',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-
-    // height: Dimensions.get('window').height,
   },
   resultcontainer: {
     margin: 25,
-    // height: Dimensions.get('window').height,
   },
   top: {
     alignItems: 'center',
@@ -37,24 +32,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icons: {
-    marginHorizontal: 15,
-    // width: '15%',
     resizeMode: 'contain',
-    marginTop: 2,
+    width: "10%",
+    marginTop: "10%",
+    marginRight: "5%",
+  },
+  logo:{
+    marginLeft: "5%",
+    width: '20%',
+    resizeMode: 'contain',
+    marginTop: "10%",
+  },
+  logo_image:{
+    width: "100%",
+    resizeMode: 'contain',
+  },
+  SectionStyle: {
+    flexDirection: 'row',
+    width: '50%',
+    borderRadius: 20,
+    backgroundColor: '#ededed',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: "10%",
   },
   input: {
     height: 40,
     width: '60%',
-    // margin: 12,
-    // borderWidth: 3,
-    // padding: 10,
-    // color: 'black',
-    // borderColor: 'black'
   },
   resultHead: {
     flexDirection: 'row',
     alignItems: 'center',
-    // height: ,
   },
   resultadoimg: {
     borderRadius: 50,
@@ -62,14 +70,6 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
     marginRight: 25,
-  },
-  SectionStyle: {
-    flexDirection: 'row',
-    width: wp('50%'),
-    height: wp('6 %'),
-    borderRadius: 25,
-    backgroundColor: '#ededed',
-    padding: 10,
   },
   ImageStyle: {
     padding: 10,
@@ -82,35 +82,52 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     opacity: 0.4,
   },
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+  },
 });
 
 function SearchScreen({ navigation }: any) {
   return (
-    <View style={{ flex: 1 }}>
-      <Header navigation={navigation} />
-      <Result navigation={navigation} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="white" />
+      <View style={{ flex: 1 }}>
+        <Header navigation={navigation} />
+        <Result navigation={navigation} />
+      </View>
+    </SafeAreaView>
   );
 }
 
 function Header({ navigation }: any) {
   return (
     <View style={styles.headercontainer}>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity  style={styles.logo} onPress={() => navigation.navigate('Home')}>
         <Image
-          style={styles.icons}
-          source={require('../assets/images/iconos/atras.png')}
+          style={styles.logo_image}
+          source={require('../assets/images/assetsTarifans/tarifans_palabra_color_blanco.png')}
         />
       </TouchableOpacity>
-      <View style={{ backgroundColor: '#F28E43', marginTop: 2 }}>
-        <Text style={{ color: 'white', fontSize: 20, marginTop: 2 }}>
-          Buscar Creador
-        </Text>
-      </View>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <View style={styles.SectionStyle}>
+            <Image
+              style={styles.ImageStyle}
+              source={require('../assets/images/iconos/lupa.png')}
+            />
+            <TextInput
+              style={{ flex: 1, fontSize: 17 }}
+              placeholder="Busca un usuario..."
+              placeholderTextColor="#9D9D9E"
+              onFocus={() => {
+                //navigation.navigate();
+              }}
+              onChangeText={() => { }}
+            />
+        </View>
+      <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Home')}>
         <Image
-          style={styles.icons}
-          source={require('../assets/images/iconos/filter.png')}
+          //style={styles.icons}
+          source={require('../assets/images/iconos/carbon_settings.png')}
         />
       </TouchableOpacity>
     </View>
@@ -124,24 +141,6 @@ function Result({ navigation }: any) {
   });
   return (
     <View style={styles.resultcontainer}>
-      <View style={styles.top}>     
-          <View style={styles.SectionStyle}>
-            <Image
-              style={styles.ImageStyle}
-              source={require('../assets/images/iconos/lupa.png')}
-            />
-            <TextInput
-              style={{ flex: 1, fontSize: 15 }}
-              placeholder="Busca un usuario..."
-              placeholderTextColor="#9D9D9E"
-              onFocus={() => {
-                navigation.navigate('Search');
-              }}
-              onChangeText={() => { }}
-            />
-        </View>
-        <Text style={{ color: '#966BEE', fontSize: 15, marginLeft: 15 }}>Cancelar</Text>
-      </View>
       <Presentacion navigation={navigation} res={RESULTS} />
     </View>
   );
