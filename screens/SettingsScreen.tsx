@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
-  Image
+  Image,
 } from 'react-native';
 
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
-  },  
+  },
   TextfileTitle: {
     fontWeight: 'bold',
     color: '#f28e43',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     marginTop: 10,
-  },  
+  },
   cabecerasInfo: {
     color: '#9D9D9E',
     fontSize: 15,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#f28e43',
     fontWeight: 'bold',
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
 });
 
@@ -148,15 +148,18 @@ function CreateCateScreen({ route, navigation }: any) {
         </View>
 
         <View style={styles.ViewMiddle}>
-
           <View style={styles.Info}>
             <View style={styles.SectionStyle}>
               <Text style={styles.TextfileTitle}>Nombre</Text>
-              <Text style={styles.textoCamposObligatorios}>{VALORES.user.first_name}</Text>
+              <Text style={styles.textoCamposObligatorios}>
+                {VALORES.user.first_name}
+              </Text>
             </View>
             <View style={styles.SectionStyle}>
               <Text style={styles.TextfileTitle}>Apellido</Text>
-              <Text style={styles.textoCamposObligatorios}>{VALORES.user.last_name}</Text>
+              <Text style={styles.textoCamposObligatorios}>
+                {VALORES.user.last_name}
+              </Text>
             </View>
             <View style={styles.SectionStyle}>
               <Text style={styles.TextfileTitle}>Nombre de usuario</Text>

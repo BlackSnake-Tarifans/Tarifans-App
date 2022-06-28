@@ -12,10 +12,10 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
+import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import MediaElement from '../components/Elementos/MediaElement';
-import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -215,9 +215,8 @@ const styles = StyleSheet.create({
   },
 });
 
-function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
-
-  const {name, description, selected} = route.params;
+function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
+  const { name, description, selected } = route.params;
 
   const [modalVisible, setModalVisible] = React.useState(false);
   const [selectedImage, setSelectedImage] = React.useState<any>({
@@ -229,15 +228,15 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
 
   const [name2, onChangeName2] = React.useState(name);
   const [description2, onChangeDescription2] = React.useState(description);
-  /*Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
+  /* Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
   const items = [
     { label: 'Básica', value: '1' },
     { label: 'Premium', value: '2' },
     { label: 'Platinum', value: '3' },
   ];
 
-  let [selectedItems, setSelectedItems] = React.useState(selected);
-  let [isShownPicker, setIsShownPicker] = React.useState(false);
+  const [selectedItems, setSelectedItems] = React.useState(selected);
+  const [isShownPicker, setIsShownPicker] = React.useState(false);
 
   const handleTap = (url: React.SetStateAction<string>) => {
     setSelectedImage({ localUri: url } as any);
@@ -427,14 +426,16 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
               />
             </View>
             <View style={styles.SectionStyleDescripcion}>
-              <Text style={styles.TextfileTitle2}>Descripcion elegida: {description2}</Text>
+              <Text style={styles.TextfileTitle2}>
+                Descripcion elegida: {description2}
+              </Text>
               <TextInput
                 placeholder="Ingrese una nueva descripcion si desea..."
                 placeholderTextColor="#b3b3b3"
                 onChangeText={text => onChangeDescription2(text)}
               />
             </View>
-        
+
             <View style={styles.SectionStyleCategory}>
               <ScrollView>
                 <TouchableOpacity
@@ -443,7 +444,9 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
                   }}
                   style={styles.ViewPicker}
                 >
-                  <Text style={styles.TextfileTitle2}>Categorías elegidas:</Text>
+                  <Text style={styles.TextfileTitle2}>
+                    Categorías elegidas:
+                  </Text>
                 </TouchableOpacity>
                 {isShownPicker ? (
                   <MultipleSelectPicker
@@ -473,7 +476,6 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
                 })}
               </ScrollView>
             </View>
-
           </View>
 
           <View style={styles.ViewEndPhoto}>
@@ -485,9 +487,8 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
                 <Text style={styles.title}>Añadir nuevo archivo</Text>
               </TouchableOpacity>
             </View>
-           
-            {
-                /*
+
+            {/*
                 Aqui en este botón se mandaría a crear la publicación.
 
                 
@@ -500,7 +501,8 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
                     Aqui iría el código de la función.
     
                     
-                  */}
+                  */
+                  }
                   setSelectedImage({
                     localUri: '',
                   }),
@@ -516,11 +518,11 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
                   setSelectedImage({
                     localUri: '',
                   }),
-                  setUrl([]),
+                    setUrl([]),
                     setSelectedItems([]),
                     onChangeDescription2(''),
-                    onChangeName2('')
-                    , goBack();
+                    onChangeName2(''),
+                    goBack();
                 }}
                 title="Volver"
                 altura={55}
@@ -536,7 +538,7 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
   if (selectedImage.localUri !== '' && url.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
-           <Modal
+        <Modal
           hasBackdrop
           isVisible={modalVisible}
           onBackdropPress={() => {
@@ -611,10 +613,10 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
               setSelectedImage({
                 localUri: '',
               }),
-              setSelectedItems([]),
-              onChangeDescription2(''),
-              onChangeName2('')
-              ,goBack();
+                setSelectedItems([]),
+                onChangeDescription2(''),
+                onChangeName2(''),
+                goBack();
             }}
             title="Volver"
             altura={70}
@@ -626,7 +628,6 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
     );
   }
   return (
-    
     <SafeAreaView style={styles.container}>
       <View style={styles.ViewTop}>
         <HeaderDiferente props={tituloHeader1} />
@@ -701,9 +702,10 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
           <TouchableOpacity
             onPress={() => {
               setSelectedItems([]),
-              onChangeDescription2(''),
-              onChangeName2(''),
-              goBack()}}
+                onChangeDescription2(''),
+                onChangeName2(''),
+                goBack();
+            }}
             style={styles.BotonCancelar}
           >
             <Text style={styles.title}>Cancelar</Text>
@@ -726,5 +728,3 @@ function UploadImgScreen({ route, navigation, navigation:{goBack}}: any) {
 }
 
 export default UploadImgScreen;
-
-

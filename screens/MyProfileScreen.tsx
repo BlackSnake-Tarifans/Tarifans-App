@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
   },
-  ViewBotonEditar:{
-    marginTop: 20
+  ViewBotonEditar: {
+    marginTop: 20,
   },
   ProfileView: {
     backgroundColor: 'transparent',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     color: '#f28e43',
     fontWeight: 'bold',
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   textoBio: {
     marginTop: 20,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     color: '#ad8feb',
     fontSize: 15,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   ViewPublicaciones: {
     flex: 1,

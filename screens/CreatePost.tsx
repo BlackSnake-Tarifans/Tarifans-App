@@ -10,10 +10,10 @@ import {
   Dimensions,
 } from 'react-native';
 
+import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import Multiselector from '../components/Elementos/MultiSelector';
-import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     width: deviceWidth,
-    //height: 100,
+    // height: 100,
     marginBottom: 20,
   },
   SectionStyle: {
@@ -140,15 +140,15 @@ function CreateCateScreen({ route, navigation }: any) {
   const [description, onChangeDesc] = useState('Todo lo que deseas y más');
   const titulo = 'Crear Nueva Publicación';
 
-  /*Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
+  /* Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
   const items = [
     { label: 'Básica', value: '1' },
     { label: 'Premium', value: '2' },
     { label: 'Platinum', value: '3' },
   ];
 
-  let [selectectedItems, setSelectedItems] = React.useState([]);
-  let [isShownPicker, setIsShownPicker] = React.useState(false);
+  const [selectectedItems, setSelectedItems] = React.useState([]);
+  const [isShownPicker, setIsShownPicker] = React.useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -175,73 +175,71 @@ function CreateCateScreen({ route, navigation }: any) {
             />
           </View>
           <View style={styles.SectionStyleCategory}>
-          <ScrollView>
-        <TouchableOpacity
-          onPress={() => {
-            setIsShownPicker(!isShownPicker);
-          }}
-          style={styles.ViewPicker}
-        >
-          <Text style={styles.TextfileTitle2}>Categorías</Text>
-        </TouchableOpacity>
-        {isShownPicker ? (
-          <MultipleSelectPicker
-            items={items}
-            onSelectionsChange={(ele: any) => {
-              setSelectedItems(ele);
-            }}
-            selectedItems={selectectedItems}
-            buttonStyle={{
-              height: 100,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            buttonText="hello"
-            checkboxStyle={styles.CheckBoxStyle}
-            rowStyle={{ backgroundColor: 'transparent' }}
-            labelStyle={styles.TextfileCate}
-          />
-        ) : null}
+            <ScrollView>
+              <TouchableOpacity
+                onPress={() => {
+                  setIsShownPicker(!isShownPicker);
+                }}
+                style={styles.ViewPicker}
+              >
+                <Text style={styles.TextfileTitle2}>Categorías</Text>
+              </TouchableOpacity>
+              {isShownPicker ? (
+                <MultipleSelectPicker
+                  items={items}
+                  onSelectionsChange={(ele: any) => {
+                    setSelectedItems(ele);
+                  }}
+                  selectedItems={selectectedItems}
+                  buttonStyle={{
+                    height: 100,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  buttonText="hello"
+                  checkboxStyle={styles.CheckBoxStyle}
+                  rowStyle={{ backgroundColor: 'transparent' }}
+                  labelStyle={styles.TextfileCate}
+                />
+              ) : null}
 
-        {(selectectedItems || []).map((item: any, index) => {
-          return (
-            <Text style={{ color: '#b3b3b3' }} key={index}>
-              {item.label}
-            </Text>
-          );
-        })}
-      </ScrollView>
+              {(selectectedItems || []).map((item: any, index) => {
+                return (
+                  <Text style={{ color: '#b3b3b3' }} key={index}>
+                    {item.label}
+                  </Text>
+                );
+              })}
+            </ScrollView>
           </View>
         </View>
 
         <View style={styles.ViewEnd}>
           <Boton
-            onPress={()=> 
-              {navigation.navigate('UploadImg', 
-              { name: name, 
-                description: description,
+            onPress={() => {
+              navigation.navigate('UploadImg', {
+                name,
+                description,
                 selected: selectectedItems,
-              }
-            )}
-            }
+              });
+            }}
             title="Adjuntar archivo a la publicación"
             anchura={220}
             altura={65}
           />
-          {
-                /*
+          {/*
                 Aqui en este botón se mandaría a crear la publicación.
 
                 
               */}
-          <View style={{margin: 10}}/>
+          <View style={{ margin: 10 }} />
           <Boton
             onPress={() => navigation.navigate('Profile')}
             title="Crear Publicación"
             anchura={220}
             altura={65}
           />
-          <View style={{margin: 10}}/>
+          <View style={{ margin: 10 }} />
         </View>
       </ScrollView>
     </SafeAreaView>

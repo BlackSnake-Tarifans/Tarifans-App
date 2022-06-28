@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  
 } from 'react-native';
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 
@@ -34,57 +33,56 @@ const styles = StyleSheet.create({
   },
 });
 
-function Multiselector({selected}: any){
-  
+function Multiselector({ selected }: any) {
+  const [selectectedItems, setSelectedItems] = React.useState(
+    selected !== [] ? selected : [],
+  );
+  const [isShownPicker, setIsShownPicker] = React.useState(false);
 
-    let [selectectedItems, setSelectedItems] = React.useState(selected!==[]?selected: []);
-    let [isShownPicker, setIsShownPicker] = React.useState(false);
-  
-    const items = [
-      { label: 'Básica', value: '1' },
-      { label: 'Premium', value: '2' },
-      { label: 'Platinum', value: '3' },
-    ];
+  const items = [
+    { label: 'Básica', value: '1' },
+    { label: 'Premium', value: '2' },
+    { label: 'Platinum', value: '3' },
+  ];
 
-    return (
-      <ScrollView>
-        <TouchableOpacity
-          onPress={() => {
-            setIsShownPicker(!isShownPicker);
+  return (
+    <ScrollView>
+      <TouchableOpacity
+        onPress={() => {
+          setIsShownPicker(!isShownPicker);
+        }}
+        style={styles.ViewPicker}
+      >
+        <Text style={styles.TextfileTitle}>Categorías</Text>
+      </TouchableOpacity>
+      {isShownPicker ? (
+        <MultipleSelectPicker
+          items={items}
+          onSelectionsChange={(ele: any) => {
+            setSelectedItems(ele);
           }}
-          style={styles.ViewPicker}
-        >
-          <Text style={styles.TextfileTitle}>Categorías</Text>
-        </TouchableOpacity>
-        {isShownPicker ? (
-          <MultipleSelectPicker
-            items={items}
-            onSelectionsChange={(ele: any) => {
-              setSelectedItems(ele);
-            }}
-            selectedItems={selectectedItems}
-            buttonStyle={{
-              height: 100,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            buttonText="hello"
-            checkboxStyle={styles.CheckBoxStyle}
-            rowStyle={{ backgroundColor: 'transparent' }}
-            labelStyle={styles.TextfileCate}
-          />
-        ) : null}
+          selectedItems={selectectedItems}
+          buttonStyle={{
+            height: 100,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          buttonText="hello"
+          checkboxStyle={styles.CheckBoxStyle}
+          rowStyle={{ backgroundColor: 'transparent' }}
+          labelStyle={styles.TextfileCate}
+        />
+      ) : null}
 
-        {(selectectedItems || []).map((item: any, index) => {
-          return (
-            <Text style={{ color: '#b3b3b3' }} key={index}>
-              {item.label}
-            </Text>
-          );
-        })}
-      </ScrollView>
-    );
-  
+      {(selectectedItems || []).map((item: any, index) => {
+        return (
+          <Text style={{ color: '#b3b3b3' }} key={index}>
+            {item.label}
+          </Text>
+        );
+      })}
+    </ScrollView>
+  );
 }
 
 export default Multiselector;

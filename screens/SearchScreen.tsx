@@ -17,7 +17,7 @@ import Navigation from '../navigation';
 
 const styles = StyleSheet.create({
   headercontainer: {
-    height:Dimensions.get('window').height*0.15,
+    height: Dimensions.get('window').height * 0.15,
     backgroundColor: '#F28E43',
     flexDirection: 'row',
     alignItems: 'center',
@@ -33,18 +33,18 @@ const styles = StyleSheet.create({
   },
   icons: {
     resizeMode: 'contain',
-    width: "10%",
-    marginTop: "10%",
-    marginRight: "5%",
+    width: '10%',
+    marginTop: '10%',
+    marginRight: '5%',
   },
-  logo:{
-    marginLeft: "5%",
+  logo: {
+    marginLeft: '5%',
     width: '20%',
     resizeMode: 'contain',
-    marginTop: "10%",
+    marginTop: '10%',
   },
-  logo_image:{
-    width: "100%",
+  logo_image: {
+    width: '100%',
     resizeMode: 'contain',
   },
   SectionStyle: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ededed',
     alignItems: 'center',
     padding: 10,
-    marginTop: "10%",
+    marginTop: '10%',
   },
   input: {
     height: 40,
@@ -103,30 +103,36 @@ function SearchScreen({ navigation }: any) {
 function Header({ navigation }: any) {
   return (
     <View style={styles.headercontainer}>
-      <TouchableOpacity  style={styles.logo} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity
+        style={styles.logo}
+        onPress={() => navigation.navigate('Home')}
+      >
         <Image
           style={styles.logo_image}
           source={require('../assets/images/assetsTarifans/tarifans_palabra_color_blanco.png')}
         />
       </TouchableOpacity>
       <View style={styles.SectionStyle}>
-            <Image
-              style={styles.ImageStyle}
-              source={require('../assets/images/iconos/lupa.png')}
-            />
-            <TextInput
-              style={{ flex: 1, fontSize: 17 }}
-              placeholder="Busca un usuario..."
-              placeholderTextColor="#9D9D9E"
-              onFocus={() => {
-                //navigation.navigate();
-              }}
-              onChangeText={() => { }}
-            />
-        </View>
-      <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Home')}>
         <Image
-          //style={styles.icons}
+          style={styles.ImageStyle}
+          source={require('../assets/images/iconos/lupa.png')}
+        />
+        <TextInput
+          style={{ flex: 1, fontSize: 17 }}
+          placeholder="Busca un usuario..."
+          placeholderTextColor="#9D9D9E"
+          onFocus={() => {
+            // navigation.navigate();
+          }}
+          onChangeText={() => {}}
+        />
+      </View>
+      <TouchableOpacity
+        style={styles.icons}
+        onPress={() => navigation.navigate('Home')}
+      >
+        <Image
+          // style={styles.icons}
           source={require('../assets/images/iconos/carbon_settings.png')}
         />
       </TouchableOpacity>

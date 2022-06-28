@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem';
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
@@ -31,7 +30,5 @@ function CarouselCards({ data }: any) {
     </View>
   );
 }
-
-
 
 export default CarouselCards;

@@ -29,17 +29,16 @@ function Header({ navigation }: any) {
           onFocus={() => {
             navigation.navigate('Search');
           }}
-          onChangeText={() => { }}
+          onChangeText={() => {}}
         />
       </View>
-      
+
       <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
         <Image
           style={styles.imagenSettigns}
           source={require('../../assets/images/assetsTarifans/settings.png')}
         />
       </TouchableOpacity>
-      
     </View>
   );
 }

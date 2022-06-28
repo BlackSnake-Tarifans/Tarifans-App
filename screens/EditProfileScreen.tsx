@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
-  Image
+  Image,
 } from 'react-native';
 
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   ViewMiddle: {
     position: 'relative',
-    top:20,
+    top: 20,
     width: deviceWidth,
     alignItems: 'center',
   },
@@ -142,19 +142,23 @@ function CreateCateScreen({ route, navigation }: any) {
         <View style={styles.ViewMiddle}>
           <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nombre</Text>
-            <Text style={styles.textoCamposObligatorios}>{VALORES.user.first_name}</Text>
+            <Text style={styles.textoCamposObligatorios}>
+              {VALORES.user.first_name}
+            </Text>
           </View>
           <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Apellido</Text>
-            <Text style={styles.textoCamposObligatorios}>{VALORES.user.last_name}</Text>
+            <Text style={styles.textoCamposObligatorios}>
+              {VALORES.user.last_name}
+            </Text>
           </View>
           <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nombre de usuario</Text>
             <TextInput
               placeholder={VALORES.user.username}
               placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeName(text)} 
-              style={[ {fontSize: 15, marginTop: 5} ]}             
+              onChangeText={text => onChangeName(text)}
+              style={[{ fontSize: 15, marginTop: 5 }]}
             />
           </View>
           <View style={styles.SectionStyle}>
@@ -162,8 +166,8 @@ function CreateCateScreen({ route, navigation }: any) {
             <TextInput
               placeholder="********"
               placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeName(text)} 
-              style={[ {fontSize: 20, marginTop: 5} ]}             
+              onChangeText={text => onChangeName(text)}
+              style={[{ fontSize: 20, marginTop: 5 }]}
             />
           </View>
           <View style={styles.SectionStyle}>
@@ -171,8 +175,8 @@ function CreateCateScreen({ route, navigation }: any) {
             <TextInput
               placeholder={VALORES.user.email}
               placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeName(text)} 
-              style={[ {fontSize: 15, marginTop: 5} ]}             
+              onChangeText={text => onChangeName(text)}
+              style={[{ fontSize: 15, marginTop: 5 }]}
             />
           </View>
           <View style={styles.SectionStyleDescripcion}>
@@ -181,11 +185,11 @@ function CreateCateScreen({ route, navigation }: any) {
               placeholder={VALORES.bio}
               multiline
               placeholderTextColor="#b3b3b3"
-              onChangeText={text => onChangeName(text)} 
-              style={[ {fontSize: 15, marginTop: 5} ]}             
+              onChangeText={text => onChangeName(text)}
+              style={[{ fontSize: 15, marginTop: 5 }]}
             />
           </View>
-          
+
           {/*  <View style={styles.SectionStyle}>
             <Text style={styles.TextfileTitle}>Nivel</Text>
             <TextInput
@@ -202,7 +206,7 @@ function CreateCateScreen({ route, navigation }: any) {
           <View style={styles.Botones}>
             <Boton
               onPress={async () => {
-                /* Añadir aquí metodo para crear sincronizar cambios con el backend */                
+                /* Añadir aquí metodo para crear sincronizar cambios con el backend */
               }}
               title="Guardar cambios"
               anchura={180}
