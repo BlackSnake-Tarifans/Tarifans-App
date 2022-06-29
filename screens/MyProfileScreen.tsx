@@ -19,18 +19,18 @@ import ImgSwiper from '../components/Elementos/ImgSwiper';
 const VALORES = {
   id: 1,
   user: {
-    id: 1,
-    username: 'cajifan',
-    email: 'cjimenezf17@gmail.com',
-    first_name: 'Carlos',
-    last_name: 'Jiménez Farfán',
+    id: 12,
+    username: 'dsantistevan',
+    email: 'dsantistevana99@gmail.com',
+    first_name: 'David',
+    last_name: 'Santistevan',
     is_superuser: false,
   },
-  birth_date: '2000-01-17',
+  birth_date: '1999-10-25',
   profile_pic: '/media/profile_pics/WhatsApp_Image_2022-01-16_at_09.05.22.jpeg',
-  bio: "Aquí va la biografía del usuario: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  num_subscribers: 654,
-  num_subscribed: 32,
+  bio: "Aquí va la biografía del usuario: Creo que me gustan los gatos",
+  num_subscribers: 9001,
+  num_subscribed: 420,
 };
 const dimensions = Dimensions.get('window');
 const deviceWidth = dimensions.width;
@@ -176,10 +176,11 @@ const data = [
   },
 ];
 const uris = [
-  'https://www.pdvg.it/wp-content/uploads/2019/03/neon-genesis-evangelion-netflix-pdvg-1024x576.jpg',
-  'https://cdn.vox-cdn.com/thumbor/8MxxvqA5HpSR0tGnqISBf3AADZI=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/23314861/Anime_SpyxFamily_Featured_1.jpg',
-  'https://www.masgamers.com/wp-content/uploads/2022/04/suzume-no-tojimari-1-1085x1536.jpg',
-  'https://gruposaedal.com/wp-content/uploads/2022/01/1643485169_965_Como-ver-el-anime-de-Hyouka-y-la-lista-de.jpg',
+  'http://localhost:19006/static/media/profile_picture.046475e6.png',
+  'https://img.freepik.com/foto-gratis/gato-rojo-o-blanco-i-estudio-blanco_155003-13189.jpg',
+  'https://www.fundacion-affinity.org/sites/default/files/el-gato-necesita-tener-acceso-al-exterior.jpg',
+  'https://images.ecestaticos.com/FVdcvD11qPRi-JWDH3USTiXDmeQ=/0x0:2120x1414/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F47b%2F328%2F963%2F47b3289639713b8e80c8d682d219fba7.jpg',
+  'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/T2GWFUZQQZDVBMWKRAJRACT72M.jpg',
 ];
 /*
 const Cuerpo = () => {

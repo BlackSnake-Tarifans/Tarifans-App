@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiUrl = 'https://dd3b-191-99-93-242.ngrok.io/api';
+const apiUrl = 'https://2454-191-99-93-50.ngrok.io/api';
+
 export const login = async (obj: any) => {
   console.log(`${apiUrl}/auth/login`);
   return axios.post<any>(`${apiUrl}/auth/login`, obj);
@@ -14,7 +15,7 @@ export const consultarCreadores = async (obj: string, token: string) => {
   return axios.get<any>(`${apiUrl}/content-creators?search=${obj}`, {
     headers: {
       Authorization:
-        'Token ' + '17a50a10d95c46779787a69be19c51c0f20579c3' /* token */,
+        'Token ' + token /* token */,
     },
   });
 };

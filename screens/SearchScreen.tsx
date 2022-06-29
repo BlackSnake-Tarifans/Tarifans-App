@@ -1,8 +1,7 @@
+
 import React, { useState } from 'react';
 import {
   StyleSheet,
-  StatusBar,
-  SafeAreaView,
   Image,
   TouchableOpacity,
   ScrollView,
@@ -17,52 +16,42 @@ import Navigation from '../navigation';
 
 const styles = StyleSheet.create({
   headercontainer: {
-    height: Dimensions.get('window').height * 0.15,
+    height: 70,
     backgroundColor: '#F28E43',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+
+    // height: Dimensions.get('window').height,
   },
   resultcontainer: {
     margin: 25,
+    // height: Dimensions.get('window').height,
   },
   top: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   icons: {
+    marginHorizontal: 15,
+    // width: '15%',
     resizeMode: 'contain',
-    width: '10%',
-    marginTop: '10%',
-    marginRight: '5%',
-  },
-  logo: {
-    marginLeft: '5%',
-    width: '20%',
-    resizeMode: 'contain',
-    marginTop: '10%',
-  },
-  logo_image: {
-    width: '100%',
-    resizeMode: 'contain',
-  },
-  SectionStyle: {
-    flexDirection: 'row',
-    width: '50%',
-    borderRadius: 20,
-    backgroundColor: '#ededed',
-    alignItems: 'center',
-    padding: 10,
-    marginTop: '10%',
+    marginTop: 2,
   },
   input: {
     height: 40,
     width: '60%',
+    // margin: 12,
+    // borderWidth: 3,
+    // padding: 10,
+    // color: 'black',
+    // borderColor: 'black'
   },
   resultHead: {
     flexDirection: 'row',
     alignItems: 'center',
+    // height: ,
   },
   resultadoimg: {
     borderRadius: 50,
@@ -71,69 +60,35 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginRight: 25,
   },
-  ImageStyle: {
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 5,
-    height: 20,
-    width: 20,
-    resizeMode: 'stretch',
-    alignItems: 'center',
-    alignSelf: 'center',
-    opacity: 0.4,
-  },
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
-  },
 });
 
 function SearchScreen({ navigation }: any) {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="white" />
-      <View style={{ flex: 1 }}>
-        <Header navigation={navigation} />
-        <Result navigation={navigation} />
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <Header navigation={navigation} />
+      <Result navigation={navigation} />
+    </View>
   );
 }
 
 function Header({ navigation }: any) {
   return (
     <View style={styles.headercontainer}>
-      <TouchableOpacity
-        style={styles.logo}
-        onPress={() => navigation.navigate('Home')}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Image
-          style={styles.logo_image}
-          source={require('../assets/images/assetsTarifans/tarifans_palabra_color_blanco.png')}
+          style={styles.icons}
+          source={require('../assets/images/iconos/atras.png')}
         />
       </TouchableOpacity>
-      <View style={styles.SectionStyle}>
-        <Image
-          style={styles.ImageStyle}
-          source={require('../assets/images/iconos/lupa.png')}
-        />
-        <TextInput
-          style={{ flex: 1, fontSize: 17 }}
-          placeholder="Busca un usuario..."
-          placeholderTextColor="#9D9D9E"
-          onFocus={() => {
-            // navigation.navigate();
-          }}
-          onChangeText={() => {}}
-        />
+      <View style={{ backgroundColor: '#F28E43', marginTop: 2 }}>
+        <Text style={{ color: 'white', fontSize: 20, marginTop: 2 }}>
+          Buscar Creador
+        </Text>
       </View>
-      <TouchableOpacity
-        style={styles.icons}
-        onPress={() => navigation.navigate('Home')}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Image
-          // style={styles.icons}
-          source={require('../assets/images/iconos/carbon_settings.png')}
+          style={styles.icons}
+          source={require('../assets/images/iconos/filter.png')}
         />
       </TouchableOpacity>
     </View>
@@ -147,6 +102,39 @@ function Result({ navigation }: any) {
   });
   return (
     <View style={styles.resultcontainer}>
+      <View style={styles.top}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Image
+            style={{
+              position: 'absolute',
+              width: '90%',
+              resizeMode: 'stretch',
+            }}
+            source={require('../assets/images/iconos/RectangleSearch.png')}
+          />
+          <Image
+            style={{ marginLeft: 15, marginRight: 10 }}
+            source={require('../assets/images/iconos/lupa.png')}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Ingrese el nombre del creador..."
+            placeholderTextColor="gray"
+            onChangeText={text => {
+              consultarCreadores(text, '83591406640cf2b5983371defbf6889de7582245')
+                .then(res => {
+                  return res.data;
+                })
+                .then(data => {
+                  setResults(data);
+                  // refresh();
+                })
+                .catch(error => console.log(error));
+            }}
+          />
+        </View>
+        <Text style={{ color: '#966BEE', fontSize: 15 }}>Cancelar</Text>
+      </View>
       <Presentacion navigation={navigation} res={RESULTS} />
     </View>
   );
@@ -174,7 +162,7 @@ function Perfil({ result }: any) {
       <Image
         style={styles.resultadoimg}
         source={{
-          uri: `http://1c0a-190-63-213-187.ngrok.io${result.profile_pic}`,
+          uri: `https://2454-191-99-93-50.ngrok.io${result.profile_pic}`,
         }}
       />
       <Text>
