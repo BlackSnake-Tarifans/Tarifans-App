@@ -8,12 +8,15 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import Multiselector from '../components/Elementos/MultiSelector';
+import { postText } from '../hooks/backendAPI';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -139,10 +142,10 @@ function CreateCateScreen({ route, navigation }: any) {
   const [name, onChangeName] = useState('Title');
   const [description, onChangeDesc] = useState('Todo lo que deseas y más');
   const titulo = 'Crear Nueva Publicación';
-
+  const [animating, setAnimating] = React.useState(false);
   /* Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
   const items = [
-    { label: 'Básica', value: '1' },
+    { label: 'Gratuita', value: '1' },
     { label: 'Premium', value: '2' },
     { label: 'Platinum', value: '3' },
   ];
@@ -214,6 +217,8 @@ function CreateCateScreen({ route, navigation }: any) {
           </View>
         </View>
 
+        <ActivityIndicator size="large" color="#00ff00" animating={animating}/>
+
         <View style={styles.ViewEnd}>
           <Boton
             onPress={() => {
@@ -234,7 +239,30 @@ function CreateCateScreen({ route, navigation }: any) {
               */}
           <View style={{ margin: 10 }} />
           <Boton
-            onPress={() => navigation.navigate('Profile')}
+            onPress={async () =>{ 
+              
+              try {
+                setAnimating(true)
+                const response = await postText({
+                    subscription_plan: 1,
+                    title: name,
+                    description: description,
+                })
+
+                if (response.status == 201) { // 201 == HTTP_CREATED
+                  let data = response.data
+                  console.log(data); 
+                  setAnimating(false)
+                  navigation.navigate('MyProfile')
+                }
+
+              }catch (error) {
+                setAnimating(false)
+                Alert.alert("Error: " + error)
+              }
+              
+            
+            }}
             title="Crear Publicación"
             anchura={220}
             altura={65}

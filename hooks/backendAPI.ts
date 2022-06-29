@@ -40,5 +40,13 @@ export const resetPassword_p2 = async (obj: any) => {
 };
 
 export const createSubsPlan = async (obj: any) => {
-  return axios.post<any>(`${apiUrl}/api/subscriptions/plan/`, obj);
+  return axios.post<any>(`${apiUrl}/subscriptions/plan/`, obj);
+};
+
+export const postText = async (obj: any) => {
+  return axios.post<any>(`${apiUrl}/posts/`, obj);
+};
+
+export const postMedia = async (obj: any) => {
+  return axios.post<any>(`${apiUrl}/posts/media`, obj);
 };

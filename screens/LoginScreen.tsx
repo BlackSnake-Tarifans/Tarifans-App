@@ -9,6 +9,7 @@ import {
   Image,
   Dimensions,
   TouchableHighlight,
+  ActivityIndicator,
   ScrollView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -203,6 +204,7 @@ function LoginScreen({ navigation }: any) {
   const route = useRoute();
   const [user, onChangeUser] = React.useState('');
   const [pass, onChangePass] = React.useState('');
+  const [animating, setAnimating] = React.useState(false);
   const [fontsLoaded] = useFonts({
     RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
   });
@@ -266,20 +268,35 @@ function LoginScreen({ navigation }: any) {
               />
             </View>
 
+            <ActivityIndicator size="large" color="#00ff00" animating={animating}/>
+
             <View style={styles.buttons}>
               <Button
-                onPress={() => {
-                  navigation.navigate('Home');
+                onPress={ async () => {
+                  //navigation.navigate('Home');
                   // console.log("Hola")
-                  login({ username: user, password: pass })
-                    .then(res => {
-                      return res.data;
-                    })
-                    .then(data => {
-                      changeToken(data.token);
-                      navigation.navigate('Home');
-                    })
-                    .catch(error => console.log(error));
+
+                      /* Añadir aquí metodo para crear categoría/plan de subscripción */
+              try {
+                setAnimating(true)
+                  const response = await login({ username: user, password: pass })
+
+                  if (response.status == 200) { // 201 == HTTP_CREATED
+                    let data = response.data
+                    console.log(data); 
+                    setAnimating(false)
+                    navigation.navigate('Home')
+                  } else if (response.status >= 400){
+                    Alert.alert("Error: No se ha encontrado un usuario con dichas credenciales ")
+                    setAnimating(false)
+                  }
+
+              }catch (error) {
+                Alert.alert("Error:" + error + "(No se ha encontrado un usuario con dichas credenciales) ")
+                setAnimating(false)
+              } 
+
+                  
                 }}
                 title="INICIAR SESIÓN"
                 style_button={styles.button_1}

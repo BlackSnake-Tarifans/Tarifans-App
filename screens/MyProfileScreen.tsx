@@ -199,7 +199,23 @@ const Cuerpo = () => {
         borderRadius: 4,
         elevation: 3,backgroundColor: color}} onPress={() => {setColor("grey"); setTitle("Suscrito")}}/>
         </View>
-        <View> */
+        <View> 
+                   
+                    try {
+                      const response = await login({ username: user, password: pass })
+    
+                      if (response.status == 200) { // 201 == HTTP_CREATED
+                        let data = response.data
+                        console.log(data); 
+                        navigation.navigate('Home')
+                    }
+    
+                  }catch (error) {
+                    Alert.alert(error)
+                  } 
+        
+        
+        */
 function ProfileScreen({ route, navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>

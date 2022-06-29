@@ -9,6 +9,8 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
@@ -16,6 +18,7 @@ import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import MediaElement from '../components/Elementos/MediaElement';
+import { postMedia, postText } from '../hooks/backendAPI';
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -223,6 +226,9 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
     localUri: '',
   });
   const [url, setUrl] = React.useState([] as any);
+
+  const [animating, setAnimating] = React.useState(false);
+
   const tituloHeader1 = 'Cargar archivo';
   const tituloHeader2 = 'Previsualización';
 
@@ -262,6 +268,7 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
 
     setSelectedImage({ localUri: pickerResult.uri } as any);
     setUrl([...url, pickerResult.uri.toString()]);
+    
   };
 
   const openCamera = async () => {
@@ -299,9 +306,7 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
   };
 
   if (selectedImage.localUri !== '' && url.length != 0) {
-    console.log(name2);
-    console.log(description2);
-    console.log(selectedItems);
+    
     return (
       <SafeAreaView style={styles.containerPhoto}>
         <Modal
@@ -495,18 +500,56 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
               */}
             <View style={styles.ViewConfirmar}>
               <Boton
-                onPress={() => {
-                  {
-                    /*
-                    Aqui iría el código de la función.
+                onPress={async() => {
+                  
+                  try {
+                    setAnimating(true)
+                    const response = await postText({
+                        subscription_plan: 1,
+                        title: name2,
+                        description: description2,
+                    })
     
-                    
-                  */
+                    if (response.status == 201) { // 201 == HTTP_CREATED
+                      console.log(selectedImage.localUri);
+                      let data = response.data
+                      console.log(data); 
+                      
+                      let localUri = selectedImage.localUri;
+                      let filename = localUri.split('/').pop();
+
+                      // Infer the type of the imag
+
+                      console.log(filename);
+                     
+
+                      // Upload the image using the fetch and FormData APIs
+                      let formData = new FormData();
+                      // Assume "photo" is the name of the form field the server expects
+                     
+        
+       
+                      formData.append('file', {uri: localUri , name:`test.${localUri.split(".")[1]}`, type:`test/${localUri.split(".")[1]}`});
+                      formData.append('type', '1')
+                      formData.append("post", "3")
+                      console.log(formData);
+                      const response2 = await postMedia(formData)
+                      if (response2.status == 201){
+                        setAnimating(false)
+                        setSelectedImage({
+                          localUri: '',
+                        }),
+                          navigation.navigate('MyProfile');
+                      }
+                    }
+    
+                  }catch (error) {
+                    setAnimating(false)
+                    Alert.alert("Error: " + error)
                   }
-                  setSelectedImage({
-                    localUri: '',
-                  }),
-                    navigation.navigate('Profile');
+
+
+                 
                 }}
                 title="Crear Publicación"
                 anchura={240}

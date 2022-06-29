@@ -217,6 +217,11 @@ function RootNavigator() {
         component={SettingsScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="MyProfile"
+        component={MyProfileScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Group screenOptions={{ presentation: 'modal' }} />
     </Stack.Navigator>
   );
