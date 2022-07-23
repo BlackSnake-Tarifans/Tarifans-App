@@ -34,6 +34,8 @@ import UploadImgScreen from '../screens/UploadImgScreen';
 import GalleryScreen from '../screens/GalleryScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import render from '../screens/Test';
+
 import {
   RootStackParamList,
   RootTabParamList,
@@ -138,8 +140,13 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-        // component={HomeTabs}
-        component={PaginaInicio}
+         component={render}
+        //component={PaginaInicio}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Test"
+        component={render}
         options={{ headerShown: false }}
       />
       <Stack.Screen
