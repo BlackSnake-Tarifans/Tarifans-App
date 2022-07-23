@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
@@ -217,7 +217,7 @@ function CreateCateScreen({ route, navigation }: any) {
           </View>
         </View>
 
-        <ActivityIndicator size="large" color="#00ff00" animating={animating}/>
+        <ActivityIndicator size="large" color="#00ff00" animating={animating} />
 
         <View style={styles.ViewEnd}>
           <Boton
@@ -239,29 +239,26 @@ function CreateCateScreen({ route, navigation }: any) {
               */}
           <View style={{ margin: 10 }} />
           <Boton
-            onPress={async () =>{ 
-              
+            onPress={async () => {
               try {
-                setAnimating(true)
+                setAnimating(true);
                 const response = await postText({
-                    subscription_plan: 1,
-                    title: name,
-                    description: description,
-                })
+                  subscription_plan: 1,
+                  title: name,
+                  description,
+                });
 
-                if (response.status == 201) { // 201 == HTTP_CREATED
-                  let data = response.data
-                  console.log(data); 
-                  setAnimating(false)
-                  navigation.navigate('MyProfile')
+                if (response.status == 201) {
+                  // 201 == HTTP_CREATED
+                  const { data } = response;
+                  console.log(data);
+                  setAnimating(false);
+                  navigation.navigate('MyProfile');
                 }
-
-              }catch (error) {
-                setAnimating(false)
-                Alert.alert("Error: " + error)
+              } catch (error) {
+                setAnimating(false);
+                Alert.alert(`Error: ${error}`);
               }
-              
-            
             }}
             title="Crear Publicación"
             anchura={220}

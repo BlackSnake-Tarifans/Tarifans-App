@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   Info: {
-    //width: deviceWidth ,
+    // width: deviceWidth ,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: 'transparent',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'flex-start',
     borderRadius: 20,
-  }
+  },
 });
 
 function SettingsScreen({ route, navigation }: any) {
