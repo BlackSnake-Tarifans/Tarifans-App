@@ -208,8 +208,9 @@ const styles = StyleSheet.create({
       height: 220,
     },
     ViewSuscripcionesDerecha: {
-      //justifyContent: "flex-start",
-      //alignItems: "center",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
       //backgroundColor: 'transparent',
       //marginRight: 20,
     },
@@ -224,8 +225,8 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       width: deviceWidth * 0.3,
       textAlign: 'center',
-      position: 'absolute',
-      bottom: 20,
+      //position: 'absolute',
+      //bottom: 20,
     },
     TextoSuscripcion: {
       fontSize: 15,
@@ -235,10 +236,9 @@ const styles = StyleSheet.create({
     backStyleImage: {
       height: 100,
       width: 100,
-      resizeMode: 'stretch',
+      //resizeMode: 'cover',
       //top: 20,
-      marginRight:20,
-      padding: 20,
+      
     },
   });
 function MySubsPlansScreen ({route, navigation, navigation:{ goBack }}:any) {
@@ -281,10 +281,10 @@ function MySubsPlansScreen ({route, navigation, navigation:{ goBack }}:any) {
     
       <View style={styles.ViewSuscripcionesDerecha}>
         
-        <View style={{padding: 5, margin: 5}}>
+        
         <Image style={styles.backStyleImage} source={suscripcion.icono} />
         
-        </View>
+      
         <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.precio}</Text>
       </View>
       </View>
