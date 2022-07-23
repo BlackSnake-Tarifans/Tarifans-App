@@ -12,7 +12,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Settings } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -34,6 +34,8 @@ import UploadImgScreen from '../screens/UploadImgScreen';
 import GalleryScreen from '../screens/GalleryScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import OptionsScreen from '../screens/OptionsScreen';
+import MySubsPlansScreen from '../screens/SubsPlansScreen';
 import {
   RootStackParamList,
   RootTabParamList,
@@ -220,6 +222,16 @@ function RootNavigator() {
       <Stack.Screen
         name="MyProfile"
         component={MyProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Options"
+        component={OptionsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MySubsPlans"
+        component={MySubsPlansScreen}
         options={{ headerShown: false }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }} />

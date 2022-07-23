@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   Info: {
-    width: deviceWidth - 80,
+    //width: deviceWidth ,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: 'transparent',
@@ -119,9 +119,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
   },
+  ScrollContainter: {
+    flexGrow: 1,
+    backgroundColor: 'white',
+    justifyContent: 'flex-start',
+    borderRadius: 20,
+  }
 });
 
-function CreateCateScreen({ route, navigation }: any) {
+function SettingsScreen({ route, navigation }: any) {
   // const { id } = route.params;
 
   const [name, onChangeName] = useState('New Category');
@@ -134,7 +140,7 @@ function CreateCateScreen({ route, navigation }: any) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.ScrollContainter}>
         <View style={styles.ViewTop}>
           <HeaderDiferente
             props={`${VALORES.user.first_name} ${VALORES.user.last_name}`}
@@ -199,4 +205,4 @@ function CreateCateScreen({ route, navigation }: any) {
   );
 }
 
-export default CreateCateScreen;
+export default SettingsScreen;
