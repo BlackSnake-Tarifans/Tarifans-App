@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,6 +20,7 @@ import { useRoute } from '@react-navigation/native';
 import { Text, View } from '../components/Themed';
 import { login } from '../hooks/backendAPI';
 import { TOKEN_CHANGE } from '../redux/AuthToken';
+import { AuthContext } from '../redux/AuthProvider';
 
 const styles = StyleSheet.create({
   container: {
@@ -205,6 +206,7 @@ function LoginScreen({ navigation }: any) {
   const [user, onChangeUser] = React.useState('');
   const [pass, onChangePass] = React.useState('');
   const [animating, setAnimating] = React.useState(false);
+  const auth : any = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
   });
@@ -268,35 +270,46 @@ function LoginScreen({ navigation }: any) {
               />
             </View>
 
-            <ActivityIndicator size="large" color="#00ff00" animating={animating}/>
+            <ActivityIndicator
+              size="large"
+              color="#00ff00"
+              animating={animating}
+            />
 
             <View style={styles.buttons}>
               <Button
-                onPress={ async () => {
-                  //navigation.navigate('Home');
+                onPress={async () => {
+                  // navigation.navigate('Home');
                   // console.log("Hola")
 
-                      /* Añadir aquí metodo para crear categoría/plan de subscripción */
-              try {
-                setAnimating(true)
-                  const response = await login({ username: user, password: pass })
+                  /* Añadir aquí metodo para crear categoría/plan de subscripción */
+                  try {
+                    setAnimating(true);
+                    const response = await login({
+                      username: user,
+                      password: pass,
+                    });
 
-                  if (response.status == 200) { // 201 == HTTP_CREATED
-                    let data = response.data
-                    console.log(data); 
-                    setAnimating(false)
-                    navigation.navigate('Home')
-                  } else if (response.status >= 400){
-                    Alert.alert("Error: No se ha encontrado un usuario con dichas credenciales ")
-                    setAnimating(false)
+                    if (response.status == 200) {
+                      // 201 == HTTP_CREATED
+                      const { data } = response;
+                      console.log(data);
+                      //setAnimating(false);
+                      auth.setAuth(data)
+                      navigation.navigate('Home');
+                      
+                    } else if (response.status >= 400) {
+                      Alert.alert(
+                        'Error: No se ha encontrado un usuario con dichas credenciales ',
+                      );
+                      setAnimating(false);
+                    }
+                  } catch (error) {
+                    Alert.alert(
+                      `Error:${error}(No se ha encontrado un usuario con dichas credenciales) `,
+                    );
+                    setAnimating(false);
                   }
-
-              }catch (error) {
-                Alert.alert("Error:" + error + "(No se ha encontrado un usuario con dichas credenciales) ")
-                setAnimating(false)
-              } 
-
-                  
                 }}
                 title="INICIAR SESIÓN"
                 style_button={styles.button_1}

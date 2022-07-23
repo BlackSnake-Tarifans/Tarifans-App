@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   StyleSheet,
   Image,
@@ -13,6 +12,8 @@ import { useSelector } from 'react-redux';
 import { consultarCreadores } from '../hooks/backendAPI';
 import { Text, View } from '../components/Themed';
 import Navigation from '../navigation';
+import { AuthContext } from '../redux/AuthProvider';
+//import {};
 
 const styles = StyleSheet.create({
   headercontainer: {
@@ -96,6 +97,8 @@ function Header({ navigation }: any) {
 }
 
 function Result({ navigation }: any) {
+  const ctx :any = useContext(AuthContext)
+  const auth = ctx.auth
   const [RESULTS, setResults] = useState([]);
   const al = useSelector(state => {
     return state;
@@ -121,7 +124,11 @@ function Result({ navigation }: any) {
             placeholder="Ingrese el nombre del creador..."
             placeholderTextColor="gray"
             onChangeText={text => {
-              consultarCreadores(text, '83591406640cf2b5983371defbf6889de7582245')
+              console.log(auth)
+              consultarCreadores(
+                text,
+                auth.token,
+              )
                 .then(res => {
                   return res.data;
                 })
