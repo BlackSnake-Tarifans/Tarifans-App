@@ -28,7 +28,7 @@ const VALORES = {
   },
   birth_date: '1999-10-25',
   profile_pic: '/media/profile_pics/WhatsApp_Image_2022-01-16_at_09.05.22.jpeg',
-  bio: "Aquí va la biografía del usuario: Creo que me gustan los gatos",
+  bio: 'Aquí va la biografía del usuario: Creo que me gustan los gatos',
   num_subscribers: 9001,
   num_subscribed: 420,
 };
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   },
   ViewBotonEditar: {
     marginTop: 20,
+    alignItems: 'center',
   },
   ProfileView: {
     backgroundColor: 'transparent',
@@ -237,10 +238,17 @@ function ProfileScreen({ route, navigation }: any) {
           <Text style={styles.textoUsername}>{VALORES.user.username}</Text>
           <Text style={styles.textoEmail}>{VALORES.user.email}</Text>
           <View style={styles.ViewBotonEditar}>
-            <Boton
+            {/* <Boton
               onPress={() => navigation.navigate('EditProfile')}
               title="Editar perfil"
               anchura={140}
+              altura={40}
+  /> */}
+            <View style={{ margin: 5 }} />
+            <Boton
+              onPress={() => navigation.navigate('Options')}
+              title="Menú de Opciones"
+              anchura={200}
               altura={40}
             />
           </View>

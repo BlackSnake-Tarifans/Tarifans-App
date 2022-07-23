@@ -15,7 +15,7 @@ export default function BackButton(props: { onPress: any }) {
   const { onPress } = props;
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image
           style={styles.backStyleImage}
           source={require('../../assets/images/iconos/back.png')}

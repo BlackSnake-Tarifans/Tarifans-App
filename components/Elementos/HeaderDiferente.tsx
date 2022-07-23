@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
+  Button,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -32,7 +33,7 @@ function HeaderDiferente({ props }: any) {
         source={require('../../assets/images/iconos/header_purple.png')}
       >
         <View style={styles.ViewBackButton}>
-          <BackButton onPress={() => navigation.navigate('Login')} />
+          <BackButton onPress={() => navigation.goBack()} />
         </View>
         <Text style={styles.title}>{props}</Text>
       </ImageBackground>

@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import store from './redux/store';
+import { AuthProvider } from './redux/AuthProvider';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -15,11 +16,13 @@ export default function App() {
   if (!isLoadingComplete) return null;
 
   return (
-    <StoreProvider store={store}>
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    </StoreProvider>
+    <AuthProvider>
+      <StoreProvider store={store}>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </StoreProvider>
+    </AuthProvider>
   );
 }

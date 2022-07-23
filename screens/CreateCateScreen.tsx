@@ -75,7 +75,7 @@ function CreateCateScreen({ route, navigation }: any) {
   );
   const [price, onChangePrice] = useState(0);
   // const [nivel, onChangeNivel] = useState(1);
-  const titulo = 'Registro Categoría Suscripción';
+  const titulo = 'Registro Plan de Suscripción';
 
   return (
     <SafeAreaView style={styles.container}>

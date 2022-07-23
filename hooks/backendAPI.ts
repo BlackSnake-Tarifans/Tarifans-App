@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'https://2454-191-99-93-50.ngrok.io/api';
+const apiUrl = 'https://3b33-190-63-214-62.ngrok.io/api';
 
 export const login = async (obj: any) => {
   console.log(`${apiUrl}/auth/login`);
@@ -14,8 +14,7 @@ export const register = async (obj: any) => {
 export const consultarCreadores = async (obj: string, token: string) => {
   return axios.get<any>(`${apiUrl}/content-creators?search=${obj}`, {
     headers: {
-      Authorization:
-        'Token ' + token /* token */,
+      Authorization: `Token ${token}` /* token */,
     },
   });
 };
@@ -27,7 +26,7 @@ export const consultainformacioncreador = async (
   return await axios.get<any>(`${apiUrl}/content-creators/${obj}`, {
     headers: {
       Authorization:
-        'Token ' + '17a50a10d95c46779787a69be19c51c0f20579c3' /* token */,
+      `Token ${token}` /* token */,
     },
   });
 };
