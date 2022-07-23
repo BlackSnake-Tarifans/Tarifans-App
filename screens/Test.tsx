@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, Image } from 'react-native';
 //import { DocumentPicker, ImagePicker } from 'expo';
 import * as DocumentPicker from 'expo-document-picker';
@@ -9,16 +9,16 @@ import { postMedia, postText } from '../hooks/backendAPI';
   localUri: '',
 });*/
 
-export default class App extends React.Component {
-    state = {
+/*function Test() : any {
+    let state = {
       image: null,
     };
     
-  _pickDocument = async () => {
+  let _pickDocument = async () => {
       let result = await DocumentPicker.getDocumentAsync({});
 	}
 
-   _pickImage = async () => {
+   let _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
@@ -32,7 +32,7 @@ export default class App extends React.Component {
     }
   };
 
-  render() {
+  let render = () => {
     const [selectedImage, setSelectedImage] = React.useState<any>({
       localUri: '',
     });
@@ -89,7 +89,7 @@ export default class App extends React.Component {
                       console.log(formData);
                       //const response2 = await postMedia(formData)
                     }*/
-    
+/*    
                   }catch (error) {
                     
                   }
@@ -112,4 +112,4 @@ export default class App extends React.Component {
     justifyContent: 'center',
   },
 });
-}
+}*/

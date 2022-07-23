@@ -36,7 +36,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import OptionsScreen from '../screens/OptionsScreen';
 import MySubsPlansScreen from '../screens/SubsPlansScreen';
-import render from '../screens/Test';
+//import render from '../screens/Test';
 import {
   RootStackParamList,
   RootTabParamList,
@@ -141,15 +141,11 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-         component={render}
-        //component={PaginaInicio}
+         
+        component={PaginaInicio}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Test"
-        component={render}
-        options={{ headerShown: false }}
-      />
+      
       <Stack.Screen
         name="Inicio"
         component={PaginaInicio}
@@ -240,7 +236,7 @@ function RootNavigator() {
         component={MySubsPlansScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Group screenOptions={{ presentation: 'modal' }} />
+      
     </Stack.Navigator>
   );
 }
