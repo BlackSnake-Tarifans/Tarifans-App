@@ -359,7 +359,7 @@ function LoginScreen({ navigation }: any) {
               />
               <Text
                 style={styles.textoFinal3}
-                onPress={() => navigation.navigate('SelectSusc')}
+                onPress={() => navigation.navigate('Profile')}
               >
                 ¡Inicia sesión con Facebook!
               </Text>

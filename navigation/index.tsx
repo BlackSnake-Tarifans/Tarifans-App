@@ -36,6 +36,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import OptionsScreen from '../screens/OptionsScreen';
 import MySubsPlansScreen from '../screens/SubsPlansScreen';
+import BloquearScreen from '../screens/BloquearScreen';
 //import render from '../screens/Test';
 import {
   RootStackParamList,
@@ -229,6 +230,11 @@ function RootNavigator() {
       <Stack.Screen
         name="Options"
         component={OptionsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Bloquear"
+        component={BloquearScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

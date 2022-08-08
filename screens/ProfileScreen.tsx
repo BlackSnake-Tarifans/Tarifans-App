@@ -80,8 +80,22 @@ const styles = StyleSheet.create({
     borderWidth: 5,
   },
   Botones: {
+    flex: 1,
     marginTop: 10,
     backgroundColor: 'transparent',
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+  BotonAcciones: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 140,
+    height: 45,
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: '#b3b3b3',
+    marginTop: 10
   },
   Info: {
     width: deviceWidth - 80,
@@ -131,6 +145,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 20,
     backgroundColor: 'transparent',
+  },  
+  title: {
+    fontSize: 20,
+    fontFamily: 'RosarioRegular',
+    color: '#949494',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
@@ -200,9 +221,15 @@ function ProfileScreen({ route, navigation }: any) {
             <Boton
               onPress={() => navigation.navigate('SelectSusc')}
               title="Seguir"
-              anchura={100}
+              anchura={140}
               altura={45}
             />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Bloquear')}
+              style={styles.BotonAcciones}
+            >
+              <Text style={styles.title}>Bloquear</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.Info}>
             <View style={styles.ViewInfoSeguidores}>
