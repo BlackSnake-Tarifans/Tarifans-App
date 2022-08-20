@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -202,6 +202,12 @@ const styles = StyleSheet.create({
 });
 
 function LoginScreen({ navigation }: any) {
+  const ctx :any = useContext(AuthContext);
+  useEffect(() => {
+    // Runs ONCE after initial rendering
+    ctx.clearAuth();
+  }, []);
+  
   const route = useRoute();
   const [user, onChangeUser] = React.useState('');
   const [pass, onChangePass] = React.useState('');

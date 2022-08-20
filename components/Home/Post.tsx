@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { Image, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import { Text, View } from '../../components/Themed';
-import { likePost } from '../../hooks/postsAPI';
+import { dislikePost, likePost } from '../../hooks/postsAPI';
 import { ImgCard } from '../Elementos/ImgCard';
 
 const deviceHeight = Dimensions.get('window').height;
@@ -118,8 +118,12 @@ function PostFooter({ post }: any) {
           imgStyle={styles.footerIcon}
           imgUrl={liked?postFooterIcons[0].imageUrl:postFooterIcons[0].likedImageUrl}
           onpress={()=>{
-            setLiked(!liked)
-            likePost(post.id)
+            setLiked(!liked);
+            if(liked){
+              dislikePost(post.id)
+            }else{
+              likePost(post.id)
+            }
             console.log(liked)
           }}
         />

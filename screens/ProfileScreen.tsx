@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,6 +15,7 @@ import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import CarouselCards from '../components/Elementos/CarouselCards';
 import ImgSwiper from '../components/Elementos/ImgSwiper';
+import { consultainformacioncreador } from '../hooks/backendAPI';
 
 const VALORES = {
   id: 1,
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 20,
     backgroundColor: 'transparent',
-  },  
+  },
   title: {
     fontSize: 20,
     fontFamily: 'RosarioRegular',
@@ -202,12 +203,28 @@ const Cuerpo = () => {
         </View>
         <View> */
 function ProfileScreen({ route, navigation }: any) {
+
+  const [following, setFollowing] = useState(true)
+  const [profile, setProfile] : any = useState(VALORES);
+
+  const {id} = route.params
+  useEffect(() => {
+    // Runs ONCE after initial rendering
+    consultainformacioncreador(id).then(
+      (data : any) =>{
+        console.log(data)
+        setProfile(data.data)
+        setFollowing(data.data.follow)
+      }
+    )
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.ViewTop}>
           <HeaderDiferente
-            props={`${VALORES.user.first_name} ${VALORES.user.last_name}`}
+            props={`${profile.user.first_name} ${profile.user.last_name}`}
           />
           <View style={styles.ProfileView}>
             <Image
@@ -218,12 +235,19 @@ function ProfileScreen({ route, navigation }: any) {
         </View>
         <View style={styles.ViewMiddle}>
           <View style={styles.Botones}>
-            <Boton
-              onPress={() => navigation.navigate('SelectSusc')}
+            {!following && <Boton
+              onPress={() => navigation.navigate('SelectSusc', {id: id})}
               title="Seguir"
               anchura={140}
               altura={45}
-            />
+            />}
+
+            {following && <Boton
+              onPress={() => {setFollowing(false)}}
+              title="Dejar de seguir"
+              anchura={140}
+              altura={45}
+            />}
             <TouchableOpacity
               onPress={() => navigation.navigate('Bloquear')}
               style={styles.BotonAcciones}
@@ -234,22 +258,22 @@ function ProfileScreen({ route, navigation }: any) {
           <View style={styles.Info}>
             <View style={styles.ViewInfoSeguidores}>
               <Text style={styles.datosCabeceraInfo}>
-                {VALORES.num_subscribers}
+                {profile.num_subscribers}
               </Text>
               <Text style={styles.cabecerasInfo}>Seguidores</Text>
             </View>
             <View style={styles.ViewInfoSeguidos}>
               <Text style={styles.datosCabeceraInfo}>
-                {VALORES.num_subscribed}
+                {profile.num_subscribed}
               </Text>
               <Text style={styles.cabecerasInfo}>Seguidos</Text>
             </View>
             <View style={styles.ViewInfoPublicaciones}>
-              <Text style={styles.datosCabeceraInfo}>{VALORES.id}</Text>
+              <Text style={styles.datosCabeceraInfo}>{profile.id}</Text>
               <Text style={styles.cabecerasInfo}>Publicaciones</Text>
             </View>
           </View>
-          <Text style={styles.textoBio}>{VALORES.bio}</Text>
+          <Text style={styles.textoBio}>{profile.bio}</Text>
         </View>
 
         <View style={styles.ViewPublicaciones}>

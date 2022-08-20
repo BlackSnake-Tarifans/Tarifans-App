@@ -14,7 +14,7 @@ function Header({ navigation }: any) {
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Image
           style={styles.logo}
-          source={require('../../assets/images/assetsTarifans/tarifans palabra color blanco.png')}
+          source={require('../../assets/images/assetsTarifans/tarifans_palabra_color_blanco.png')}
         />
       </TouchableOpacity>
       <View style={styles.SectionStyle}>

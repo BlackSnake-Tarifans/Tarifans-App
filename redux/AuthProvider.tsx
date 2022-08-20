@@ -9,6 +9,11 @@ const configureAxiosHeaders = (token: any) => {
   axios.defaults.headers.common.Authorization = `Token ${token}`;
 };
 
+const removeHeaders = () => {
+  delete axios.defaults.headers.common["Authorization"];
+}
+
+
 function AuthProvider({ children }: any) {
   const [auth, setAuthState] = useState({});
 
@@ -54,6 +59,7 @@ function AuthProvider({ children }: any) {
     try {
       await AsyncStorage.clear();
       localStorage.removeItem('auth')
+      removeHeaders();
     } catch (e) {
       alert('Failed to clear the async storage.');
     } finally {

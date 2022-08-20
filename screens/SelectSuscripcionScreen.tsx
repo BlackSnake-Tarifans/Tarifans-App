@@ -13,6 +13,8 @@ import Modal from 'react-native-modal';
 import { Text, View } from '../components/Themed';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
+import { creatorSusbscriptionPlans, suscribe } from '../hooks/backendAPI';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -183,39 +185,51 @@ const styles = StyleSheet.create({
 });
 
 // Datos de prueba
-const SUSCRIPCIONES = [
+const SUSCRIPCIONES =[
   {
-    id: 1,
-    user: 'Pepe',
-    nombre: 'Básica',
-    desc: 'Mira fotos y videos antes que todos',
-    precio: '$7.5\n/mes',
-    nivel: 1,
-    icono: require('../assets/images/iconos/light.png'),
+      "id": 1,
+      "fee": "0.00",
+      "currency": 1,
+      "label": "Free",
+      "is_active": true,
+      "description": null,
+      "content_creator": 1
   },
   {
-    id: 2,
-    user: 'Pepe',
-    nombre: 'Premium',
-    desc: 'Fotos de arte exclusivas',
-    precio: '$15\n/mes',
-    nivel: 2,
-    icono: require('../assets/images/iconos/star_icon.png'),
+      "id": 2,
+      "fee": "100.00",
+      "currency": 1,
+      "label": "Premium",
+      "is_active": true,
+      "description": null,
+      "content_creator": 1
   },
   {
-    id: 3,
-    user: 'Pepe',
-    nombre: 'Master+',
-    desc: 'Más fotos y videos de arte a tu alcance.',
-    precio: '$25\n/mes',
-    nivel: 3,
-    icono: require('../assets/images/iconos/crown.png'),
-  },
-];
+      "id": 3,
+      "fee": "10.00",
+      "currency": 1,
+      "label": "Basic",
+      "is_active": true,
+      "description": "",
+      "content_creator": 1
+  }
+]
 
 function SelectSuscripcionScreen({ route, navigation }: any) {
   const Titulo = 'Seleccione una categoría';
   const [fontsLoaded] = useFonts({ Rosario_400Regular });
+  const [suscripciones, SetSuscripciones] = useState(SUSCRIPCIONES)
+  const {id} = route.params;
+
+  useEffect(() => {
+    creatorSusbscriptionPlans(id).then( (data:any) =>{
+      console.log(data);
+      SetSuscripciones(data.data)
+    })
+  
+    
+  }, [])
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -224,7 +238,7 @@ function SelectSuscripcionScreen({ route, navigation }: any) {
           <HeaderDiferente props={Titulo} />
         </View>
 
-        <Suscripciones navigation={navigation} res={SUSCRIPCIONES} />
+        <Suscripciones navigation={navigation} res={suscripciones} id={id} />
 
         <View style={styles.ViewEnd} />
       </ScrollView>
@@ -232,7 +246,7 @@ function SelectSuscripcionScreen({ route, navigation }: any) {
   );
 }
 
-function Suscripciones({ navigation, res }: any) {
+function Suscripciones({ navigation, res , id}: any) {
   return (
     <ScrollView contentContainerStyle={styles.ViewMiddle}>
       {res.map((suscripcion: any, index: any) => (
@@ -240,13 +254,14 @@ function Suscripciones({ navigation, res }: any) {
           suscripcion={suscripcion}
           key={index}
           navigation={navigation}
+          id={id}
         />
       ))}
     </ScrollView>
   );
 }
 
-function SuscData({ suscripcion, navigation }: any) {
+function SuscData({ suscripcion, navigation, id }: any) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.suscData}>
@@ -269,15 +284,12 @@ function SuscData({ suscripcion, navigation }: any) {
             </View>
             <View>
               <Text style={styles.modalText}>
-                Suscripción: {suscripcion.nombre}
+                Suscripción: {suscripcion.label}
               </Text>
               <Text style={styles.modalText}>
-                Beneficios: {suscripcion.desc}
+                Beneficios: {suscripcion.description}
               </Text>
-              <Text style={styles.modalText}>
-                Nivel de Suscripción: {suscripcion.nivel}
-              </Text>
-              <Text style={styles.modalText}>Precio: {suscripcion.precio}</Text>
+              <Text style={styles.modalText}>Precio: {suscripcion.fee}</Text>
               <Text style={styles.modalText2}>
                 ¿Desea confirmar su compra a la siguiente suscripción?
               </Text>
@@ -293,9 +305,24 @@ function SuscData({ suscripcion, navigation }: any) {
             </View>
             <View style={styles.ViewConfirmar}>
               <Boton
-                onPress={() => {
+                onPress={async () => {
                   !modalVisible;
-                  navigation.navigate('Profile');
+                  const authDataString =
+                    (await AsyncStorage.getItem('auth')) || localStorage.getItem('auth');
+                  const authData = JSON.parse(authDataString as string) || {};
+
+                  let obj = {
+                    content_creator: id,
+                    plan: suscripcion.id,
+                    subscriber: authData.profile_id
+                  }
+                  suscribe(obj).then(
+                    () =>{
+                      console.log(obj);
+                      navigation.navigate('Profile', {id: id});
+                    }
+                  )
+                  
                 }}
                 title="Confirmar"
                 anchura={240}
@@ -308,7 +335,7 @@ function SuscData({ suscripcion, navigation }: any) {
 
       <View style={styles.ViewSuscripciones}>
         <Text style={styles.TextoSuscripcionTitle}>
-          {suscripcion.user} {suscripcion.nombre}
+          {suscripcion.user} {suscripcion.label}
         </Text>
 
         <View
@@ -318,7 +345,7 @@ function SuscData({ suscripcion, navigation }: any) {
             marginBottom: 10,
           }}
         >
-          <Text style={styles.TextoSuscripcion}>{suscripcion.desc}</Text>
+          <Text style={styles.TextoSuscripcion}>{suscripcion.description}</Text>
           <Text style={styles.TextoSuscripcion}>
             Nivel: {suscripcion.nivel}
           </Text>
@@ -336,7 +363,7 @@ function SuscData({ suscripcion, navigation }: any) {
 
       <View style={styles.ViewSuscripcionesDerecha}>
         <Image style={styles.backStyleImage} source={suscripcion.icono} />
-        <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.precio}</Text>
+        <Text style={styles.TextoSuscripcionPrecio}>{suscripcion.fee}</Text>
       </View>
     </View>
   );

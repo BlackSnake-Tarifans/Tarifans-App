@@ -27,7 +27,7 @@ function HeaderDiferente({ props }: any) {
           width: imageWidth,
           backgroundColor: 'transparent',
           alignItems: 'flex-start',
-          maxHeight: '400px',
+          maxHeight: 400,
         }}
         resizeMode="stretch"
         source={require('../../assets/images/iconos/header_purple.png')}

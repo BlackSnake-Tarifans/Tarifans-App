@@ -21,15 +21,9 @@ export const consultarCreadores = async (obj: string, token: string) => {
 };
 
 export const consultainformacioncreador = async (
-  obj: string,
-  token: string,
+  obj: string
 ) => {
-  return await axios.get<any>(`${apiUrl}/content-creators/${obj}`, {
-    headers: {
-      Authorization:
-      `Token ${token}` /* token */,
-    },
-  });
+  return await axios.get<any>(`${apiUrl}/content-creators/${obj}`);
 };
 
 export const resetPassword_p1 = async (obj: any) => {
@@ -44,6 +38,14 @@ export const createSubsPlan = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/subscriptions/plan/`, obj);
 };
 
+export const unsuscribe = async (obj: any) => {
+  return axios.delete<any>(`${apiUrl}/subscriptions/${obj}/`);
+};
+
+export const suscribe = async (obj: any) => {
+  return axios.post<any>(`${apiUrl}/subscriptions/`, obj);
+};
+
 /*export const postText = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/posts/`, obj);
 };
@@ -56,6 +58,9 @@ export const likePost = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/posts/media`, obj);
 };*/
 
+export const creatorSusbscriptionPlans = async (id: any) =>{
+  return axios.get<any>(`${apiUrl}/content-creators/${id}/subscription-plans/`);
+}
 
 export const getFeed = async () => {
   return axios.get<any>(`${apiUrl}/posts/feed/`);

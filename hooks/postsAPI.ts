@@ -13,6 +13,10 @@ export const likePost = async (id: any) => {
 return axios.post<any>(`${apiUrl}/api/v1/posts/${id}/likes/`, {});
 };
 
+export const dislikePost = async (id: any) => {
+    return axios.delete<any>(`${apiUrl}/api/v1/posts/${id}/likes/`, {});
+    };
+
 export const loadComments = async (id: any) => {
 return axios.post<any>(`${apiUrl}/api/v1/posts/${id}/likes/`, {});
 };

@@ -13,7 +13,7 @@ export default StyleSheet.create({
     height: wp('15 %'),
     position: 'relative',
     top: 0,
-    maxHeight: '150px',
+    maxHeight: 150,
   },
   logo: {
     width: wp('18%'),
@@ -21,8 +21,8 @@ export default StyleSheet.create({
     resizeMode: 'contain',
     top: 15,
     left: 25,
-    maxHeight: '50px',
-    maxWidth: '120px',
+    maxHeight: 60,
+    maxWidth: 120,
   },
   SectionStyle: {
     flexDirection: 'row',
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     padding: 10,
     right: 0,
     top: 15,
-    maxHeight: '50px',
+    maxHeight: 50,
   },
   ImageStyle: {
     padding: 10,
@@ -53,6 +53,6 @@ export default StyleSheet.create({
     resizeMode: 'contain',
     top: 15,
     right: 25,
-    maxHeight: '25px',
+    maxHeight: 25,
   },
 });
