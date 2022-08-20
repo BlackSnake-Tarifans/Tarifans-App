@@ -37,6 +37,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import OptionsScreen from '../screens/OptionsScreen';
 import MySubsPlansScreen from '../screens/SubsPlansScreen';
 import BloquearScreen from '../screens/BloquearScreen';
+import CommentScreen from '../screens/CommentScreen';
 //import render from '../screens/Test';
 import {
   RootStackParamList,
@@ -143,7 +144,8 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
          
-        component={PaginaInicio}
+        //component={PaginaInicio}
+        component={HomeTabs}
         options={{ headerShown: false }}
       />
       
@@ -154,7 +156,7 @@ function RootNavigator() {
       />
       <Stack.Screen
         name="Home"
-        component={HomeTabs}
+        component={HomeScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -242,7 +244,11 @@ function RootNavigator() {
         component={MySubsPlansScreen}
         options={{ headerShown: false }}
       />
-      
+      <Stack.Screen
+        name="Comment"
+        component={CommentScreen}
+        options={{ headerShown: false }}
+      />      
     </Stack.Navigator>
   );
 }

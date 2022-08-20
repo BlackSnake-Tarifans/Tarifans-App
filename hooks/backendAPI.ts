@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiUrl = 'https://3b33-190-63-214-62.ngrok.io/api';
+//const apiUrl = 'https://3b33-190-63-214-62.ngrok.io/api';
+const apiUrl = 'https://bb40-190-63-214-62.ngrok.io/api'
 
 export const login = async (obj: any) => {
   console.log(`${apiUrl}/auth/login`);
@@ -43,10 +44,16 @@ export const createSubsPlan = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/subscriptions/plan/`, obj);
 };
 
-export const postText = async (obj: any) => {
+/*export const postText = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/posts/`, obj);
 };
 
 export const postMedia = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/posts/media`, obj);
 };
+
+export const likePost = async (obj: any) => {
+  return axios.post<any>(`${apiUrl}/posts/media`, obj);
+};*/
+
+export default apiUrl;

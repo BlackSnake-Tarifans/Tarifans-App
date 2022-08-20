@@ -18,7 +18,7 @@ import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import MediaElement from '../components/Elementos/MediaElement';
-import { postMedia, postText } from '../hooks/backendAPI';
+import { postMedia, postText } from '../hooks/postsAPI';
 
 const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);

@@ -16,7 +16,7 @@ import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import Multiselector from '../components/Elementos/MultiSelector';
-import { postText } from '../hooks/backendAPI';
+import { postText } from '../hooks/postsAPI';
 
 const deviceWidth = Dimensions.get('window').width;
 

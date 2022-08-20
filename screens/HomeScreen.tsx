@@ -6,9 +6,11 @@ import Post from '../components/Home/Post';
 
 const POSTS = [
   {
+    id: 1,
     imageUrl: require('../assets/images/fotos/fotoejemplo.png'),
     user: 'dylan',
     likes: 999,
+    liked: true,
     caption: 'me mete y me saca de su closefriends',
     profile_picture: 'url',
     fecha: '12/12/12',
@@ -20,9 +22,11 @@ const POSTS = [
     ],
   },
   {
+    id: 2,
     imageUrl: require('../assets/images/fotos/fotoejemplo.png'),
     user: 'david',
     likes: 999,
+    liked: false,
     caption: 'me mete y me saca de su closefriends',
     profile_picture: 'url',
     fecha: '12/12/12',
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />

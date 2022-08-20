@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
+import { likePost } from '../../hooks/postsAPI';
 
 const styles = StyleSheet.create({
   footerIcon: {
@@ -44,13 +45,13 @@ const postFooterIcons = [
   },
 ];
 
-function Post({ post }: any) {
+function Post({ post, navigation }: any) {
   return (
     <View style={{ marginBottom: 30, marginHorizontal: 30 }}>
       <Divider />
       <PostHeader post={post} />
       <PostImage post={post} />
-      <PostFooter />
+      <PostFooter post={post}/>
       <PostCaption post={post} />
     </View>
   );
@@ -85,17 +86,28 @@ function PostImage({ post }: any) {
   );
 }
 
-function PostFooter() {
+
+
+function PostFooter({ post }: any) {
+  const [liked,setLiked] = useState(post.liked)
   return (
     <View style={{ flexDirection: 'row', marginVertical: 7 }}>
       <View style={styles.leftFooterIconsContainer}>
         <Icon
           imgStyle={styles.footerIcon}
-          imgUrl={postFooterIcons[0].imageUrl}
+          imgUrl={liked?postFooterIcons[0].imageUrl:postFooterIcons[0].likedImageUrl}
+          onpress={()=>{
+            setLiked(!liked)
+            likePost(post.id)
+            console.log(liked)
+          }}
         />
         <Icon
           imgStyle={styles.footerIcon}
           imgUrl={postFooterIcons[1].imageUrl}
+          onpress={()=>{
+            navigation.navigate('Comment',post);
+          }}
         />
         <Icon
           imgStyle={styles.footerIcon}
@@ -112,7 +124,7 @@ function PostFooter() {
   );
 }
 
-function PostCaption({ post }: any) {
+export function PostCaption({ post }: any) {
   return (
     <View style={{}}>
       <Text>
@@ -123,9 +135,10 @@ function PostCaption({ post }: any) {
   );
 }
 
-function Icon({ imgStyle, imgUrl }: any) {
+function Icon({ imgStyle, imgUrl , onpress}: any) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity 
+      onPress = {onpress}>
       <Image style={imgStyle} source={imgUrl} />
     </TouchableOpacity>
   );
