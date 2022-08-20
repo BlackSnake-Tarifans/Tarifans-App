@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import Header from '../components/Elementos/Header';
 import Post from '../components/Home/Post';
+import { getFeed } from '../hooks/backendAPI';
 
 /*const POSTS = [
   {
@@ -38,7 +39,7 @@ import Post from '../components/Home/Post';
     ],
   },
 ];*/
-const POSTS = [
+/*const POSTS = [
   {
       id: 1,
       media_set: [
@@ -48,7 +49,7 @@ const POSTS = [
               height: null,
               width: null,
               duration: null,
-              file: "http://bb40-190-63-214-62.ngrok.io/media/posts/sakurai_14.jpg",
+              file: "https://bb40-190-63-214-62.ngrok.io/media/posts/sakurai_14.jpg",
               post: 1
           },
           {
@@ -57,7 +58,7 @@ const POSTS = [
               height: null,
               width: null,
               duration: null,
-              file: "http://bb40-190-63-214-62.ngrok.io/media/posts/natsu-lucy-happy-navidad.jpg",
+              file: "https://bb40-190-63-214-62.ngrok.io/media/posts/natsu-lucy-happy-navidad.jpg",
               post: 1
           }
       ],
@@ -82,7 +83,7 @@ const POSTS = [
       total_likes: 0,
       total_comments: 0,
       subscription_plan: 1
-  },];
+  },];*/
 // const POSTS={POST.map((post,index)=> (<Post post={post} key={index}/> ))}
 
 const styles = StyleSheet.create({
@@ -93,6 +94,19 @@ const styles = StyleSheet.create({
 });
 
 function HomeScreen({ navigation }: any) {
+  const [POSTS, setPOSTS] : any = useState([]);
+
+  useEffect(() => {
+    // Runs ONCE after initial rendering
+    getFeed().then(
+      (data : any) =>{
+        console.log(data)
+        setPOSTS(data.data)
+      }
+    )
+  }, []);
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />

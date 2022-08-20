@@ -56,4 +56,8 @@ export const likePost = async (obj: any) => {
   return axios.post<any>(`${apiUrl}/posts/media`, obj);
 };*/
 
+
+export const getFeed = async () => {
+  return axios.get<any>(`${apiUrl}/posts/public/`);
+}
 export default apiUrl;
