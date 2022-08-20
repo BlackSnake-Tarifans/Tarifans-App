@@ -53,6 +53,7 @@ function AuthProvider({ children }: any) {
   const clearAuth = async () => {
     try {
       await AsyncStorage.clear();
+      localStorage.removeItem('auth')
     } catch (e) {
       alert('Failed to clear the async storage.');
     } finally {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
 
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
+import { AuthContext, AuthProvider } from '../redux/AuthProvider';
 
 const VALORES = {
   id: 1,
@@ -130,6 +131,8 @@ const styles = StyleSheet.create({
 function SettingsScreen({ route, navigation }: any) {
   // const { id } = route.params;
 
+  const ctx :any = useContext(AuthContext)
+
   const [name, onChangeName] = useState('New Category');
   const [description, onChangeDescription] = useState(
     'Todo lo que deseas y más',
@@ -193,7 +196,7 @@ function SettingsScreen({ route, navigation }: any) {
         <View style={styles.ViewEnd}>
           <View style={styles.Botones}>
             <Boton
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => {navigation.navigate('Login'); ctx.clearAuth();}}
               title="Cerrar sesión"
               anchura={180}
               altura={45}

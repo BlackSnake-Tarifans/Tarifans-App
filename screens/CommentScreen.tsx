@@ -4,7 +4,7 @@ import { PostCaption } from "../components/Home/Post";
 import { View } from "../components/Themed";
 import { loadComments, commentPost } from "../hooks/postsAPI";
 
-const[reducerValue, forceUpdate] = useReducer(x=>x+1,0)
+
 
 const styles = StyleSheet.create({
     SectionStyle: {
@@ -62,6 +62,9 @@ function WriteComment(post : any){
 }
 
 function CommentScreen({ navigation, post }: any) {
+  const[reducerValue, forceUpdate] = useReducer(x=>x+1,0)
+
+  
     return (
       <View style={{ marginBottom: 30, marginHorizontal: 30 }}>
          <ScrollView >
