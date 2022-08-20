@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { likePost } from '../../hooks/postsAPI';
+import { ImgCard } from '../Elementos/ImgCard';
+
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width * 0.95;
 
 const styles = StyleSheet.create({
   footerIcon: {
@@ -22,6 +26,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginLeft: 'auto',
   },
+  thumbnail: {
+    width: (deviceWidth -1) / 2.5,
+    height: deviceHeight / 1.5,
+    borderColor: 'purple',
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 2,
+    resizeMode: "contain"
+  }
 });
 
 const postFooterIcons = [
@@ -77,11 +90,19 @@ function PostHeader({ post }: any) {
 
 function PostImage({ post }: any) {
   return (
-    <View style={{ width: '100%', height: 450 }}>
-      <Image
-        source={post.imageUrl}
-        style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
-      />
+    <View style={{ justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap', }}>
+       {post.media_set.map((urls: any, index: any) => (
+            <View key={index} style={{ margin: 1 }}>
+              <TouchableOpacity
+                activeOpacity={1}
+               
+              >
+                <Image source={{ uri: urls.file }} style={styles.thumbnail} />
+              </TouchableOpacity>
+            </View>
+          ))}
     </View>
   );
 }
@@ -128,9 +149,9 @@ export function PostCaption({ post }: any) {
   return (
     <View style={{}}>
       <Text>
-        <Text style={{ fontWeight: 'bold' }}>{post.user}</Text>
-        <Text>{` ${post.caption}`}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{post.title}</Text>
       </Text>
+      <Text>{`${post.description}`}</Text>
     </View>
   );
 }
