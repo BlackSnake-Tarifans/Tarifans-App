@@ -1,21 +1,26 @@
-import React, { useReducer } from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, TextInput } from "react-native";
+import React, { useEffect, useReducer, useState } from "react";
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TextInput } from "react-native";
+import BackButton from "../components/Elementos/BackButtom";
 import { PostCaption } from "../components/Home/Post";
 import { View } from "../components/Themed";
-import { loadComments, commentPost } from "../hooks/postsAPI";
+import { loadComments, Comments } from "../hooks/postsAPI";
+import styles from '../components/Styles/HeaderDiferenteStyle';
+import HeaderDiferente from "../components/Elementos/HeaderDiferente";
 
 
 
-const styles = StyleSheet.create({
+const stylesComment = StyleSheet.create({
     SectionStyle: {
-        flexDirection: 'row',
-        height: 50,
-        width: Dimensions.get('window').width * 0.8,
-        maxWidth: 800,
+        //: 30,
+        width: Dimensions.get('window').width * .9,
+        marginHorizontal: 20,
+        //maxWidth: 800,
         marginTop: 10,
         borderRadius: 15,
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
-        padding: 10,
+        //padding: 10,
+        alignItems: "center",
+        justifyContent: "flex-end",
       },
     commentBlock:{
       marginTop: 10,
@@ -24,56 +29,92 @@ const styles = StyleSheet.create({
     comment:{
       marginBottom: 10
     },
+    container: {
+      backgroundColor: 'white',
+      flex: 1,
+    },
+    vistascreen: { 
+      marginBottom: 30, 
+      marginHorizontal: 30, 
+      height: "100%",
+      flexDirection: 'column', 
+      justifyContent:"space-between"},
+    
+    writeComment: {
+      alignSelf: 'stretch', 
+      height: 30, 
+      width: "90%", 
+      marginBottom:20,
+      marginTop: 5,}
+      ,
 
 
 });
 
-async function Comments(post : any){
-    const result = await loadComments(post.id)
-    const comments = JSON.parse(result.data)
-
-    return ( comments.map((item : any) => (
-      <View>
-        <Text><b>{item.username}</b> {"  "} {item.comment}</Text>
-      </View>
-    )))
+function CommentItem(comment : any){
+    return (
+      <Text style={{marginBottom: 5}}>
+        <Text style={{ fontWeight: 'bold' }}>{comment.comment.username} {" "}</Text>
+        <Text style={{ }}>{comment.comment.comment} {}</Text>
+      </Text>
+    );
 }
 
 
 
-function WriteComment(post : any){
-  const [user, onChangeComment] = React.useState('');
+function WriteComment({update,onSubmitComment,id} : any){
+  const [comentario, onChangeComment] = React.useState('');
     return(
-        <View>
-            <View style={styles.SectionStyle}>
+            <View style={stylesComment.SectionStyle}>
               <TextInput
-                style={{ flex: 1 }}
-                placeholder="Nombre de usuario"
+                style={stylesComment.writeComment}
+                value={comentario}
+                placeholder=" Comentario "
                 placeholderTextColor="#9D9D9E"
                 onChangeText={text => onChangeComment(text)}
-                onSubmitEditing={text => {
-                    //commentPost(post.id)
+                onSubmitEditing={() => {
+                  Comments( id,{
+                    comment: comentario,
+                  })
+                  onChangeComment('')
+                  onSubmitComment(update+1)
                   }
                 }
               />
             </View>
-        </View>
     )
 }
 
-function CommentScreen({ navigation, post }: any) {
-  const[reducerValue, forceUpdate] = useReducer(x=>x+1,0)
-
-  
-    return (
-      <View style={{ marginBottom: 30, marginHorizontal: 30 }}>
-         <ScrollView >
-          <PostCaption post={post}/>
-        </ScrollView>
-        <View style={{ alignSelf: 'flex-end'}}>
-          <WriteComment post={post}/>
-        </View>
+function CommentScreen({ route, navigation}: any) {
+  const [COMMENTS, setCOMMENTS] : any = useState([]);
+  const [update, onSubmitComment] = React.useState(0);
+  useEffect(() => {
+    loadComments(post.id).then(
+      (data : any) =>{
+        console.log(data)
+        setCOMMENTS(data.data)
+      }
+    )
+  }, [update]);
+  const { post } = route.params;
+    
+  return (
+      <SafeAreaView style={stylesComment.container}>
+      <View style={{backgroundColor: "#F28E43", alignItems: "flex-start", paddingLeft: 5}}>
+        <BackButton onPress={() => navigation.goBack()} />
       </View>
+      <View style={stylesComment.vistascreen}>
+         <ScrollView >
+          <View style={{marginBottom: 9, marginTop: 9}}>
+          <PostCaption post={post} />
+          </View>
+          {COMMENTS.map((comment:any) => (
+            <CommentItem comment={comment} />
+          ))}
+        </ScrollView>
+        <WriteComment update={update} onSubmitComment={onSubmitComment} id={post.id} style={{}}/>
+      </View>
+      </SafeAreaView>
     );
   }
 

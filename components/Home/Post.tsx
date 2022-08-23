@@ -64,7 +64,7 @@ function Post({ post, navigation }: any) {
       <Divider />
       <PostHeader post={post} />
       <PostImage post={post} />
-      <PostFooter post={post}/>
+      <PostFooter post={post} navigation={navigation}/>
       <PostCaption post={post} />
     </View>
   );
@@ -109,7 +109,7 @@ function PostImage({ post }: any) {
 
 
 
-function PostFooter({ post }: any) {
+function PostFooter({ navigation, post }: any) {
   const [liked,setLiked] = useState(post.liked)
   return (
     <View style={{ flexDirection: 'row', marginVertical: 7 }}>
@@ -120,9 +120,9 @@ function PostFooter({ post }: any) {
           onpress={()=>{
             setLiked(!liked);
             if(liked){
-              dislikePost(post.id)
-            }else{
               likePost(post.id)
+            }else{
+              dislikePost(post.id)
             }
             console.log(liked)
           }}
@@ -131,7 +131,7 @@ function PostFooter({ post }: any) {
           imgStyle={styles.footerIcon}
           imgUrl={postFooterIcons[1].imageUrl}
           onpress={()=>{
-            navigation.navigate('Comment',post);
+            navigation.navigate('Comment',{post});
           }}
         />
         <Icon
