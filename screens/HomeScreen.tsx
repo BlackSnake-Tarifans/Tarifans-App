@@ -42,7 +42,7 @@ import { getFeed } from '../hooks/backendAPI';
 /*const POSTS = [
   {
       id: 1,
-      media_set: [
+      multimedia: [
           {
               id: 1,
               type: 1,
@@ -73,7 +73,7 @@ import { getFeed } from '../hooks/backendAPI';
       subscription_plan: 1
   } ,{
       id: 9,
-      media_set: [],
+      multimedia: [],
       created_at: "2022-06-28T18:54:53.110279-05:00",
       is_active: true,
       description: "Z",

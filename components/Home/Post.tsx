@@ -93,7 +93,7 @@ function PostImage({ post }: any) {
     <View style={{ justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap', }}>
-       {post.media_set.map((urls: any, index: any) => (
+       {post.multimedia.map((urls: any, index: any) => (
             <View key={index} style={{ margin: 1 }}>
               <TouchableOpacity
                 activeOpacity={1}
