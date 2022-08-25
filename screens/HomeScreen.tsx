@@ -111,8 +111,8 @@ function HomeScreen({ navigation }: any) {
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />
       <ScrollView>
-        {POSTS.map((post:any) => (
-          <Post post={post} navigation={navigation} />
+        {POSTS.map((post:any, index: any) => (
+          <Post post={post} key={index} navigation={navigation} />
         ))}
       </ScrollView>
     </SafeAreaView>

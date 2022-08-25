@@ -3,7 +3,7 @@ import { Divider } from 'react-native-paper';
 import { Image, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { deletesavePost, dislikePost, likePost, savePost } from '../../hooks/postsAPI';
-import { ImgCard } from '../Elementos/ImgCard';
+import ImgSwiper from '../Elementos/ImgSwiper';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width * 0.95;
@@ -81,7 +81,7 @@ function PostHeader({ post }: any) {
     >
       <View>
         <Text style={{ color: 'gray', marginLeft: 5, fontWeight: '700' }}>
-          {post.fecha}
+          {post.updated_at.split(".")[0].split("T")[0]} , {post.updated_at.split(".")[0].split("T")[1]}
         </Text>
       </View>
     </View>
@@ -89,20 +89,19 @@ function PostHeader({ post }: any) {
 }
 
 function PostImage({ post }: any) {
+  let uris = [];
+  if (post.multimedia.length>0){
+    for(let media of post.multimedia){
+      if(media.file != null){
+        uris.push(media.file)
+      }
+    }
+  }
   return (
     <View style={{ justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap', }}>
-       {post.multimedia.map((urls: any, index: any) => (
-            <View key={index} style={{ margin: 1 }}>
-              <TouchableOpacity
-                activeOpacity={1}
-               
-              >
-                <Image source={{ uri: urls.file }} style={styles.thumbnail} />
-              </TouchableOpacity>
-            </View>
-          ))}
+    <ImgSwiper images={uris}/>
     </View>
   );
 }

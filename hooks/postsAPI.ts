@@ -5,8 +5,8 @@ export const postText = async (obj: any) => {
 return axios.post<any>(`${apiUrl}/posts/`, obj);
 };
 
-export const postMedia = async (obj: any) => {
-return axios.post<any>(`${apiUrl}/posts/media`, obj);
+export const postMedia = async (id: any, obj: any) => {
+return axios.put<any>(`${apiUrl}/posts/${id}/media/`, obj);
 };
 
 export const likePost = async (id: any) => {
