@@ -1,16 +1,17 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'transparent',
+    alignContent: 'flex-start'
   },
   backStyleImage: {
     position: 'relative',
-    height: 40,
+    height: 20,
     width: 40,
-    resizeMode: 'stretch',
-    alignItems: 'center',
-    alignSelf: 'center',
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
   },
 });

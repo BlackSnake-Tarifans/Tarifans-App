@@ -1,11 +1,9 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TextInput } from "react-native";
-import BackButton from "../components/Elementos/BackButtom";
 import { PostCaption } from "../components/Home/Post";
 import { View } from "../components/Themed";
 import { loadComments, Comments } from "../hooks/postsAPI";
-import styles from '../components/Styles/HeaderDiferenteStyle';
-import HeaderDiferente from "../components/Elementos/HeaderDiferente";
+import BackHeader from "../components/Elementos/BackHeader";
 
 
 
@@ -100,9 +98,7 @@ function CommentScreen({ route, navigation}: any) {
     
   return (
       <SafeAreaView style={stylesComment.container}>
-      <View style={{backgroundColor: "#F28E43", alignItems: "flex-start", paddingLeft: 5}}>
-        <BackButton onPress={() => navigation.goBack()} />
-      </View>
+      <BackHeader/>
       <View style={stylesComment.vistascreen}>
          <ScrollView >
           <View style={{marginBottom: 9, marginTop: 9}}>

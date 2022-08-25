@@ -38,6 +38,7 @@ import OptionsScreen from '../screens/OptionsScreen';
 import MySubsPlansScreen from '../screens/SubsPlansScreen';
 import BloquearScreen from '../screens/BloquearScreen';
 import CommentScreen from '../screens/CommentScreen';
+import SavedScreen from '../screens/SavedScreen';
 //import render from '../screens/Test';
 import {
   RootStackParamList,
@@ -248,7 +249,12 @@ function RootNavigator() {
         name="Comment"
         component={CommentScreen}
         options={{ headerShown: false }}
-      />      
+      />
+      <Stack.Screen
+        name="Saved"
+        component={SavedScreen}
+        options={{ headerShown: false }}
+      />           
     </Stack.Navigator>
   );
 }
