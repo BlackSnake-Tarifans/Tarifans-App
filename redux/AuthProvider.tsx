@@ -1,6 +1,10 @@
 import { useState, createContext, useEffect } from 'react';
-import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage, {
+  useAsyncStorage,
+} from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { Platform } from 'react-native';
+
 
 // Create a context
 const AuthContext = createContext({});
@@ -10,9 +14,8 @@ const configureAxiosHeaders = (token: any) => {
 };
 
 const removeHeaders = () => {
-  delete axios.defaults.headers.common["Authorization"];
-}
-
+  delete axios.defaults.headers.common.Authorization;
+};
 
 function AuthProvider({ children }: any) {
   const [auth, setAuthState] = useState({});
@@ -57,8 +60,16 @@ function AuthProvider({ children }: any) {
   // on Log Out
   const clearAuth = async () => {
     try {
-      await AsyncStorage.clear();
-      localStorage && localStorage.removeItem('auth')
+      const asyncStorageKeys = await AsyncStorage.getAllKeys();
+      if (asyncStorageKeys.length > 0) {
+        if (Platform.OS === 'android') {
+          await AsyncStorage.clear();
+        }
+        if (Platform.OS === 'ios') {
+          await AsyncStorage.multiRemove(asyncStorageKeys);
+        }
+      }
+      localStorage && localStorage.removeItem('auth');
       removeHeaders();
     } catch (e) {
       alert('Failed to clear the async storage.');
