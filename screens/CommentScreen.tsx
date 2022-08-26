@@ -4,6 +4,7 @@ import { PostCaption } from "../components/Home/Post";
 import { View } from "../components/Themed";
 import { loadComments, Comments } from "../hooks/postsAPI";
 import BackHeader from "../components/Elementos/BackHeader";
+import { black } from "react-native-paper/lib/typescript/styles/colors";
 
 
 
@@ -34,15 +35,19 @@ const stylesComment = StyleSheet.create({
     vistascreen: { 
       marginBottom: 30, 
       marginHorizontal: 30, 
-      height: "100%",
+      height: "90%",
       flexDirection: 'column', 
       justifyContent:"space-between"},
     
     writeComment: {
       alignSelf: 'stretch', 
+      justifyContent: "center",
+      borderWidth: 1,
+      borderColor: "#F28E43",
       height: 30, 
       width: "90%", 
       marginBottom:20,
+      borderRadius: 20,
       marginTop: 5,}
       ,
 
