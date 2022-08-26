@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    alignContent: 'flex-start'
+    alignContent: 'flex-start',
   },
   backStyleImage: {
     position: 'relative',

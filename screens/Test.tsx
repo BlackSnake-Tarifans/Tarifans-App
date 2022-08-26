@@ -1,4 +1,4 @@
-/*import React from 'react';
+/* import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, Image } from 'react-native';
 //import { DocumentPicker, ImagePicker } from 'expo';
 import * as DocumentPicker from 'expo-document-picker';
@@ -7,9 +7,9 @@ import { postMedia, postText } from '../hooks/backendAPI';
 
 /*const [selectedImage, setSelectedImage] = React.useState<any>({
   localUri: '',
-});*/
+}); */
 
-/*function Test() : any {
+/* function Test() : any {
     let state = {
       image: null,
     };
@@ -61,10 +61,10 @@ import { postMedia, postText } from '../hooks/backendAPI';
                         subscription_plan: 1,
                         title: "prueba",
                         description: "description2",
-                    })*/
-                    
-                      //console.log(localUri);
-                    /*if (response.status == 201) { // 201 == HTTP_CREATED
+                    }) */
+
+// console.log(localUri);
+/* if (response.status == 201) { // 201 == HTTP_CREATED
                       console.log(selectedImage.localUri);
                       let data = response.data
                       console.log(data); 
@@ -88,7 +88,7 @@ import { postMedia, postText } from '../hooks/backendAPI';
                       formData.append("post", "3")
                       console.log(formData);
                       //const response2 = await postMedia(formData)
-                    }*/
+                    } */
 /*    
                   }catch (error) {
                     
@@ -112,4 +112,4 @@ import { postMedia, postText } from '../hooks/backendAPI';
     justifyContent: 'center',
   },
 });
-}*/
+} */

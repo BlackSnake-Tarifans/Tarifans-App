@@ -147,8 +147,9 @@ function OptionsScreen({ route, navigation, navigation: { goBack } }: any) {
       <View style={styles.ViewEnd}>
         <View style={styles.ViewCancelar}>
           <TouchableOpacity
-            onPress={()=>{
-              navigation.navigate('Saved')}}
+            onPress={() => {
+              navigation.navigate('Saved');
+            }}
             style={styles.BotonStyle}
           >
             <Text style={styles.title}>Favoritos</Text>

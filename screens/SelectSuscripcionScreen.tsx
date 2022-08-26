@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import { useFonts, Rosario_400Regular } from '@expo-google-fonts/rosario';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, View } from '../components/Themed';
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
 import Boton from '../components/Elementos/Boton';
 import { creatorSusbscriptionPlans, suscribe } from '../hooks/backendAPI';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -185,51 +185,48 @@ const styles = StyleSheet.create({
 });
 
 // Datos de prueba
-const SUSCRIPCIONES =[
+const SUSCRIPCIONES = [
   {
-      "id": 1,
-      "fee": "0.00",
-      "currency": 1,
-      "label": "Free",
-      "is_active": true,
-      "description": null,
-      "content_creator": 1
+    id: 1,
+    fee: '0.00',
+    currency: 1,
+    label: 'Free',
+    is_active: true,
+    description: null,
+    content_creator: 1,
   },
   {
-      "id": 2,
-      "fee": "100.00",
-      "currency": 1,
-      "label": "Premium",
-      "is_active": true,
-      "description": null,
-      "content_creator": 1
+    id: 2,
+    fee: '100.00',
+    currency: 1,
+    label: 'Premium',
+    is_active: true,
+    description: null,
+    content_creator: 1,
   },
   {
-      "id": 3,
-      "fee": "10.00",
-      "currency": 1,
-      "label": "Basic",
-      "is_active": true,
-      "description": "",
-      "content_creator": 1
-  }
-]
+    id: 3,
+    fee: '10.00',
+    currency: 1,
+    label: 'Basic',
+    is_active: true,
+    description: '',
+    content_creator: 1,
+  },
+];
 
 function SelectSuscripcionScreen({ route, navigation }: any) {
   const Titulo = 'Seleccione una categoría';
   const [fontsLoaded] = useFonts({ Rosario_400Regular });
-  const [suscripciones, SetSuscripciones] = useState(SUSCRIPCIONES)
-  const {id} = route.params;
+  const [suscripciones, SetSuscripciones] = useState(SUSCRIPCIONES);
+  const { id } = route.params;
 
   useEffect(() => {
-    creatorSusbscriptionPlans(id).then( (data:any) =>{
+    creatorSusbscriptionPlans(id).then((data: any) => {
       console.log(data);
-      SetSuscripciones(data.data)
-    })
-  
-    
-  }, [])
-  
+      SetSuscripciones(data.data);
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -246,7 +243,7 @@ function SelectSuscripcionScreen({ route, navigation }: any) {
   );
 }
 
-function Suscripciones({ navigation, res , id}: any) {
+function Suscripciones({ navigation, res, id }: any) {
   return (
     <ScrollView contentContainerStyle={styles.ViewMiddle}>
       {res.map((suscripcion: any, index: any) => (
@@ -308,21 +305,19 @@ function SuscData({ suscripcion, navigation, id }: any) {
                 onPress={async () => {
                   !modalVisible;
                   const authDataString =
-                    (await AsyncStorage.getItem('auth')) || localStorage.getItem('auth');
+                    (await AsyncStorage.getItem('auth')) ||
+                    localStorage.getItem('auth');
                   const authData = JSON.parse(authDataString as string) || {};
 
-                  let obj = {
+                  const obj = {
                     content_creator: id,
                     plan: suscripcion.id,
-                    subscriber: authData.profile_id
-                  }
-                  suscribe(obj).then(
-                    () =>{
-                      console.log(obj);
-                      navigation.navigate('Profile', {id: id});
-                    }
-                  )
-                  
+                    subscriber: authData.profile_id,
+                  };
+                  suscribe(obj).then(() => {
+                    console.log(obj);
+                    navigation.navigate('Profile', { id });
+                  });
                 }}
                 title="Confirmar"
                 anchura={240}

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 function SettingsScreen({ route, navigation }: any) {
   // const { id } = route.params;
 
-  const ctx :any = useContext(AuthContext)
+  const ctx: any = useContext(AuthContext);
 
   const [name, onChangeName] = useState('New Category');
   const [description, onChangeDescription] = useState(
@@ -197,9 +197,11 @@ function SettingsScreen({ route, navigation }: any) {
                 style={[{ fontSize: 15, marginTop: 5 }]}
               />
             </View>
-            <TouchableOpacity style={styles.SectionStyleButton} 
-              onPress={()=>{
-                navigation.navigate('Saved')}}
+            <TouchableOpacity
+              style={styles.SectionStyleButton}
+              onPress={() => {
+                navigation.navigate('Saved');
+              }}
             >
               <Text style={styles.TextfileTitleButton}>Posts Guardados</Text>
             </TouchableOpacity>
@@ -209,7 +211,10 @@ function SettingsScreen({ route, navigation }: any) {
         <View style={styles.ViewEnd}>
           <View style={styles.Botones}>
             <Boton
-              onPress={() => {navigation.navigate('Login'); ctx.clearAuth();}}
+              onPress={() => {
+                navigation.navigate('Login');
+                ctx.clearAuth();
+              }}
               title="Cerrar sesión"
               anchura={180}
               altura={45}

@@ -11,10 +11,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import HeaderDiferente from '../components/Elementos/HeaderDiferente';
-import Boton from '../components/Elementos/Boton';
 import { MultipleSelectPicker } from 'react-native-multi-select-picker';
 import Modal from 'react-native-modal';
+import HeaderDiferente from '../components/Elementos/HeaderDiferente';
+import Boton from '../components/Elementos/Boton';
 
 const VALORES = {
   id: 1,
@@ -34,7 +34,7 @@ const VALORES = {
 };
 
 const OBSERVACIONES = {
-  obs: "* No pueda acceder a tu perfil\n* No pueda enviarte mensajes privados\n* No pueda ver ni interactuar con tus publicaciones\n* No pueda acceder a la información de tu perfil"
+  obs: '* No pueda acceder a tu perfil\n* No pueda enviarte mensajes privados\n* No pueda ver ni interactuar con tus publicaciones\n* No pueda acceder a la información de tu perfil',
 };
 const dimensions = Dimensions.get('window');
 const deviceWidth = dimensions.width;
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   Botones: {
     marginTop: 30,
     backgroundColor: 'transparent',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   ProfileView: {
     backgroundColor: 'transparent',
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     borderWidth: 1,
     borderColor: '#b3b3b3',
-    marginTop: 10
+    marginTop: 10,
   },
   title: {
     fontSize: 20,
@@ -194,41 +194,39 @@ function CreateCateScreen({ route, navigation }: any) {
       setModalVisible(!modalVisible);
     }
   };
-  const items = [
-    { label: 'Bloquear a este usuario para que:', value: '1' }
-  ];
-  
+  const items = [{ label: 'Bloquear a este usuario para que:', value: '1' }];
+
   return (
     <SafeAreaView style={styles.container}>
       <Modal
-          hasBackdrop
-          isVisible={modalVisible}
-          onBackdropPress={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.modalV}>
-            <Text
-              style={{
-                padding: 10,
-                fontSize: 20,
-                fontFamily: 'RosarioRegular',
-                color: '#949494',
-                textAlign: 'center',
-              }}
-            >
-              {modalText}
-            </Text>
-            <Boton
-              onPress={() => {
-                manejarCambio();
-              }}
-              title={changeText}
-              anchura={120}
-              altura={45}
-            />
-          </View>
-        </Modal>
+        hasBackdrop
+        isVisible={modalVisible}
+        onBackdropPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalV}>
+          <Text
+            style={{
+              padding: 10,
+              fontSize: 20,
+              fontFamily: 'RosarioRegular',
+              color: '#949494',
+              textAlign: 'center',
+            }}
+          >
+            {modalText}
+          </Text>
+          <Boton
+            onPress={() => {
+              manejarCambio();
+            }}
+            title={changeText}
+            anchura={120}
+            altura={45}
+          />
+        </View>
+      </Modal>
       <ScrollView>
         <View style={styles.ViewTop}>
           <HeaderDiferente
@@ -243,42 +241,39 @@ function CreateCateScreen({ route, navigation }: any) {
         </View>
 
         <View style={styles.ViewMiddle}>
-
-        <ScrollView>
-              <TouchableOpacity
-                onPress={() => {
-                  setIsShownPicker(!isShownPicker);
+          <ScrollView>
+            <TouchableOpacity
+              onPress={() => {
+                setIsShownPicker(!isShownPicker);
+              }}
+            />
+            {isShownPicker ? (
+              <MultipleSelectPicker
+                items={items}
+                onSelectionsChange={(ele: any) => {
+                  setSelectedItems(ele);
                 }}
-              >
-              </TouchableOpacity>
-              {isShownPicker ? (
-                <MultipleSelectPicker
-                  items={items}
-                  onSelectionsChange={(ele: any) => {
-                    setSelectedItems(ele);
-                  }}
-                  selectedItems={selectectedItems}
-                  buttonStyle={{
-                    height: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                  buttonText="hello"
-                  checkboxStyle={styles.CheckBoxStyle}
-                  rowStyle={{ backgroundColor: 'transparent' }}
-                />
-              ) : null}
+                selectedItems={selectectedItems}
+                buttonStyle={{
+                  height: 100,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                buttonText="hello"
+                checkboxStyle={styles.CheckBoxStyle}
+                rowStyle={{ backgroundColor: 'transparent' }}
+              />
+            ) : null}
 
-              {(selectectedItems || []).map((item: any, index) => {
-                return (
-                  <Text style={{ color: '#b3b3b3' }} key={index}>
-                    {item.label}
-                  </Text>
-                );
-              })}
-            </ScrollView>
-            <Text style={styles.textoBio}>{OBSERVACIONES.obs}</Text>
-
+            {(selectectedItems || []).map((item: any, index) => {
+              return (
+                <Text style={{ color: '#b3b3b3' }} key={index}>
+                  {item.label}
+                </Text>
+              );
+            })}
+          </ScrollView>
+          <Text style={styles.textoBio}>{OBSERVACIONES.obs}</Text>
         </View>
 
         <View style={styles.ViewEnd}>

@@ -5,7 +5,6 @@ import AsyncStorage, {
 import axios from 'axios';
 import { Platform } from 'react-native';
 
-
 // Create a context
 const AuthContext = createContext({});
 
@@ -60,6 +59,7 @@ function AuthProvider({ children }: any) {
   // on Log Out
   const clearAuth = async () => {
     try {
+      removeHeaders();
       const asyncStorageKeys = await AsyncStorage.getAllKeys();
       if (asyncStorageKeys.length > 0) {
         if (Platform.OS === 'android') {
@@ -70,7 +70,6 @@ function AuthProvider({ children }: any) {
         }
       }
       localStorage && localStorage.removeItem('auth');
-      removeHeaders();
     } catch (e) {
       alert('Failed to clear the async storage.');
     } finally {

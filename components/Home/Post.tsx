@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Divider } from 'react-native-paper';
-import { Image, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import { Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Text, View } from '../../components/Themed';
-import { deletesavePost, dislikePost, likePost, savePost } from '../../hooks/postsAPI';
+import {
+  deletesavePost,
+  dislikePost,
+  likePost,
+  savePost,
+} from '../../hooks/postsAPI';
 import ImgSwiper from '../Elementos/ImgSwiper';
 
 const deviceHeight = Dimensions.get('window').height;
@@ -27,14 +32,14 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   thumbnail: {
-    width: (deviceWidth -1) / 2.5,
+    width: (deviceWidth - 1) / 2.5,
     height: deviceHeight / 1.5,
     borderColor: 'purple',
     borderWidth: 1,
     borderRadius: 10,
     margin: 2,
-    resizeMode: "contain"
-  }
+    resizeMode: 'contain',
+  },
 });
 
 const postFooterIcons = [
@@ -64,7 +69,7 @@ function Post({ post, navigation }: any) {
       <Divider />
       <PostHeader post={post} />
       <PostImage post={post} />
-      <PostFooter post={post} navigation={navigation}/>
+      <PostFooter post={post} navigation={navigation} />
       <PostCaption post={post} />
     </View>
   );
@@ -81,7 +86,8 @@ function PostHeader({ post }: any) {
     >
       <View>
         <Text style={{ color: 'gray', marginLeft: 5, fontWeight: '700' }}>
-          {post.updated_at.split(".")[0].split("T")[0]} , {post.updated_at.split(".")[0].split("T")[1]}
+          {post.updated_at.split('.')[0].split('T')[0]} ,{' '}
+          {post.updated_at.split('.')[0].split('T')[1]}
         </Text>
       </View>
     </View>
@@ -89,62 +95,69 @@ function PostHeader({ post }: any) {
 }
 
 function PostImage({ post }: any) {
-  let uris = [];
-  if (post.multimedia.length>0){
-    for(let media of post.multimedia){
-      if(media.file != null){
-        uris.push(media.file)
+  const uris = [];
+  if (post.multimedia.length > 0) {
+    for (const media of post.multimedia) {
+      if (media.file != null) {
+        uris.push(media.file);
       }
     }
   }
   return (
-    <View style={{ justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap', }}>
-    <ImgSwiper images={uris}/>
+    <View
+      style={{
+        justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+      }}
+    >
+      <ImgSwiper images={uris} />
     </View>
   );
 }
 
-
-
 function PostFooter({ navigation, post }: any) {
-  const [liked,setLiked] = useState(post.liked_by_me)
-  const [fav, setFavorite] = useState(post.saved_to_favs)
-  //console.log(post.saved_to_favs)
+  const [liked, setLiked] = useState(post.liked_by_me);
+  const [fav, setFavorite] = useState(post.saved_to_favs);
+  // console.log(post.saved_to_favs)
   return (
     <View style={{ flexDirection: 'row', marginVertical: 7 }}>
       <View style={styles.leftFooterIconsContainer}>
         <Icon
           imgStyle={styles.footerIcon}
-          imgUrl={liked?postFooterIcons[0].likedImageUrl:postFooterIcons[0].imageUrl}
-          onpress={()=>{
-            if(!liked){
-              //console.log("liking")
-              likePost(post.id)
-            }else{
-              //console.log("disliking")
-              dislikePost(post.id)
+          imgUrl={
+            liked
+              ? postFooterIcons[0].likedImageUrl
+              : postFooterIcons[0].imageUrl
+          }
+          onpress={() => {
+            if (!liked) {
+              // console.log("liking")
+              likePost(post.id);
+            } else {
+              // console.log("disliking")
+              dislikePost(post.id);
             }
             setLiked(!liked);
-            
           }}
         />
         <Icon
           imgStyle={styles.footerIcon}
           imgUrl={postFooterIcons[1].imageUrl}
-          onpress={()=>{
-            navigation.navigate('Comment',{post});
+          onpress={() => {
+            navigation.navigate('Comment', { post });
           }}
         />
         <Icon
           imgStyle={styles.footerIcon}
-          imgUrl={fav?postFooterIcons[2].savedImageUrl:postFooterIcons[2].imageUrl}
-          onpress={()=>{
-            if(!fav){
-              savePost(post.id)
-            }else{
-              deletesavePost(post.id)
+          imgUrl={
+            fav ? postFooterIcons[2].savedImageUrl : postFooterIcons[2].imageUrl
+          }
+          onpress={() => {
+            if (!fav) {
+              savePost(post.id);
+            } else {
+              deletesavePost(post.id);
             }
             setFavorite(!fav);
           }}
@@ -161,22 +174,21 @@ function PostFooter({ navigation, post }: any) {
 }
 
 export function PostCaption({ post }: any) {
-  console.log(post.username)
+  console.log(post.username);
   return (
     <View style={{}}>
       <Text>
-        <Text style={{ fontWeight: 'bold' }}>{post.username} {" "} </Text>
-        <Text >{post.title}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{post.username} </Text>
+        <Text>{post.title}</Text>
       </Text>
       <Text>{`${post.description}`}</Text>
     </View>
   );
 }
 
-function Icon({ imgStyle, imgUrl , onpress}: any) {
+function Icon({ imgStyle, imgUrl, onpress }: any) {
   return (
-    <TouchableOpacity 
-      onPress = {onpress}>
+    <TouchableOpacity onPress={onpress}>
       <Image style={imgStyle} source={imgUrl} />
     </TouchableOpacity>
   );

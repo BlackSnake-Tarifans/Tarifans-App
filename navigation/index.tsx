@@ -39,7 +39,7 @@ import MySubsPlansScreen from '../screens/SubsPlansScreen';
 import BloquearScreen from '../screens/BloquearScreen';
 import CommentScreen from '../screens/CommentScreen';
 import SavedScreen from '../screens/SavedScreen';
-//import render from '../screens/Test';
+// import render from '../screens/Test';
 import {
   RootStackParamList,
   RootTabParamList,
@@ -144,19 +144,17 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-         
         component={PaginaInicio}
-        //component={HomeTabs}
+        // component={HomeTabs}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="HomeTabs"
-         
         component={HomeTabs}
         options={{ headerShown: false }}
       />
-      
+
       <Stack.Screen
         name="Inicio"
         component={PaginaInicio}
@@ -261,7 +259,7 @@ function RootNavigator() {
         name="Saved"
         component={SavedScreen}
         options={{ headerShown: false }}
-      />           
+      />
     </Stack.Navigator>
   );
 }

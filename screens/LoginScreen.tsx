@@ -202,20 +202,20 @@ const styles = StyleSheet.create({
 });
 
 function LoginScreen({ navigation }: any) {
-  const ctx :any = useContext(AuthContext);
+  const ctx: any = useContext(AuthContext);
   const isFocused = useIsFocused();
   useEffect(() => {
     // Runs ONCE after initial rendering
-    if(isFocused){
+    if (isFocused) {
       ctx.clearAuth();
     }
   }, [isFocused]);
-  
+
   const route = useRoute();
   const [user, onChangeUser] = React.useState('');
   const [pass, onChangePass] = React.useState('');
   const [animating, setAnimating] = React.useState(false);
-  const auth : any = useContext(AuthContext);
+  const auth: any = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     RosarioRegular: require('@expo-google-fonts/rosario/Rosario_400Regular.ttf'),
   });
@@ -303,10 +303,9 @@ function LoginScreen({ navigation }: any) {
                       // 201 == HTTP_CREATED
                       const { data } = response;
                       console.log(data);
-                      //setAnimating(false);
-                      auth.setAuth(data)
-                      navigation.navigate("HomeTabs");
-                      
+                      // setAnimating(false);
+                      auth.setAuth(data);
+                      navigation.navigate('HomeTabs');
                     } else if (response.status >= 400) {
                       Alert.alert(
                         'Error: No se ha encontrado un usuario con dichas credenciales ',

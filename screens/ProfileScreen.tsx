@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: 'transparent',
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   BotonAcciones: {
     alignItems: 'center',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     borderWidth: 1,
     borderColor: '#b3b3b3',
-    marginTop: 10
+    marginTop: 10,
   },
   Info: {
     width: deviceWidth - 80,
@@ -203,20 +203,17 @@ const Cuerpo = () => {
         </View>
         <View> */
 function ProfileScreen({ route, navigation }: any) {
+  const [following, setFollowing] = useState(true);
+  const [profile, setProfile]: any = useState(VALORES);
 
-  const [following, setFollowing] = useState(true)
-  const [profile, setProfile] : any = useState(VALORES);
-
-  const {id} = route.params
+  const { id } = route.params;
   useEffect(() => {
     // Runs ONCE after initial rendering
-    consultainformacioncreador(id).then(
-      (data : any) =>{
-        console.log(data)
-        setProfile(data.data)
-        setFollowing(data.data.follow)
-      }
-    )
+    consultainformacioncreador(id).then((data: any) => {
+      console.log(data);
+      setProfile(data.data);
+      setFollowing(data.data.follow);
+    });
   }, [route.params]);
 
   return (
@@ -235,19 +232,25 @@ function ProfileScreen({ route, navigation }: any) {
         </View>
         <View style={styles.ViewMiddle}>
           <View style={styles.Botones}>
-            {!following && <Boton
-              onPress={() => navigation.navigate('SelectSusc', {id: id})}
-              title="Seguir"
-              anchura={140}
-              altura={45}
-            />}
+            {!following && (
+              <Boton
+                onPress={() => navigation.navigate('SelectSusc', { id })}
+                title="Seguir"
+                anchura={140}
+                altura={45}
+              />
+            )}
 
-            {following && <Boton
-              onPress={() => {setFollowing(false)}}
-              title="Dejar de seguir"
-              anchura={140}
-              altura={45}
-            />}
+            {following && (
+              <Boton
+                onPress={() => {
+                  setFollowing(false);
+                }}
+                title="Dejar de seguir"
+                anchura={140}
+                altura={45}
+              />
+            )}
             <TouchableOpacity
               onPress={() => navigation.navigate('Bloquear')}
               style={styles.BotonAcciones}

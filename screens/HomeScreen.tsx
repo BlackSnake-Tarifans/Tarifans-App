@@ -5,7 +5,7 @@ import Header from '../components/Elementos/Header';
 import Post from '../components/Home/Post';
 import { getFeed } from '../hooks/backendAPI';
 
-/*const POSTS = [
+/* const POSTS = [
   {
     id: 1,
     imageUrl: require('../assets/images/fotos/fotoejemplo.png'),
@@ -38,8 +38,8 @@ import { getFeed } from '../hooks/backendAPI';
       },
     ],
   },
-];*/
-/*const POSTS = [
+]; */
+/* const POSTS = [
   {
       id: 1,
       multimedia: [
@@ -83,7 +83,7 @@ import { getFeed } from '../hooks/backendAPI';
       total_likes: 0,
       total_comments: 0,
       subscription_plan: 1
-  },];*/
+  },]; */
 // const POSTS={POST.map((post,index)=> (<Post post={post} key={index}/> ))}
 
 const styles = StyleSheet.create({
@@ -94,24 +94,21 @@ const styles = StyleSheet.create({
 });
 
 function HomeScreen({ navigation }: any) {
-  const [POSTS, setPOSTS] : any = useState([]);
+  const [POSTS, setPOSTS]: any = useState([]);
 
   useEffect(() => {
     // Runs ONCE after initial rendering
-    getFeed().then(
-      (data : any) =>{
-        console.log(data)
-        setPOSTS(data.data)
-      }
-    )
+    getFeed().then((data: any) => {
+      console.log(data);
+      setPOSTS(data.data);
+    });
   }, []);
-  
 
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />
       <ScrollView>
-        {POSTS.map((post:any, index: any) => (
+        {POSTS.map((post: any, index: any) => (
           <Post post={post} key={index} navigation={navigation} />
         ))}
       </ScrollView>

@@ -13,7 +13,7 @@ import { consultarCreadores } from '../hooks/backendAPI';
 import { Text, View } from '../components/Themed';
 import Navigation from '../navigation';
 import { AuthContext } from '../redux/AuthProvider';
-//import {};
+// import {};
 
 const styles = StyleSheet.create({
   headercontainer: {
@@ -97,8 +97,8 @@ function Header({ navigation }: any) {
 }
 
 function Result({ navigation }: any) {
-  const ctx :any = useContext(AuthContext)
-  const auth = ctx.auth
+  const ctx: any = useContext(AuthContext);
+  const { auth } = ctx;
   const [RESULTS, setResults] = useState([]);
   const al = useSelector(state => {
     return state;
@@ -124,11 +124,8 @@ function Result({ navigation }: any) {
             placeholder="Ingrese el nombre del creador..."
             placeholderTextColor="gray"
             onChangeText={text => {
-              console.log(auth)
-              consultarCreadores(
-                text,
-                auth.token,
-              )
+              console.log(auth);
+              consultarCreadores(text, auth.token)
                 .then(res => {
                   return res.data;
                 })
@@ -169,7 +166,7 @@ function Perfil({ result }: any) {
       <Image
         style={styles.resultadoimg}
         source={{
-          uri: `https://2454-191-99-93-50.ngrok.io${result.profile_pic}`,
+          uri: `https://bb40-190-63-214-62.ngrok.io${result.profile_pic}`,
         }}
       />
       <Text>

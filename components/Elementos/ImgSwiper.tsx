@@ -10,10 +10,10 @@ function ImgSwiper({ images }: any) {
   return (
     <View
       style={{
-        backgroundColor: "white",
+        backgroundColor: 'white',
         borderColor: 'purple',
         borderWidth: 1,
-        height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth*1.25,
+        height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth * 1.25,
         width: deviceWidth > 500 ? deviceWidth / 2 : deviceWidth * 0.9,
       }}
     >
@@ -29,19 +29,14 @@ function ImgSwiper({ images }: any) {
         }}
       >
         {images.map((img: any, index: any) => (
-          <View
-            key={index}
-            style={{  
-              
-      
-          }}
-          >
+          <View key={index} style={{}}>
             <Image
               style={{
                 maxWidth: '100%',
-                resizeMode: "contain",
+                resizeMode: 'contain',
                 width: '100%',
-                height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth*1.25,
+                height:
+                  deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth * 1.25,
                 alignSelf: 'center',
               }}
               source={{ uri: img }}
