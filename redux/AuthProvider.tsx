@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 // Create a context
@@ -44,7 +44,7 @@ function AuthProvider({ children }: any) {
       console.log('dentro de setAuth');
       console.log(auth_data);
       await AsyncStorage.setItem('auth', JSON.stringify(auth_data));
-      localStorage.setItem('auth', JSON.stringify(auth_data));
+      localStorage && localStorage.setItem('auth', JSON.stringify(auth_data));
       // Configure axios headers
       configureAxiosHeaders(auth_data.token);
       setAuthState(auth_data);
@@ -58,7 +58,7 @@ function AuthProvider({ children }: any) {
   const clearAuth = async () => {
     try {
       await AsyncStorage.clear();
-      localStorage.removeItem('auth')
+      localStorage && localStorage.removeItem('auth')
       removeHeaders();
     } catch (e) {
       alert('Failed to clear the async storage.');
