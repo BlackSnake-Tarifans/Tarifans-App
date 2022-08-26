@@ -217,7 +217,7 @@ function ProfileScreen({ route, navigation }: any) {
         setFollowing(data.data.follow)
       }
     )
-  }, []);
+  }, [route.params]);
 
   return (
     <SafeAreaView style={styles.container}>

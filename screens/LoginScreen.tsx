@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import AppLoading from 'expo-app-loading';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
-import { useRoute } from '@react-navigation/native';
+import { useIsFocused, useRoute } from '@react-navigation/native';
 import { Text, View } from '../components/Themed';
 import { login } from '../hooks/backendAPI';
 import { TOKEN_CHANGE } from '../redux/AuthToken';
@@ -203,10 +203,13 @@ const styles = StyleSheet.create({
 
 function LoginScreen({ navigation }: any) {
   const ctx :any = useContext(AuthContext);
+  const isFocused = useIsFocused();
   useEffect(() => {
     // Runs ONCE after initial rendering
-    ctx.clearAuth();
-  }, []);
+    if(isFocused){
+      ctx.clearAuth();
+    }
+  }, [isFocused]);
   
   const route = useRoute();
   const [user, onChangeUser] = React.useState('');
