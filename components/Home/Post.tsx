@@ -111,7 +111,7 @@ function PostImage({ post }: any) {
 function PostFooter({ navigation, post }: any) {
   const [liked,setLiked] = useState(post.liked_by_me)
   const [fav, setFavorite] = useState(post.saved_to_favs)
-  console.log(post.saved_to_favs)
+  //console.log(post.saved_to_favs)
   return (
     <View style={{ flexDirection: 'row', marginVertical: 7 }}>
       <View style={styles.leftFooterIconsContainer}>
@@ -120,10 +120,10 @@ function PostFooter({ navigation, post }: any) {
           imgUrl={liked?postFooterIcons[0].likedImageUrl:postFooterIcons[0].imageUrl}
           onpress={()=>{
             if(!liked){
-              console.log("liking")
+              //console.log("liking")
               likePost(post.id)
             }else{
-              console.log("disliking")
+              //console.log("disliking")
               dislikePost(post.id)
             }
             setLiked(!liked);
@@ -161,10 +161,12 @@ function PostFooter({ navigation, post }: any) {
 }
 
 export function PostCaption({ post }: any) {
+  console.log(post.username)
   return (
     <View style={{}}>
       <Text>
-        <Text style={{ fontWeight: 'bold' }}>{post.title}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{post.username} {" "} </Text>
+        <Text >{post.title}</Text>
       </Text>
       <Text>{`${post.description}`}</Text>
     </View>

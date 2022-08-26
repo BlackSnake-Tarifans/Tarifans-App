@@ -305,7 +305,7 @@ function LoginScreen({ navigation }: any) {
                       console.log(data);
                       //setAnimating(false);
                       auth.setAuth(data)
-                      navigation.navigate('Home');
+                      navigation.navigate("HomeTabs");
                       
                     } else if (response.status >= 400) {
                       Alert.alert(

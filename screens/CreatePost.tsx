@@ -145,9 +145,9 @@ function CreateCateScreen({ route, navigation }: any) {
   const [animating, setAnimating] = React.useState(false);
   /* Arreglo de Items para el multiselector, usar useState para traer el plan de suscripción */
   const items = [
-    { label: 'Gratuita', value: '1' },
-    { label: 'Premium', value: '2' },
-    { label: 'Platinum', value: '3' },
+    { label: 'Gratuita', value: '4' },
+    { label: 'Premium', value: '4' },
+    { label: 'Platinum', value: '4' },
   ];
 
   const [selectectedItems, setSelectedItems] = React.useState([]);

@@ -145,7 +145,14 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
          
-        //component={PaginaInicio}
+        component={PaginaInicio}
+        //component={HomeTabs}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="HomeTabs"
+         
         component={HomeTabs}
         options={{ headerShown: false }}
       />
