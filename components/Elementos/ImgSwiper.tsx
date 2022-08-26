@@ -4,23 +4,23 @@ import Swiper from 'react-native-web-swiper';
 
 const dimensions = Dimensions.get('window');
 const deviceWidth = dimensions.width;
-
+const SLIDER_WIDTH = Dimensions.get('window').width + 80;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 function ImgSwiper({ images }: any) {
   return (
     <View
       style={{
+        backgroundColor: "white",
         borderColor: 'purple',
         borderWidth: 1,
-        borderRadius: 10,
-        marginTop: 10,
-        height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth,
+        height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth*1.25,
         width: deviceWidth > 500 ? deviceWidth / 2 : deviceWidth * 0.9,
       }}
     >
       <Swiper
         from={0}
         loop
-        timeout={5.5}
+        timeout={0}
         controlsProps={{
           dotsTouchable: true,
           dotActiveStyle: { backgroundColor: '#f28e43' },
@@ -31,15 +31,18 @@ function ImgSwiper({ images }: any) {
         {images.map((img: any, index: any) => (
           <View
             key={index}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            style={{  
+              
+      
+          }}
           >
             <Image
               style={{
+                maxWidth: '100%',
+                resizeMode: "contain",
                 width: '100%',
-                height: '100%',
-                borderWidth: 1,
-                borderRadius: 10,
-                resizeMode: 'cover',
+                height: deviceWidth > 500 ? deviceWidth / 2.25 : deviceWidth*1.25,
+                alignSelf: 'center',
               }}
               source={{ uri: img }}
             />

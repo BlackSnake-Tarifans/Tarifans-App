@@ -8,6 +8,8 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  Touchable,
+  TouchableOpacity,
 } from 'react-native';
 
 import HeaderDiferente from '../components/Elementos/HeaderDiferente';
@@ -67,9 +69,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.04)',
     padding: 10,
   },
+  SectionStyleButton: {
+    flexDirection: 'column',
+    height: 70,
+    width: Dimensions.get('window').width * 0.85,
+    margin: 10,
+    borderRadius: 15,
+    backgroundColor: '#F28E43',
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   TextfileTitle: {
     fontWeight: 'bold',
     color: '#f28e43',
+  },
+  TextfileTitleButton: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 20,
   },
   Botones: {
     marginTop: 30,
@@ -179,18 +197,13 @@ function SettingsScreen({ route, navigation }: any) {
                 style={[{ fontSize: 15, marginTop: 5 }]}
               />
             </View>
+            <TouchableOpacity style={styles.SectionStyleButton} 
+              onPress={()=>{
+                navigation.navigate('Saved')}}
+            >
+              <Text style={styles.TextfileTitleButton}>Posts Guardados</Text>
+            </TouchableOpacity>
           </View>
-
-          {/*  <View style={styles.SectionStyle}>
-            <Text style={styles.TextfileTitle}>Nivel</Text>
-            <TextInput
-              placeholder="NivelAAA"
-              placeholderTextColor={'#b3b3b3'}
-              keyboardType='numeric'
-              maxLength={10}
-              onChangeText={text => onChangeNivel(parseInt(text))}
-            />
-          </View> */}
         </View>
 
         <View style={styles.ViewEnd}>

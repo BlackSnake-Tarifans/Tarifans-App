@@ -514,11 +514,9 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
                       console.log(data);
 
                       const { localUri } = selectedImage;
-                      const filename = localUri.split('/').pop();
-
-                      // Infer the type of the imag
-
-                      console.log(filename);
+                      const parts = localUri.split('.')
+                      const lenghtParts = parts.length
+                      const ext = parts[lenghtParts - 1]
 
                       // Upload the image using the fetch and FormData APIs
                       const formData = new FormData();
@@ -526,18 +524,19 @@ function UploadImgScreen({ route, navigation, navigation: { goBack } }: any) {
 
                       formData.append('file', {
                         uri: localUri,
-                        name: `test.${localUri.split('.')[1]}`,
-                        type: `test/${localUri.split('.')[1]}`,
+                        name: `${name}.${ext}`,
+                        type: `image/${ext}`,
                       });
                       formData.append('type', '1');
                       formData.append('post', '3');
                       console.log(formData);
-                      const response2 = await postMedia(formData);
+                      const response2 = await postMedia(data.id,formData);
                       if (response2.status == 201) {
                         setAnimating(false);
                         setSelectedImage({
                           localUri: '',
                         }),
+                        Alert.alert(`Your post has been created!`)
                           navigation.navigate('MyProfile');
                       }
                     }
